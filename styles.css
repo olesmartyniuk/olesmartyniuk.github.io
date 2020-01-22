@@ -1,0 +1,15 @@
+body {
+  background-color: rgb(120,120,120);
+  color: rgb(255,255,255);
+  margin: 50px;
+}
+div {
+  border: 1px solid white;
+  font-family: courier;
+  margin-bottom: 10px; 
+}
+li {
+	font-family: verdana;
+}
+
+
