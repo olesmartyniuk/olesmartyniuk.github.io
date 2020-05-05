@@ -47,5 +47,4 @@ namespace Scania.Sws.EcuUpdate
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<IUpdateService, UpdateService>();
         }
-
 ```
