@@ -1,33 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<h1>The Marvelous Mrs. Maisel</h1>
-	<div>First season
-	<ol type="1">
-	<li>"Pilot"</li>
-	<li>"Ya Shivu v Bolshom Dome Na Kholme"</li>
-	<li>"Because You Left"</li>
-	<li>"The Disappointment of the Dionne Quintuplets"</li>
-	<li>"Doink"</li>
-	<li>"Mrs. X at the Gaslight"</li>
-	<li>"Put That On Your Plate!"</li>
-	<li>"Thank You and Good Night"</li></ol></div>
-	<div>Second season
-	<ol type="1">
-	<li>"Simone"</li>
-	<li>"Mid-way to Mid-town"</li>
-	<li>"The Punishment Room"</li>
-	<li>"We're Going to the Catskills!"</li>
-	<li>"Midnight at the Concord"</li>
-	<li>"Let's Face the Music and Dance"</li>
-	<li>"Look, She Made a Hat"</li>
-	<li>"Someday..."</li>
-	<li>"Vote for Kennedy, Vote for Kennedy"</li>
-	<li>"All Alone"</li></ol></div>
-	</body>
-<a href="https://en.wikipedia.org/wiki/The_Marvelous_Mrs._Maisel#Season_1_(2017)">The Marvelous Mrs. Maisel site</a>
-</body>
-</html>
+---
+layout: default
+---
+
+<div class="home">
+
+  <h1 class="page-heading">Posts</h1>
+
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+
+        <h2>
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </h2>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+
+</div>
