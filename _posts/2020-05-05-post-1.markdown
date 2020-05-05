@@ -23,7 +23,7 @@ Indented code
 Block code "fences"
 
 ```c#
-namespace Scania.Sws.EcuUpdate
+namespace Update
 {
     public class Startup
     {
