@@ -22,6 +22,30 @@ Indented code
 
 Block code "fences"
 
-```
-Sample text here...
+```c#
+namespace Scania.Sws.EcuUpdate
+{
+    public class Startup
+    {
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+            Logging.Setup(Configuration);
+        }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            // This call adds and configures the set of standard services, as enforced by Yeoman generator
+            AppConfigure.ConfigureServices(Configuration, services);
+
+            // Add project specific services below
+            services.AddSwaggerGenNewtonsoftSupport();
+
+            services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<IUpdateService, UpdateService>();
+        }
+
 ```
