@@ -136,9 +136,20 @@ blockquote {
 /**
  * Code formatting
  */
+
+@font-face {
+  font-family: JetBrainMono;
+  src: url('fonts/jet-brain-mono/eot/JetBrainsMono-Regular.eot');
+  src: url('fonts/jet-brain-mono/eot/JetBrainsMono-Regular.eot') format('embedded-opentype'),
+    url('fonts/jet-brain-mono/woff2/JetBrainsMono-Regular.woff2') format('woff2'), 
+    url('fonts/jet-brain-mono/woff/JetBrainsMono-Regular.woff') format('woff'),
+    url('fonts/jet-brain-mono/eot/JetBrainsMono-Regular.eot') format('truetype');
+}
+
 pre,
 code {
-    font-size: 15px;
+    font-family: 'JetBrainMono', Helvetica, Arial, sans-serif;
+    font-size: 14px;
     border: 1px solid $grey-color-light;
     border-radius: 3px;
 }
