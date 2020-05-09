@@ -8,28 +8,28 @@
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 #--------------------------
 
-title: Олександр Мартинюк              # the main title
+title: Олександр Мартинюк              
 
-tagline: Блог про .NET і не тільки.    # it will display as the sub-title
+tagline: Блог про .NET і не тільки    
 
 description: >-                        # used by seo meta and the atom feed
-  Персональний блог Олександра Мартинюка
+  Персональний блог Олександра Мартинюка українською мовою
   Oleksandr Martyniuk personal blog
-  .NET C# Web Development Software Programming
+  .NET C# Web Development Software Programming Algorithms Ukrainian
 
 # Replace with the website url, e.g. 'https://username.github.io'
 url: 'http://alexmartyniuk.github.io'
 
-author: Олександр Мартинюк              # change to your full name
+author: Олександр Мартинюк              
 
-avatar: /assets/img/sample/avatar.jpg   # support internet resources
+avatar: /assets/img/sample/avatar.jpg   
 
 github:
-  username: alexmartyniuk               # change to your github username
+  username: alexmartyniuk               
 
 social:
-  name: Олександр Мартинюк              # it will shows as the copyright owner in Footer
-  email: alexander.martinyuk@gmail.com  # change to your email address
+  name: Олександр Мартинюк              
+  email: alexander.martinyuk@gmail.com  
   links:
     # The first element serves as the copyright owner's link
     - https://github.com/alexmartyniuk       
@@ -60,8 +60,8 @@ google_analytics:
     cache: false  # pv data local cache, good for the users from GFW area.
 
 disqus:
-  comments: false  # boolean type, the global switch for posts comments.
-  shortname: ''    # Fill with your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
+  comments: true  # boolean type, the global switch for posts comments.
+  shortname: 'martyniuk'    # Fill with your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
 
 
 # Prefer color scheme setting, available values:

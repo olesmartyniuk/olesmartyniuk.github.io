@@ -6,25 +6,25 @@
 
 
 -
-  name: Home
+  name: Замітки
   icon: "fas fa-home"
 -
-  name: Categories
+  name: Категорії
   icon: "fas fa-stream"
   path: tabs
   url: categories
 -
-  name: "Tags"
+  name: Теги
   icon: "fas fa-tags"
   path: tabs
   url: tags
 -
-  name: "Archives"
+  name: Архів
   path: tabs
   url: archives
   icon: "fas fa-archive"
 -
-  name: "About"
+  name: Про мене
   icon: "fas fa-info"
   path: tabs
   url: about

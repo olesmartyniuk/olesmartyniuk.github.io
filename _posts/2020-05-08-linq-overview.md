@@ -2,8 +2,8 @@
 layout: post
 title:  "LINQ. Огляд"
 date:   2020-05-08 17:35:30 +0200
-categories: [.net]
-tags: [c#, linq, .net]
+categories: [.NET]
+tags: [c#, linq]
 ---
 
 В цій статті пропоную розглянути LINQ як важливий компонент .NET фреймворку, його історію та роль, для чого він був створений і як врешті користуватись цим інструментом. В кінці розглянемо базові приклади мовою C#, які дадуть уявлення про те, що таке LINQ на практиці.
@@ -51,46 +51,46 @@ Restore succeeded.
 Визначимо клас супергероя і додамо тестові дані.
 
 ```c#
-    private class Hero
-    {
-        public string Name { get; set; }
-        public int YearOfBirth { get; set; }
-        public string Comics { get; set; }
-    }
+private class Hero
+{
+    public string Name { get; set; }
+    public int YearOfBirth { get; set; }
+    public string Comics { get; set; }
+}
 
-    private static readonly List<Hero> _heroes = new List<Hero> 
+private static readonly List<Hero> _heroes = new List<Hero> 
+{
+    new Hero
     {
-        new Hero
-        {
-            Name = "Superman",
-            YearOfBirth = 1938,
-            Comics = "Action Comics"
-        },
-        new Hero
-        {
-            Name = "Batman",
-            YearOfBirth = 1938,
-            Comics = "Detective Comics"
-        },
-        new Hero
-        {
-            Name = "Captain America",
-            YearOfBirth = 1941,
-            Comics = "Captain America Comics"
-        },
-        new Hero
-        {
-            Name = "Ironman",
-            YearOfBirth = 1963,
-            Comics = "Tales of Suspense"
-        },
-        new Hero
-        {
-            Name = "Spiderman",
-            YearOfBirth = 1963,
-            Comics = "Amazing Fantasy"
-        }
-    };
+        Name = "Superman",
+        YearOfBirth = 1938,
+        Comics = "Action Comics"
+    },
+    new Hero
+    {
+        Name = "Batman",
+        YearOfBirth = 1938,
+        Comics = "Detective Comics"
+    },
+    new Hero
+    {
+        Name = "Captain America",
+        YearOfBirth = 1941,
+        Comics = "Captain America Comics"
+    },
+    new Hero
+    {
+        Name = "Ironman",
+        YearOfBirth = 1963,
+        Comics = "Tales of Suspense"
+    },
+    new Hero
+    {
+        Name = "Spiderman",
+        YearOfBirth = 1963,
+        Comics = "Amazing Fantasy"
+    }
+};
 ```
 Нехай наша задача полягатиме в тому, щоб відібрати тих супергероїв, які мають слово "man" в імені та вивести їх імена на екран у алфавітному порядку. Тобто, ми повинні отримати всіх героїв (окрім Капітана Америки) у відсортованому вигляді.
 ```
@@ -170,13 +170,13 @@ var heroNames = _heroes
 
 З методами розширення ми можемо розбити LINQ вираз на декілька частин і сформувати його згідно певної умови, що для синтаксису запиту неможливо. Наприклад:
 ```c#
-    var query = _heroes.Where((hero, index) => hero.Name.Contains("man"));
-    
-    if (shouldBeSorted)
-        query = query.OrderBy(hero => hero.Name);
-    
-    var heroNames = query
-        .Select(hero => hero.Name);
+var query = _heroes.Where((hero, index) => hero.Name.Contains("man"));
+
+if (shouldBeSorted)
+    query = query.OrderBy(hero => hero.Name);
+
+var heroNames = query
+    .Select(hero => hero.Name);
 ```
 Ми додаємо сортування тільки якщо вхідний параметр `shouldBeSorted` дорівнює "true". Використовуючи синтаксис запиту нам необхідно записати вираз двічі в залежності від умови: в першому випадку зі сортуванням, а в другому - без нього.
 
