@@ -2,6 +2,7 @@
 layout: post
 title:  "Жадібні алгоритми"
 date:   2020-05-08 17:31:31 +0200
+date_friendly: 3 Травня 2020 р. 
 categories: [Алгоритми]
 tags: [алгоритми, codility]
 ---

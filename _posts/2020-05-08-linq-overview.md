@@ -2,6 +2,7 @@
 layout: post
 title:  "LINQ. Огляд"
 date:   2020-05-08 17:35:30 +0200
+date_friendly: 1 Травня 2020 р. 
 categories: [.NET]
 tags: [c#, linq]
 ---

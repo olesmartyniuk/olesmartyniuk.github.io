@@ -20,8 +20,8 @@ layout: page
       <!-- posted date -->
       <i class="far fa-clock fa-fw"></i>
       <span class="timeago" data-toggle="tooltip" data-placement="bottom"
-        title="{{ post.date | date: site.data.date_format.tooltip }}">
-      {{ post.date | date: site.data.date_format.post }}
+        title="{{ post.date_friendly }}">
+      {{ post.date_friendly }}
       <i class="unloaded">{{ post.date | date_to_xmlschema }}</i>
       </span>
       <!-- page views -->

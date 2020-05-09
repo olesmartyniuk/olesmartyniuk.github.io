@@ -6,7 +6,62 @@
  * MIT Licensed
  */
 
-$(function() {
+$(function () {
+
+  function ukrainianSuffix(value, type) {
+    if ([2, 3, 4].includes(value % 10)) {
+      switch (type) {
+        case "хвилина":
+          return "хвилини";
+        case "година":
+          return "години";
+        case "день":
+          return "дні";
+        case "тиждень":
+          return "тижні";
+        case "місяць":
+          return "місяці";
+        case "рік":
+          return "роки";
+      }
+    }
+
+    if ([5, 6, 7, 8, 9, 0].includes(value % 10) || (value > 10 && value < 20)) {
+      switch (type) {
+        case "хвилина":
+          return "хвилин";
+        case "година":
+          return "годин";
+        case "день":
+          return "днів";
+        case "тиждень":
+          return "тижнів";
+        case "місяць":
+          return "місяців";
+        case "рік":
+          return "років";
+      }
+    }
+
+    if ([1].includes(value % 10)) {
+      switch (type) {
+        case "хвилина":
+          return "хвилину";
+        case "година":
+          return "годину";
+        case "день":
+          return "день";
+        case "тиждень":
+          return "тиждень";
+        case "місяць":
+          return "місяць";
+        case "рік":
+          return "рік";
+      }
+    }
+
+    throw "Error in unkrainianSuffix";
+  }
 
   function timeago(date, isLastmod) {
     var now = new Date();
@@ -15,40 +70,40 @@ $(function() {
 
     var year = Math.floor(seconds / 31536000);
     if (year >= 1) {
-      return year + " year" + (year > 1 ? "s" : "") + " ago";
+      return year + " " + ukrainianSuffix(year, "рік") + " тому";
     }
 
     var month = Math.floor(seconds / 2592000);
     if (month >= 1) {
-      return month + " month" + (month > 1 ? "s" : "") + " ago";
+      return month + " " + ukrainianSuffix(month, "місяць") + " тому";
     }
 
     var week = Math.floor(seconds / 604800);
     if (week >= 1) {
-      return week + " week" + (week > 1 ? "s" : "") + " ago";
+      return week + " " + ukrainianSuffix(week, "тиждень") + " тому";
     }
 
     var day = Math.floor(seconds / 86400);
     if (day >= 1) {
-      return day + " day" + (day > 1 ? "s" : "") + " ago";
+      return day + " " + ukrainianSuffix(day, "день") + " тому";
     }
 
     var hour = Math.floor(seconds / 3600);
     if (hour >= 1) {
-      return hour + " hour" + (hour > 1 ? "s" : "") + " ago";
+      return hour + " " + ukrainianSuffix(hour, "година") + " тому";
     }
 
     var minute = Math.floor(seconds / 60);
     if (minute >= 1) {
-      return minute + " minute" + (minute > 1 ? "s" : "") + " ago";
+      return minute + " " + ukrainianSuffix(minute, "хвилина") + " тому";
     }
 
-    return (isLastmod? "just" : "Just") + " now";
+    return (isLastmod ? "щойно" : "Щойно");
   }
 
 
   function updateTimeago() {
-    $(".timeago").each(function() {
+    $(".timeago").each(function () {
       if ($(this).children("i").length > 0) {
         var isLastmod = $(this).hasClass('lastmod');
         var node = $(this).children("i");

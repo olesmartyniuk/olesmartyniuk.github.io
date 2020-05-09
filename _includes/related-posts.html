@@ -1,10 +1,6 @@
 <!--
  The related posts of current post.
  Placed in the bottom of every single post.
- v2.0
- https://github.com/cotes2020/jekyll-theme-chirpy
- © 2019 Cotes Chung
- Published under the MIT License
 -->
 
 {% assign MAX_SIZE = 3 %}
@@ -53,7 +49,7 @@
         <a href="{{ post.url | relative_url }}">
           <div class="card-body">
             <span class="timeago small">
-                {{ post.date | date: site.data.date_format.post }}
+                {{ date_friendly }}
                 <i class="unloaded">{{ post.date | date_to_xmlschema }}</i>
             </span>
             <h3 class="pt-0 mt-1 mb-3" data-toc-skip>{{ post.title }}</h3>
