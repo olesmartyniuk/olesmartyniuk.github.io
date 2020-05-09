@@ -1,8 +1,9 @@
 ---
 layout: post
-title:  "Greedy algorithms"
+title:  "Жадібні алгоритми"
 date:   2020-05-08 17:31:31 +0200
-categories: [algorithms]
+categories: [Algorithms]
+tags: [алгоритми, codility]
 ---
 
  # Жадібні алгоритми
