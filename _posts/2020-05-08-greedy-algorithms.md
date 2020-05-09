@@ -2,7 +2,7 @@
 layout: post
 title:  "Greedy algorithms"
 date:   2020-05-08 17:31:31 +0200
-categories: algorithms
+categories: [algorithms]
 ---
 
  # Жадібні алгоритми
