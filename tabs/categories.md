@@ -1,5 +1,6 @@
 ---
 title: Categories
+title_friendly: Категорії
 ---
 
 {% assign sort_categories = site.categories | sort %}

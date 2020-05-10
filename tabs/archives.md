@@ -1,5 +1,6 @@
 ---
 title: Archives
+title_friendly: Архів
 ---
 
 <div id="archives" class="pl-xl-2">

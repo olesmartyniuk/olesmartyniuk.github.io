@@ -1,5 +1,6 @@
 ---
 title: Tags
+title_friendly: Теги
 ---
 
 {% comment %}
