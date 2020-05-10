@@ -110,7 +110,7 @@ defaults:
       location: Post
       breadcrumb:
         -
-          label: Замітки
+          label: Дописи
           url: /
   -
     scope:
