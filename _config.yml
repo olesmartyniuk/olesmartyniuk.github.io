@@ -100,7 +100,7 @@ defaults:
       layout: post
       comments: true    # Enable comments in posts.
       toc: true         # Display TOC column in posts.
-      location: Post
+      location: Допис
       breadcrumb:
         -
           label: Дописи
@@ -115,7 +115,7 @@ defaults:
       path: tags
     values:
       tab_active: Tags
-      location: Tag
+      location: Тег
       breadcrumb:
         -
           label: Головна
@@ -128,7 +128,7 @@ defaults:
       path: categories
     values:
       tab_active: Categories
-      location: Category
+      location: Категорія
       breadcrumb:
         -
           label: Головна
