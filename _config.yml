@@ -1,7 +1,7 @@
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 #--------------------------
 
-title: Олександр Мартинюк              
+title: Мартинюк              
 
 tagline: Блог про .NET і не тільки    
 
@@ -11,7 +11,7 @@ description: >-                        # used by seo meta and the atom feed
   .NET C# Web Development Software Programming Algorithms Ukrainian
 
 # Replace with the website url, e.g. 'https://username.github.io'
-url: 'http://alexmartyniuk.github.io'
+url: 'http://www.martyniuk.info'
 
 author: Олександр Мартинюк              
 
