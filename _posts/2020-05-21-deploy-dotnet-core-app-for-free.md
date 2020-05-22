@@ -1,4 +1,12 @@
-# Публікація .NET Core WebApp безкоштовно
+---
+layout: post
+title:  "Публікація .NET Core WebApp безкоштовно"
+date:   2020-05-21 10:00:00 +0200
+date_friendly: 21 травня 2020 р. 
+categories: [Програмування, dotNET]
+tags: [dotnet, asp.net core, deployment, heroku]
+---
+# 
 
 ![](/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/cover.png)
 
