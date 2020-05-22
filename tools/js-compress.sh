@@ -14,11 +14,6 @@
 # Process:
 #     input: /path/to/js/source.js --> output: /path/to/js/dist/source.min.js
 #
-# v2.0
-# https://github.com/cotes2020/jekyll-theme-chirpy
-# © 2020 Cotes Chung
-# MIT Licensed
-
 
 set -eu
 
