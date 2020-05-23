@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "Публікація .NET Core WebApp безкоштовно"
+title:  "Безкоштовна публікація ASP.NET Core програми"
 date:   2020-05-21 10:00:00 +0200
 date_friendly: 21 травня 2020 р. 
 categories: [Програмування, dotNET]
 tags: [dotnet, asp.net core, deployment, heroku]
 ---
-![](/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/cover.png)
+![](http://www.martyniuk.info/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/cover.png)
 
 В багатьох програмістів є власні проєкти на .NET Core, які в певний момент хочеться показати іншим. Бажано, щоб розгортання відбувалось просто і швидко, а хостинг був безкоштовним. В цій замітці я розкажу, як розгортати проєкти на .NET Core в Heroku з безперервною доставкою, не вкладаючи в це ні копійки.
 
@@ -15,25 +15,25 @@ tags: [dotnet, asp.net core, deployment, heroku]
 
 ## Heroku та безкоштовний dyno
 
-**[Heroku](http://heroku.com)** - хмарний провайдер, що дозволяє запускати веб програми і сервіси написані на багатьох мовах, серед яких Java, Node.JS, Scala, Python, PHP, Ruby, Go та Clojure. Heroku була однією з перших хмарних платформ. В її основі лежить система віртуалізації побудована на ізольованих Linux контейнерах, які в Heroku називаються **dyno**. Тобто, dyno - це ніби окремий віртуальний комп'ютер, що виконує вашу програму на серверах Heroku. 
+**[Heroku](http://heroku.com)** - хмарний провайдер, що дозволяє запускати веб програми і сервіси написані на мовах Java, Node.JS, Scala, Python, PHP, Ruby, Go та Clojure. Heroku була однією з перших хмарних платформ. В її основі лежить система віртуалізації побудована на ізольованих Linux контейнерах, які в Heroku називаються **dyno**. Тобто, dyno - це ніби окремий віртуальний комп'ютер, що виконує вашу програму на серверах Heroku. 
 
 Безкоштовно Heroku надає один dyno з наступними характеристиками:
 * 512 MB оперативної пам'яті
 * 550 годин виконання кожного місяця
 
 Dyno бувають двох типів:
-* web - для програм що очікують вхідних HTTP запитів
-* worker - для програм, що виконують операції у фоні
+* **web** - для програм що очікують вхідних HTTP запитів
+* **worker** - для програм, що виконують операції у фоні
 
-![](/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/free-plan-capabilities.png)
+![](http://www.martyniuk.info/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/free-plan-capabilities.png)
 
-Якщо ви використовуєте для виконання своєї програми лише безкоштовний dyno, варто зауважити, що Heroku призупиняє виконання dyno після 30 хв бездіяльності. Тобто, якщо за останні 30 хв. до вашого web dyno не надійшло жодного запиту, він буде поставлений на паузу. Для користувача це може виглядадти так, ніби сайт в браузері перший раз відкривається довго. Наступні запити будуть виконуватись на максимально можливій швидкості. В цей час, поки ваш dyno спить, він НЕ споживає вільні години. Іншими словами, якщо ваш тестовий проєкт досить навантажений і обслуговує користувачів 24 години на добу вам вистачить вільних хвилин лише на 23 дні в місяць. 
+Якщо ви використовуєте лише безкоштовний dyno, варто зауважити, що Heroku призупиняє виконання dyno після 30 хв бездіяльності. Тобто, якщо за останні 30 хв. до вашого web dyno не надійшло жодного запиту, він буде поставлений на паузу. Прокинеться він при наступному запиті. Для користувача це може виглядадти так, ніби сайт в браузері перший раз відкривається довго. В той час, поки ваш dyno спить, він НЕ споживає вільні години. Іншими словами, якщо ваш тестовий проєкт досить навантажений і обслуговує користувачів 24 години на добу вам вистачить вільних хвилин лише на 23 дні в місяць. 
 
 > Heroku дає можливість розширити кількість вільних хвилин до 1000 просто вказавши реквізити банківської карти в налаштуваннях, без жодних списань коштів. Це дає можливість працювати одному free dyno без зупинки 24/7 або двом-трьом free dyno, якщо навантаження на сайт не постійне. 
 
 ## Налаштування Heroku CLI
 
-Давайте створимо безкоштовний акаунт на [Heroku](https://signup.heroku.com/) і розгорнемо в ньому просту ASP.NET Core програму. Після реєстрації і підтвердження поштової адреси завантажте [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install). Це консольна утиліта, що спростить нам створення і розгортання нашої веб програми без відвідування сайту. Далі ми будемо все робити через командний рядок, тому важливо, щоб вона була встановлена.
+Давайте створимо безкоштовний акаунт [Heroku](https://signup.heroku.com/) і розгорнемо в ньому просту ASP.NET Core програму. Після реєстрації і підтвердження поштової адреси завантажте [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install). Це консольна утиліта, що спростить створення і розгортання веб програми без відвідування сайту. Далі ми будемо все робити через командний рядок, тому важливо, щоб вона була встановлена.
 
 Перевірте, чи ви маєте все необхідне для роботи. Версії програм можуть відрізнятись, це не принципово. Головне, що .NET, Git and Heroku CLI встановлені коректно.
 
@@ -49,7 +49,9 @@ heroku/7.30.0 win32-x64 node-v11.14.0
 ```
 
 ## Створення програми ASP.NET Core
-Створимо ASP.NET Core веб програму і назвемо її dotnet-app-heroku.
+Створимо ASP.NET Core веб програму в каталозі `dotnet-app-heroku`.
+
+> Вам не варто використовувати ту саму назву для програми. Змініть її на щось унікальне, наприклад `%USERNAME%-dotnet-app-heroku`. Це дасть змогу уникнути конфліктів адрес з моєю програмою, яка може бути в цей момент розгорнута в Інтернет.
 
 ```bash
 > dotnet new webapp --name DotnetAppHeroku --output dotnet-app-heroku       
@@ -58,10 +60,11 @@ The template "ASP.NET Core Web App" was created successfully.
 Restore succeeded.
 ```
 
-Створимо програму в Heroku, але спочатку необхідно пройти процедуру логіну.
+Тепер створимо програму в Heroku, але перед цим необхідно пройти процедуру логіну.
 
 ```bash
 > cd dotnet-app-heroku
+
 > heroku login   
 heroku: Press any key to open up the browser to login or q to exit:
 Opening browser to https://cli-auth.heroku.com/auth/cli/browser/12b5558d-f062-4dbb-a055-1c7e9f0f84c5
@@ -75,9 +78,7 @@ https://dotnet-app-heroku.herokuapp.com/ | https://git.heroku.com/dotnet-app-her
 ```
 В результаті команди `create` ми отримали дві URL адреси, що знадобляться нам пізніше. Перша - це адреса нашого майбутнього сайту в Інтернет, а друга - адреса Git репозиторію, в який нам необхідно проштовхнути наш код, щоб розгорнути веб програму. 
 
-> Вам не варто використовувати ту саму назву для програми. Змініть її на щось унікальне, наприклад `%USERNAME%-dotnet-app-heroku`. Це дасть змогу уникнути конфліктів, адже моя програма в цей момент може бути розгорнута, а адреси сайтів в Інтернет повинні бути унікальними.
-
-Створимо git репозиорій в папці проєкту, додамо всі файли і спробуємо проштовхнути код у репозиторій.
+Створимо git репозиторій в каталозі проєкту, додамо всі файли і спробуємо проштовхнути код у репозиторій.
 
 ```bash
 > git init
@@ -110,7 +111,7 @@ remote:  HINT: This occurs when Heroku cannot detect the buildpack to use for th
 ## Контейнер в якості стеку
 
 Всі dyno за умовчанням запускаються на Linux Ubuntu 18:
-![](/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/dotnet-app-heroku-settings.png)
+![](http://www.martyniuk.info/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/dotnet-app-heroku-settings.png)
 
 Але Heroku має можливість запустити будь-який **Docker** контейнер і таким чином дозволяє самостійно вирішувати, яка операційна система і фреймворк потрібні програмісту. 
 
@@ -124,7 +125,7 @@ remote:  HINT: This occurs when Heroku cannot detect the buildpack to use for th
 Stack set. Next release on ⬢ dotnet-app-heroku will use container.
 Run git push heroku master to create a new release on ⬢ dotnet-app-heroku.
 ```
-Тепер dyno буде використовувати для запуску контейнер, який ми зараз побудуємо. Створіть Dockerfile в каталозі проєкту з таким вмістом.
+Тепер dyno буде використовувати для запуску контейнер, який ми зараз побудуємо. Створіть файл `Dockerfile` в каталозі проєкту з таким вмістом.
 
 ```docker
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
@@ -145,7 +146,7 @@ CMD dotnet DotnetAppHeroku.dll
 
 > Якщо ім'я вашого проєкту відрізняється від DotnetAppHeroku вам необхідно змінити останній рядоку файлу.
 
-Також необхідно створити в корні проєкту файл `heroku.yml`, де вказати шлях до Dockerfile. Heroku буде шукати файл для побудови образу в середині `heroku.yml`
+Також необхідно створити в корні проєкту файл `heroku.yml`, де вказати шлях до `Dockerfile`, який Heroku буде використовувати для побудови образу.
 
 ```yaml
 build:
@@ -153,10 +154,11 @@ build:
     web: Dockerfile
 ```
 
-Тепер можна додати новостворені файли до репозиорію і знову зробити push.
+Тепер можна додати новостворені файли до репозиторію і знову зробити push.
 
 ```bash
-> git add .                               
+> git add .  
+
 > git status                              
 On branch master
 Changes to be committed:
@@ -183,21 +185,23 @@ To https://git.heroku.com/dotnet-app-heroku.git
 
 ## Змінна оточення PORT
 
-Якщо відкрити сайт `https://dotnet-app-heroku.herokuapp.com/` в браузері ми побачимо помилку. 
+Якщо зараз відкрити сайт `https://dotnet-app-heroku.herokuapp.com/` в браузері ми побачимо помилку. 
 
-![](/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/app-error.png)
+![](http://www.martyniuk.info/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/app-error.png)
 
 Щоб розібратись, чому це сталося, переглянемо логи нашої програми:
 
 ```bash
 > heroku logs
 ...
-2020-05-22T08:33:01.674783+00:00 app[web.1]: Unhandled exception. System.Net.Sockets.SocketException (13): Permission denied
+app[web.1]: Unhandled exception. System.Net.Sockets.SocketException (13): Permission denied
 ...
-2020-05-22T08:33:01.674801+00:00 app[web.1]: at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+app[web.1]: at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
 ```
 
-Як бачимо, сталася помилка `Permission denied` під час відкриття порту на прослуховування. Механізми безпеки Linux працюють таким чином, що для прослуховування стандартного для **HTTP** порту **80** процесу необхідні права супер-користувача. В [документації](https://devcenter.heroku.com/articles/setting-the-http-port-for-java-applications) до Heroku можна знайти вирішення проблеми. Heroku очікує, що кожна програма буде стартувати не з довільним портом, а із портом заданим у змінній оточення **PORT**. Внутрішні механізми Heroku будуть відправляти на цей порт весь трафік із зовнішнього порту 80, на якому сайт буде доступний в Інтернет. Виправимо це в нашому проєкті і додамо відповідну конфігурацію для Kestrel серверу у файлі `Startup.cs`:
+Як бачимо, сталася помилка `Permission denied` під час відкриття порту на прослуховування. Механізми безпеки Linux працюють таким чином, що для прослуховування стандартного для **HTTP** порту **80** процесу необхідні права супер-користувача. В [документації](https://devcenter.heroku.com/articles/setting-the-http-port-for-java-applications) до Heroku можна знайти вирішення проблеми. Heroku очікує, що кожна програма буде стартувати не з довільним портом, а з портом заданим у змінній оточення **PORT**. Внутрішні механізми Heroku будуть відправляти на цей порт весь трафік із зовнішнього порту 80, на якому сайт буде доступний в Інтернет. 
+
+Виправимо це в нашому проєкті і додамо відповідну конфігурацію для Kestrel серверу у файлі `Startup.cs`:
 
 ```c#
 webBuilder
@@ -212,9 +216,9 @@ webBuilder
     });
 ```
 
-Тепер можна зберегти зміни і зробити пуш в репозиторій. Пуш займе близько хвилини, поки створиться Docker образ. Відкрийте `https://dotnet-app-heroku.herokuapp.com/`. Все працює!
+Тепер можна зберегти зміни і зробити пуш в репозиторій. Пуш займе близько хвилини, поки створиться Docker образ. Відкрийте `https://dotnet-app-heroku.herokuapp.com/`. Тепер все працює.
 
-![](/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/app-running.png)
+![](http://www.martyniuk.info/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/app-running.png)
 
 ## Висновок
 Ми побачили, як:
@@ -222,7 +226,7 @@ webBuilder
 2. Створити проєкт ASP.NET Core та додати Dockerfile для компіляції проєкту в образ.
 3. Розгорнути образ в Heroku завдяки команді `git push`.
 4. Переглянути логи програми у разі помилки.
-5. Використвувати змінні оточення Heroku для успішного старту програми. 
+5. Використовувати змінні оточення Heroku для успішного старту програми. 
 
 [Репозиторій на Github](https://github.com/alexmartyniuk/blog-dotnet-app-heroku)
 
