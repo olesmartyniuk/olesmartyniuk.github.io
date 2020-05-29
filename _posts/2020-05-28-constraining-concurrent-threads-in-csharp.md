@@ -4,7 +4,7 @@ title:  "Обмеження конкурентних потоків в C#"
 date:   2020-05-28 19:00:00 +0200
 date_friendly: 28 травня 2020 р. 
 categories: [Програмування, dotNET]
-tags: [dotnet, threads, parallelism, translation]
+tags: [dotnet, concurrency, parallelism, translation]
 ---
 ![](http://www.martyniuk.info/assets/img/posts/2020-05-28-constraining-concurrent-threads-in-csharp/cover.png)
 
