@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Зустрічайте C# 9.0"
-date:   2020-05-28 19:00:00 +0200
-date_friendly: 28 травня 2020 р. 
+date:   2020-06-14 12:00:00 +0200
+date_friendly: 14 червня 2020 р. 
 published: true
 categories: [Програмування, dotNET]
 tags: [dotnet, csharp, translation]
@@ -357,6 +357,6 @@ class Tiger : Animal
 
 ## І навіть більше…
 
-Найкраще місце, щоб ознайомитися з повним переліком майбутніх можливостей в C# 9.0 і слідкувати за їх реалізацією - це сторінка [Статус Можливостей Мови](https://github.com/dotnet/roslyn/blob/master/docs/Language%20Feature%20Status.md) в репозиnорії Roslyn (C#/VB Compiler) на GitHub.
+Найкраще місце, щоб ознайомитися з повним переліком майбутніх можливостей в C# 9.0 і слідкувати за їх реалізацією - це сторінка [Статус реалізації нових можливостей мови](https://github.com/dotnet/roslyn/blob/master/docs/Language%20Feature%20Status.md) в репозиnорії Roslyn (C#/VB Compiler) на GitHub.
 
 Приємного кодування!
