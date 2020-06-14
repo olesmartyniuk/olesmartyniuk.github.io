@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Зустрічайте C# 9.0"
-date:   2020-06-14 12:00:00 +0200
-date_friendly: 14 червня 2020 р. 
+date:   2020-06-11 12:00:00 +0200
+date_friendly: 11 червня 2020 р. 
 published: true
 categories: [Програмування, dotNET]
 tags: [dotnet, csharp, translation]
