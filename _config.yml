@@ -20,6 +20,9 @@ avatar: /assets/img/sample/avatar.jpg
 github:
   username: alexmartyniuk               
 
+twitter:
+  username: alexmartyniuk
+
 social:
   name: Олександр Мартинюк              
   email: alexander.martinyuk@gmail.com  
@@ -56,6 +59,10 @@ disqus:
   comments: true  # boolean type, the global switch for posts comments.
   shortname: 'martyniuk'    # Fill with your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
 
+navigation:
+  show_share_buttons: false
+  show_prev_next_posts: false
+  show_related_posts: false
 
 # Prefer color scheme setting, available values:
 #

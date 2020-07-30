@@ -81,7 +81,9 @@ layout: default
           </div>
           {% endif %}
 
-          {% include post-sharing.html %}
+          {% if site.navigation.show_share_buttons %}
+            {% include post-sharing.html %}
+          {% endif %}
 
         </div><!-- .post-tail-bottom -->
 
@@ -100,13 +102,17 @@ layout: default
 
     <div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
 
-      {% include post-nav.html %}
-
-      {% if site.disqus.comments and page.comments %}
-      {% include disqus.html %}
+      {% if site.navigation.show_prev_next_posts %}
+        {% include post-nav.html %}
       {% endif %}
 
-      {% include related-posts.html %}
+      {% if site.disqus.comments and page.comments %}
+        {% include disqus.html %}
+      {% endif %}
+
+      {% if site.navigation.show_related_posts %}
+        {% include related-posts.html %}
+      {% endif %}      
 
     </div> <!-- .pl-1 pr-1 -->
 
