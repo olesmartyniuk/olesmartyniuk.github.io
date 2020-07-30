@@ -60,21 +60,23 @@ layout: default
         {% endif %}
 
         <!-- tags -->
-        {% if page.tags.size > 0 %}
-        <div class="post-tags">
-          <i class="fa fa-tags fa-fw mr-1"></i>
-          {% for tag in page.tags %}
-          <a href="{{ site.baseurl }}/tags/{{ tag | replace: ' ', '-' | downcase | url_encode }}/"
-            class="post-tag no-text-decoration">
-            {{- tag -}}
-          </a>
-          {% endfor %}
-        </div>
-        {% endif %}
+        {% if site.navigation.show_tags %}
+          {% if page.tags.size > 0 %}
+          <div class="post-tags">
+            <i class="fa fa-tags fa-fw mr-1"></i>
+            {% for tag in page.tags %}
+            <a href="{{ site.baseurl }}/tags/{{ tag | replace: ' ', '-' | downcase | url_encode }}/"
+              class="post-tag no-text-decoration">
+              {{- tag -}}
+            </a>
+            {% endfor %}
+          </div>
+          {% endif %}
+        {% endif %}   
 
         <div class="post-tail-bottom
           d-flex justify-content-between align-items-center pt-5 pb-2">
-          {% if site.data.rights.license %}
+          {% if site.data.rights.license.show %}
           <div class="license-wrapper">
             Цей допис опубліковано під ліцензією
             <a href="{{ site.data.rights.license.link }}">{{ site.data.rights.license.name }}</a>.

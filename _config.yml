@@ -63,6 +63,7 @@ navigation:
   show_share_buttons: false
   show_prev_next_posts: false
   show_related_posts: false
+  show_tags: false
 
 # Prefer color scheme setting, available values:
 #
