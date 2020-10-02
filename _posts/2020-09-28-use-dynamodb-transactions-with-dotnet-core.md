@@ -18,7 +18,7 @@ tags: [dotnet, DynamoDB, AWS, NoSQL, transaction, ACID]
 
 Для представлення документів DynamoDB використовує формат JSON. Створення таблиці вимагає лише трьох аргументів: імені таблиці, ключа та списку атрибутів, серед яких повинен бути атрибут, що використовується як ключ секції. Ключ секції (Partition Key) використовується для визначення фізичного розміщення запису. Ключ секції разом з необов'язковим ключем сортування (Sort Key) створюють первісний ключ, що дозволяє унікально ідентифікувати запис в таблиці DynamoDB.
 
-![](../assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/dynamodb-table.jpg)
+![](http://www.martyniuk.info/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/dynamodb-table.jpg)
 
 Тоді як реляційні бази даних пропонують досить потужну мову запитів SQL, DynamoDB пропонує лише операції Put, Get, Update та Delete на одиночних таблицях і взагалі не пропонує будь яких об'єднань таблиць. Через цю простоту DynamoDB дуже добре масштабується і має високу пропускну здатність. 
 
@@ -63,17 +63,17 @@ Docker завантжив образ dynamodb-local і запустив серв
 
 Нам потрібний клієнт. Будь яка таблиця DynamoDB повинна містити унікальний ключ, нехай це буде телефонний номер клієнта. Також таблиця буде містити поточне замовлення цього клієнту. 
 
-![](../assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/client-table.jpg)
+![](http://www.martyniuk.info/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/client-table.jpg)
 
 У водія все схоже, тільки як унікальний ідентифікатор візьмемо номер машини. Так як модель водія дуже схожа на модель клієнта, то чому б нам не записати їх в одну таблицю? 
 
 В замовленні будуть міститись ідентифікатори водія, клієнта і статус замовлення: `Pending`, `InProgress`, `Done`.
 
-![](../assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table.jpg)
+![](http://www.martyniuk.info/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table.jpg)
 
 Уявімо, що в системі існує клієнт, водій та замовлення від клієнту, яке в знаходиться в статусі очікування.
 
-![](../assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table-1.jpg)
+![](http://www.martyniuk.info/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table-1.jpg)
 
 Для тих розробників, які багато працювали з SQL така універсальна таблиця, що містить все на світі може здатись дивною і не правильно. Їм відразу захочеться розділити її та провести нормалізацію. Але у світі NoSQL це абсолютно звична річ. Такі таблиці називаються *гомогенними*. DynamoDB не буде марнувати місце на диску для збереження порожніх полів записів, адже вона збергіає документи, або колекції атрибутів. В колекції атрибутів для записів клієнта та водія будуть відсутніми `ClientId`, `DriverId` та `OrderStatus`, а для замовлень буде відсутнім атрибут `OrderId`. Крім того, сам Amazon рекомендує використовувати гомогенні таблиці в DynamoDB. Їх рекомендація - [тримати пов'язані дані якомога ближче і мати якнайменше таблиць](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-general-nosql-design.html#bp-general-nosql-design-concepts). 
 
@@ -176,7 +176,7 @@ private static async Task AddClientDriverAndOrder()
 
 Тобто, кінцевий результат повинен виглядати наступним чином:
 
-![](../assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table-2.jpg)
+![](http://www.martyniuk.info/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table-2.jpg)
 
 Тут нам знадобиться [ACID](https://uk.wikipedia.org/wiki/ACID) транзакція, адже оновити рядок замовлення і рядок водія потрібно синхронно. Якщо будь яка з перелічених вище умов не виконається, жодних змін в базі не має відбутися. 
 
