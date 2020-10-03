@@ -64,7 +64,7 @@ Docker завантажив образ `dynamodb-local` і запустив се
 
 # Система замовлення таксі
 
-![](http://www.martyniuk.info/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-illustration.jpg)
+![](http://www.martyniuk.info/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-illustration.png)
 
 Перед тим як створити першу таблицю, давайте опишемо предметну область, яку ми будемо моделювати.
 
