@@ -8,7 +8,7 @@ categories: [Програмування, dotNET]
 tags: [dotnet, DynamoDB, AWS, NoSQL, transaction, ACID]
 ---
 
-![](http://www.martyniuk.info/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/cover.jpg)
+![](http://www.martyniuk.info/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/cover.png)
 
 Протягом багатьох років в розробці програмного забезпечення домінували реляційні бази даних. Мова SQL стала однією з найпоширеніших мов програмування. Але на початку 21 століття розвиток WEB 2.0 і потреби таких компаній як Google і Facebook спричинили революцію в збереженні даних. 
 
