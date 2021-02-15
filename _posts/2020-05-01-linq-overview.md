@@ -1,49 +1,52 @@
 ---
 layout: post
-title:  "LINQ. Огляд"
+title:  "LINQ. Overview"
+i18n-link: linq-overview
 date:   2020-05-01 17:35:30 +0200
-date_friendly: 1 травня 2020 р. 
-categories: [Програмування, dotNET]
+date_friendly: 1 May 2020 
+categories: Programming, dotNET]
 tags: [c#, linq]
 ---
-![Ілюстрація](/assets/img/posts/2020-05-01-linq-overview/Cover.png)
+![Illustration](/assets/img/posts/2020-05-01-linq-overview/Cover.png)
 
-В цій статті пропоную розглянути LINQ як важливий компонент .NET фреймворку, його історію та роль. Чому він був створений і як врешті користуватись цим інструментом. В кінці розглянемо приклади на мові C#, які дадуть уявлення про те, що таке LINQ.
+In this article, I propose to consider LINQ as an important component of the .NET framework, its history and role. Why it was created and how to use this tool in the end. Finally, let's look at examples in C # that give an idea of ​​what LINQ is.
 
-**LINQ** - (*анг. language integrated query*) - мова запитів до структурованих даних, що інтегрована в C#. Такими структурованими даними можуть бути колекції об'єктів в пам'яті, XML файли, таблиці баз даних, веб-сервіси і т.ін. Але для чого нам потрібен ще один інструмент в мові C#, яка і так дозволяє працювати з даними? Вся справа у легкості розуміння і сприйняття. Для того, щоб пояснити в чому саме полягає легкість LINQ, необхідно розглянути відмінність між декларативним та імперативним програмуванням.
+**LINQ** - (*анг. language integrated query*) - a language of queries to structured data, which is integrated into C #. Such structured data can be collections of objects in memory, XML files, database tables, web services, etc. But why do we need another tool in C # that allows us to work with data anyway? It's all about ease of understanding and perception. In order to explain what the ease of LINQ is, it is necessary to consider the difference between declarative and imperative programming.
 
-## Імперативне та декларативне програмування
-Перші мови програмування задавали чіткий порядок команд. Це дуже зручно, коли ви маєте справу з регістрами процесору і прямим доступом до пам'яті. В таких мовах, як C та Assembler широко використовуються оператори виділення пам'яті, присвоєння, умовні оператори та підпрограми. Все це ознаки імперативного підходу. Слово *імператив* з англійської перекладається як *наказ* і це досить точне вмзначення для подібного підходу, тому що при імперативному підході програма є послідовністю чітких команд і комп'ютер виконує ці команди одна за одною.
+## Imperative and declarative programming
+The first programming languages ​​set a clear order of commands. This is very handy when dealing with CPU registers and direct memory access. Languages ​​such as C and Assembler use memory allocation operators, assignments, conditional operators, and routines. All these are signs of an imperative approach. The word imperative is translated from English as an order and it is quite an accurate meaning for such an approach, because in the imperative approach the program is a sequence of clear commands and the computer executes these commands one by one.
 
-До імперативних мов програмування відносяться: 
+Imperative programming languages ​​include:
 * C#
 * Python
 * JavaScript
 * Go
 
-Всі ці мови базуються на змінних, операторах присвоєння і підпрограмах. Такий підхід близький до того як працює комп'ютер, але далекий від людської мови, звичної всім нам. Людині зручніше декларувати те, чого вона хоче, ніж описувати чіткий алгоритм досягнення цієї мети. 
+All of these languages ​​are based on variables, assignment operators, and routines. This approach is close to how a computer works, but far from human language, familiar to all of us. It is more convenient for a person to declare what he wants than to describe a clear algorithm for achieving this goal.
 
-Тому імперативному підходу протиставляється декларативний. Його головною ознакою є те, що покроковий алгоритм не задається. Натомість задається джерело даних, описується бажаний результат і набір правил, завдяки яким цей результат буде досягнуто. Виконання запиту доручається інтерпретатору, який вміє перевести його у форму зручну для комп'ютера, тобто в імперативну форму.
+Therefore, the imperative approach is opposed to the declarative. Its main feature is that the step-by-step algorithm is not specified. Instead, the data source is specified, the desired result is described and a set of rules by which this result will be achieved. Execution of the request is entrusted to the interpreter, who is able to translate it into a form convenient for the computer, ie in the imperative form.
 
-До декларативних мов відносяться:
+Declarative languages ​​include:
 * SQL
 * Regular Expressions
 * XSLT Transformation
 * Gremlin
 
-Саме введення декларативного підходу до обробки даних в .NET і було головною метою створення LINQ.
+It was the introduction of a declarative approach to data processing in .NET and was the main purpose of creating LINQ.
 
-## Порівняння підходів
-Розглянемо на прикладі два підходи, спочатку імперативний з використанням циклу, а потім декларативний з використанням LINQ.
+## Comparison of approaches
 
-Як тестовий набір даних візьмемо список супергероїв, кожен з яких має ім'я, рік народження (або першої згадки у коміксах) та назву серії, де він вперше з'явився.
+Consider two examples, first imperative using a loop and then declarative using LINQ.
 
-Отже, створимо нову консольну програму в .NET Core:
+As a test data set, take a list of superheroes, each with a name, year of birth (or first mention in comics) and the name of the series where he first appeared.
+
+So, let's create a new console program in .NET Core:
+
 ``` bash
 > dotnet new console -n  LinqTestApp
 The template "Console Application" was created successfully.
 ```
-Визначимо клас супергероя і додамо тестові дані.
+Define the superhero class and add test data.
 
 ```c#
 private class Hero
@@ -87,14 +90,14 @@ private static readonly List<Hero> _heroes = new List<Hero>
     }
 };
 ```
-Нехай, наша задача полягатиме в тому, щоб відібрати тих супергероїв, які мають слово "man" в імені та вивести їх імена на екран у алфавітному порядку. Тобто, ми повинні отримати імена всіх героїв (окрім Капітана Америки) у відсортованому вигляді.
+Suppose our task is to select those superheroes who have the word "man" in their name and display their names in alphabetical order. That is, we must get the names of all the heroes (except Captain America) in sorted form.
 ```
 Batman
 Ironman
 Spiderman
 Superman
 ```
-При імперативному підході нам необхідно створити список в який ми будемо заносити імена відфільтрованих героїв, потім пройтись по списку героїв і додати до створеного списку лише тих, чиї імена містять слово "man". Після цього необхідно відсортувати отриманий список і вивести на екран:
+With the imperative approach, we need to create a list in which we will enter the names of the filtered characters, then go through the list of characters and add to the created list only those whose names contain the word "man". After that it is necessary to sort the received list and to display:
 ```c#
 static void Main(string[] args)
 {
@@ -114,8 +117,8 @@ static void Main(string[] args)
     }
 }
 ```
-Тепер давайте розв'яжемо ту ж задачу, але за допомогою LINQ. 
-> Не забудьте піключити простір імен `System.Linq`
+Now let's solve the same problem, but with LINQ.
+> Don't forget to check the namespace System.Linq
 
 ```c#
 using System.Linq;
@@ -135,38 +138,41 @@ static void Main(string[] args)
 }
 ```
 
-Програма стала на 5 рядків коротшою і легшою для розуміння, адже вибірка даних здійснюється мовою дуже схожою на англійську: *From heroes where heroName contains "man" ordered by name select name*, що можна перекласти як *"З колекції героїв обери імена тих героїв які містять слово "man" в імені і відсортуй їх за ім'ям"*.
+The program has become 5 lines shorter and easier to understand, because the data is sampled in a language very similar to English: From heroes where heroName contains “man” ordered by name select name , which can be translated as “Choose the names of those heroes "Man" in the name and sort them by name .
 
-Розберемо, що робить даний код.
+Let's understand what this code does.
 
-`from hero in _heroes` задає джерело даних. У нас це константний список `_heroes`. До кожного елементу списку ми будемо звертатися у виразі через змінну `hero`. І хоча ми ніде не вказували її тип, вираз залишається строго типізованим, адже компілятор має змогу вивести тип з типу колекції `_heroes`.
+from hero in _heroesspecifies the data source. We have a constant list _heroes. We will refer to each item in the list in an expression through a variable hero. And although we did not specify its type anywhere, the expression remains strictly typed, because the compiler can output the type from the collection type _heroes.
 
-`where hero.Name.Contains` задає умову фільтрації вхідного списку. Якщо елемент відповідає умові, він передається далі. Таким чином, всі подальші оператори у виразі будуть працювати вже з відфільтрованим списком. Оператор `where` ще називають оператором фільтрації.
+where hero.Name.Containsspecifies the condition for filtering the incoming list. If the element meets the condition, it is passed on. Thus, all subsequent operators in the expression will already work with the filtered list. The operator is wherealso called the filter operator.
 
-`orderby hero.Name` задає поле і спосіб сортування.
+orderby hero.Name specifies the field and sort method.
 
-`select hero.Name` задає значення, що потрапить у результуючу вибірку. Оскільки нас цікавлять лише імена героїв, ми вказуємо тут поле Name. Саме цей оператор задає тип результату, тому у нашому випадку це буде `IEnumerable<string>`. Даний оператор ще називають оператором проекції, оскільки він перетворює дані, що містить джерело у вигляд необхідний нам для конкретної задачі. 
+select hero.Namesets the value to be included in the resulting sample. Since we are only interested in the names of the characters, we specify the Name field here. It is this operator that specifies the type of result, so in our case it will be IEnumerable<string>. This operator is also called the projection operator because it converts the data containing the source into the form we need for a specific task.
 
-## Методи розширення
-Варто зазначити, що хоча синтаксис LINQ значно відрізняється від синтаксису C#, все ж під капотом LINQ використовує методи розширення C#, тож наведений вище запит можна переписати в більш звичному об'єктному стилі:
+## Expansion methods
+It is worth noting that although the LINQ syntax is significantly different from the C # syntax, still under the hood LINQ uses C # extension methods, so the above query can be rewritten in a more familiar object style:
 ```c#
 var heroNames = _heroes
     .Where(hero => hero.Name.Contains("man"))
     .OrderBy(hero => hero.Name)
     .Select(hero => hero.Name);
 ```
-Такий синтаксис називається синтаксисом методів розширення (або лямбда синтаксисом) і він може застосовуватись разом з синтаксисом запитів LINQ. Часто, коли говорять про LINQ мають на увазі методи розширення, тому що вони реалізовані в просторі імен `System.Linq` і є частиною LINQ як компоненту .NET. У своїй більшості ці методи розширюють інтерфейс IEnumerable і є базою для реалізації LINQ. Це може спочатку збивати з пантелику, але LINQ це не лише синтаксис `from ... in ... select`, але також і синтаксис методів розширення.
+This syntax is called extension syntax (or lambda syntax) and can be used in conjunction with LINQ query syntax. Often when we talk about LINQ we mean extension methods because they are implemented in the namespace System.Linqand are part of LINQ as a component of .NET. For the most part, these methods extend the IEnumerable interface and are the basis for implementing LINQ. This may be confusing at first, but LINQ is not only the syntax from ... in ... select, but also the syntax of extension methods.
 
-Так як методи розширення є базою для реалізації LINQ, вони більш потужні ніж синтаксис запитів. Наприклад, метод `Where` має перевантажену версію, в якій при фільтрації доступний індекс елементу у вихідній колекції. Цей індекс може бути використаний при формуванні логічного виразу (предикату).
+Because extension methods are the basis for implementing LINQ, they are more powerful than query syntax. For example, the method Wherehas an overloaded version in which the index of the item in the source collection is available when filtering. This index can be used in the formation of a logical expression (predicate).
+
 ```c#
     ...
     .Where((hero, index) => hero.Name.Contains("man") && index > 2)
 ```
-Нажаль, даний індекс недоступний, якщо ми використовуємо синтаксис запиту `from ... in ... select`. 
 
-При використанні синтаксису запиту також недоступні скалярні функції Count, Max, Sum та інші методи (наприклад, Intersect). 
+Sorry, this index is not available if we use query syntax from ... in ... select.
 
-Також, з методами розширення ми можемо розбити LINQ вираз на декілька частин і сформувати його згідно певної умови, що для синтаксису запиту неможливо. Наприклад:
+Scalar functions Count, Max, Sum, and other methods (such as Intersect) are also not available when using query syntax.
+
+Also, with extension methods, we can break a LINQ expression into several parts and form it according to a certain condition, which is impossible for query syntax. Example:
+
 ```c#
 var query = _heroes.Where((hero, index) => hero.Name.Contains("man"));
 
@@ -176,22 +182,21 @@ if (shouldBeSorted)
 var heroNames = query
     .Select(hero => hero.Name);
 ```
-Ми додаємо сортування тільки якщо вхідний параметр `shouldBeSorted` дорівнює `true`. Використовуючи синтаксис запиту нам необхідно записати вираз двічі в залежності від умови: в першому випадку зі сортуванням, а в другому - без нього.
+We only add sorting if the input parameter shouldBeSortedis equal to true. Using the syntax of the query, we need to write the expression twice depending on the condition: in the first case with sorting, and in the second - without it.
 
-> В подальшому огляді ми будемо використовувати синтаксис методів розширення, так як він більш потужний і дозволяє показати можливості LINQ в повній мірі.
+> In the following review, we will use the syntax of extension methods, as it is more powerful and allows you to show the full potential of LINQ.
 
-## Трохи історії
-У 2007 році мова C# мала версію 2.0 і не мала LINQ. Обробка даних відбувалась в імперативному стилі. В той час вже існували Python 2.4 та JavaScript 1.6, які мали потужні вбудовані засоби роботи з колекціями, такі як `filter`, `map` і `reduce`. C# значно програвав їм у зручності коли йшлося про роботу з колекціями, і це не могло продовжуватись довго.
+## A little history
+In 2007, C # had version 2.0 and no LINQ. Data processing took place in an imperative style. At that time, Python 2.4 and JavaScript 1.6 already existed, which had powerful built-in tools for working with collections, such as filter, mapand reduce. C # lost a lot of convenience to them when it came to working with collections, and it couldn't last long.
 
-Восени 2007 року компанія Microsoft випустила .NET Framework 3.5 в якому були значні нововведення. Ці зміни дали можливість створити LINQ та підняти версію мови C# до 3.0 Серед нововведень були:
+In the fall of 2007, Microsoft released the .NET Framework 3.5, which featured significant innovations. These changes made it possible to create LINQ and raise the C # version to 3.0. Among the innovations were:
 
-* **Лямбда** вирази зробили можливим просте визначення предикатів для методів типу Where, Select у вигляді `() => {...}`. 
-* **Анонімні типи** дозволили створювати об'єкти довільної структури на льоту і прибрали необхідність оголошувати тип для результату LINQ виразу.
-* **Дерева виразів** зробили можливим збереження предикатів у вигляді об'єктів, на основі яких різні провайдери даних могли сформувати власний оптимізований запит. Це стосується LINQ to SQL або LINQ to XPath. 
-* **Методи розширення** дозволили розширяти вже існуючі типи без їх модифікації і наслідування. Це дозволило застосовувати LINQ до великої кількості сторонніх типів, що підтримують IEnumerable або IQueryable.
-* **Ініціалізатори об’єктів та колекцій** довзолили створювати об'єкти та ініціалізувати їх поля без використання конструкторів, що значно спростило синтаксис для методів проекції LINQ, коли нові об'єкти створюються як частина виразу.  
-* **Оголошення змінних через `var`** значно спростило визначення типу результату запиту і зробило можливим повернення даних анонімних типів з LINQ виразу.
+Lambda expressions have made it possible to easily define predicates for methods such as Where, Select as () => {...}.
+Anonymous types allowed the creation of objects of arbitrary structure on the fly and removed the need to declare a type for the result of the LINQ expression.
+Expression trees made it possible to store predicates as objects, on the basis of which different data providers could generate their own optimized query. This applies to LINQ to SQL or LINQ to XPath.
+Expansion methods have allowed to expand existing types without modifying and imitating them. This allowed LINQ to be applied to a large number of third-party types that support IEnumerable or IQueryable.
+Object and collection initializers allowed objects to be created and their fields to be initialized without the use of constructors, which greatly simplified the syntax for LINQ projection methods when creating new objects as part of an expression.
+Declaring variablesvar greatly simplified the query result type determination and made it possible to return anonymous data from a LINQ expression.
+All these features have taken C # and the .NET platform to a whole new level and allowed us to create LINQ. Since its release, it has become an integral part of the .NET framework and as a library for working with data is not inferior, and in many respects surpasses the built-in tools of other languages, such as Java, Python, Go and JavaScript.
 
-Всі ці можливості вивели C# і платформу .NET на якісно новий рівень і довзолили створити LINQ. З моменту випуску він став невід'ємною частиною .NET фреймворку і як бібліотека для роботи з даними не поступається, а багато в чому і перевершує, вбудовані засоби інших мов, таких як Java, Python, Go і JavaScript.
-
-В наступних статтях розглянемо детальніше всі основні аспекти роботи з LINQ. Ви переконаєтесь, що це не тільки зручний, але й доволі ефективний та зрілий інструмент.
+In the following articles we will consider in more detail all the main aspects of working with LINQ. You will find that it is not only convenient, but also quite effective and mature tool.
