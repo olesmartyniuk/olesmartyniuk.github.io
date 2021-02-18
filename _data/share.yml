@@ -1,4 +1,5 @@
-label: "Поділитись"
+#  Sharing options at the bottom of the post.
+#  Icons from <https://fontawesome.com/>
 
 platforms:
   -
@@ -13,3 +14,14 @@ platforms:
     type: Telegram
     icon: "fab fa-telegram"
     link: "https://telegram.me/share?text=TITLE&url=URL"
+
+  # Uncomment below if you need to.
+  # -
+  #   type: Linkedin
+  #   icon: "fab fa-linkedin"
+  #   link: "https://www.linkedin.com/sharing/share-offsite/?url=URL"
+  #
+  # -
+  #   type: Weibo
+  #   icon: "fab fa-weibo"
+  #   link: "http://service.weibo.com/share/share.php?title=TITLE&url=URL"

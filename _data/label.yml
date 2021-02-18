@@ -1,14 +1,19 @@
 # The label text of site.
 
 panel:
-  lastmod: "З останнього"
-  trending_tags: "Популярне"
-  toc: "Зміст"
+  lastmod: Recent Update
+  trending_tags: Trending Tags
+  toc: Contents
 
 post:
-  relate_posts: "Ще почитати"
+  relate_posts: Further Reading
+  share: Share
   button:
-    next: Новіші
-    previous: Старіші
+    next: Newer
+    previous: Older
 
-search_hint: "Пошук"   # text show on search bar
+search_hint: Search   # text show on search bar
+
+pin_prompt: Pinned    # pinned prompt
+
+read_time_unit: min   # see posts' time to read

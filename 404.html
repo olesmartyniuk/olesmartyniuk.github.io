@@ -1,25 +1,21 @@
 ---
-# The 404 page
-# v2.0
-# https://github.com/cotes2020/jekyll-theme-chirpy
-# © 2017-2019 Cotes Chung
-# MIT License
 layout: page
 title: "404: Page not found"
 permalink: /404.html
 
-redirect_from:  # part of site.sitemap_exclude
+redirect_from:
   - /norobots/
   - /assets/
-  - /tabs/
-  - /categories/
-  - /tags/
   - /posts/
 
 dynamic_title: true
 ---
 
 <div class="lead">
-  <p>Вибачте, ви помилились адресою або шукаєте те, що було видалене. </p>
-  <p><a href="{{ site.baseurl }}/">Відвідайте Головну сторінку</a> щоб скористатись пошуком або <a href="{{ site.baseurl }}/tabs/archives">подивіться в Архів</a>.</p>
+  <p>Sorry, we've misplaced that URL or it's pointing to something that doesn't exist. </p>
+  <p>
+    <a href="{{ '/' | relative_url }}">Head back Home</a>
+    to try finding it again, or search for it on the
+    <a href="{{ 'archives' | relative_url }}">Archives page</a>.
+  </p>
 </div>

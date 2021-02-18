@@ -1,73 +1,115 @@
-<div id="nav-wrapper">
-  <div id="profile-wrapper" class="d-flex flex-column">
-    <div id="avatar" class="d-flex justify-content-center">
-      <a href="{{ site.baseurl }}/" alt="avatar">
-        {% assign avatar_url = site.avatar %}
-        {% capture start %}{{ site.avatar | slice: 0 }}{% endcapture %}
-        {% if start == '/' %}
-          {% assign avatar_url = avatar_url | prepend: site.baseurl %}
-        {% endif %}
-        <img src="{{ avatar_url }}" alt="avatar">
+<!--
+  The Side Bar
+-->
+
+<div id="sidebar" class="d-flex flex-column align-items-end">
+
+  <div class="profile-wrapper text-center">
+    <div id="avatar">
+      <a href="{{ '/' | relative_url }}" alt="avatar" class="mx-auto">
+        {% capture avatar_url %}
+          {%- if site.avatar contains '://' -%}
+            {{ site.avatar }}
+          {%- elsif site.img_cdn != '' and site.img_cdn -%}
+            {{ site.avatar | prepend: site.img_cdn }}
+          {%- else -%}
+            {{ site.avatar | relative_url }}
+          {%- endif -%}
+        {% endcapture %}
+        <img src="{{ avatar_url }}" alt="avatar" onerror="this.style.display='none'">
       </a>
     </div>
 
-    <div class="profile-text mt-3">
-      <div id="site-title">
-        <a href="{{ site.baseurl }}/">{{- site.title -}}</a>
-      </div>
-      <div id="site-subtitle" class="font-italic">{{- site.tagline -}}</div>
+    <div class="site-title mt-3">
+      <a href="{{ '/' | relative_url }}">{%t site.title %}</a>
     </div>
-  </div>
 
-  <ul class="nav flex-column">
-  {% assign page_urls = page.url | split: "/" %}
+    <div class="site-subtitle font-italic">{%t site.tagline %}</div>
 
-  {% for item in site.data.tabs %}
-    {% assign ref = site.baseurl | append: "/" %}
+    <!-- language -->
 
-    {% if item.path %}
-      {% assign ref = ref | append: item.path | append: "/" %}
-      {% if item.url %}
-        {% assign ref = ref | append: item.url | append: "/" %}
-      {% endif %}
+    {% if site.lang == "en" %}              
+      {% assign lang_prefix = "" %}
+    {% else %}      
+      {% assign lang_prefix = "/uk" %}
     {% endif %}
+    
+    <div class="site-title mt-0">               
+      {% if site.lang == "en" %}        
+        <a href="/uk{{ page.url }}" title="{% t global.another_language %}">
+          <img src="/assets/img/sample/ukrainian.png" width="40px" height="40px"/>
+        </a>  
+      {% else %}
+        <a href="{{ page.url }}" title="{% t global.another_language %}">
+          <img src="/assets/img/sample/english.png" width="40px" height="40px"/>          
+        </a>  
+      {% endif %}              
+    </div>
 
-    <li class="nav-item d-flex justify-content-center
-      {% if item.url == page_urls.last
-        or item.name == page.tab_active
-        or item.name == "Home" and page.layout == "home" %}active{% endif %}">
-      <a href="{{ ref }}" class="nav-link d-flex justify-content-center align-items-center w-100">
-        <i class="fa-fw {{ item.icon }} ml-3 mr-3 unloaded"></i>
-        <span>{{ item.name | upcase }}</span>
+  </div><!-- .profile-wrapper -->
+
+  <ul class="w-100">    
+    <!-- home -->
+    {% capture title %}{% t pages.home %}{% endcapture %}
+    <li class="nav-item{% if page.layout == 'home' %}{{ " active" }}{% endif %}">
+      <a href="{{ lang_prefix }}{{ '/' | relative_url }}" class="nav-link">
+        <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i>
+        <span>{{ title | upcase }}</span>
       </a>
-    </li> <!-- .nav-item -->
-  {% endfor %}
+    </li>
+    <!-- the real tabs -->
+    {% for tab in site.tabs %}
+
+      {% capture title %}{% t tab.title %}{% endcapture %}
+
+      <li class="nav-item{% if tab.url == page.url %}{{ " active" }}{% endif %}">
+        <a href="{{ lang_prefix }}{{ tab.url | relative_url }}" class="nav-link">
+          <i class="fa-fw {{ tab.icon }} ml-xl-3 mr-xl-3 unloaded"></i>
+          <span>{{ title | upcase }}</span>
+        </a>
+      </li> <!-- .nav-item -->
+    {% endfor %}
 
   </ul> <!-- ul.nav.flex-column -->
 
-</div><!-- #nav-wrapper -->
+  <div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center">
 
-<div class="sidebar-bottom d-flex flex-wrap justify-content-around mt-4">
+    {% for entry in site.data.contact %}
+      {% capture url %}
+        {%- if entry.type == 'github' -%}
+          https://github.com/{{ site.github.username }}
+        {%- elsif entry.type == 'twitter' -%}
+          https://twitter.com/{{ site.twitter.username }}
+        {%- elsif entry.type == 'email' -%}
+          {% assign email = site.social.email | split: '@' %}
+          javascript:location.href = 'mailto:' + ['{{ email[0] }}','{{ email[1] }}'].join('@')
+        {%- elsif entry.type == 'rss' -%}
+          {{ "/feed.xml" | relative_url }}
+        {%- else -%}
+          {{ entry.url }}
+        {%- endif -%}
+      {% endcapture %}
 
-  {% if site.theme_mode == "dual" %}
-  <span id="mode-toggle-wrapper">
-    {% include mode-toggle.html %}
-  </span>
-  <span class="icon-border"></span>
-  {% endif %}
+      {% if url %}
+      <a href="{{ url }}" aria-label="{{ entry.type }}"
+        {% unless site.theme_mode %}class="order-{{ forloop.index | plus: 2 }}"{% endunless %}
+        {% unless entry.noblank %}target="_blank" rel="noopener"{% endunless %}>
+        <i class="{{ entry.icon }}"></i>
+      </a>
+      {% endif %}
 
-  <a href="https://github.com/{{ site.github.username }}" target="_blank">
-    <i class="fab fa-github-alt"></i>
-  </a>
-  <a href="https://twitter.com/{{ site.twitter.username }}" target="_blank">
-    <i class="fab fa-twitter"></i>
-  </a>
-  {% assign email = site.social.email | split: '@' %}
-  <a href="javascript:window.open('mailto:' + ['{{ email[0] }}','{{ email[1] }}'].join('@'))">
-    <i class="fas fa-envelope"></i>
-  </a>
-  <a href="{{ site.baseurl }}/feed.xml" target="_blank">
-    <i class="fas fa-rss"></i>
-  </a>
+    {% endfor %}
 
-</div>
+    {% unless site.theme_mode %}
+      {% if site.data.contact.size > 0 %}
+        <span class="icon-border order-2"></span>
+      {% endif %}
+
+      <span id="mode-toggle-wrapper" class="order-1">
+        {% include mode-toggle.html %}
+      </span>
+    {% endunless %}
+
+  </div> <!-- .sidebar-bottom -->
+
+</div><!-- #sidebar -->
