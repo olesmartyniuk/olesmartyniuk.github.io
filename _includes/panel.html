@@ -6,36 +6,21 @@
 
   <div class="access">
 
-  {% include update-list.html %}
-
-  {% if update_list.size > 0 %}
-
-    <div id="access-lastmod" class="post">
-      <span>{{- site.data.label.panel.lastmod | default: 'Recent Update' -}}</span>
-      <ul class="post-content pl-0 pb-1 ml-1 mt-2">
-
-      {% for item in update_list %}
-        {% assign index = item | split: "::" | last | plus: 0 %}
-        {% assign post = site.posts[index] %}
-        {% assign url = post.url | relative_url %}
-        <li><a href="{{ url }}">{{ post.title }}</a></li>
-      {% endfor %}
-
-      </ul>
-    </div> <!-- #access-lastmod -->
-
-  {% endif %}
-
   {% include trending-tags.html %}
+
+  {% if site.lang == "en" %}              
+    {% assign lang_prefix = "" %}
+  {% else %}      
+    {% assign lang_prefix = "/uk" %}
+  {% endif %}
 
   {% if trending_tags.size > 0 %}
     <div id="access-tags">
       <span>{% t tags.title %}</span>
-      <div class="d-flex flex-wrap mt-3 mb-1 mr-3">
-
+      <div class="d-flex flex-wrap mt-3 mb-1 mr-3">        
       {% for tag_name in trending_tags %}
         {% assign url = tag_name | slugify | url_encode | prepend: "/tags/" | append: "/" %}
-        <a class="post-tag" href="{{ url | relative_url }}">{{ tag_name }}</a>
+        <a class="post-tag" href="{{ lang_prefix }}{{ url }}">{{ tag_name }}</a>
       {% endfor %}
 
       </div>

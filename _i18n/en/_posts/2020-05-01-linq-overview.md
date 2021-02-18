@@ -1,11 +1,10 @@
 ---
 layout: post
 title:  "LINQ. Overview"
-i18n-link: linq-overview
 date:   2020-05-01 17:35:30 +0200
 date_friendly: 1 May 2020 
-categories: Programming, dotNET]
-tags: [c#, linq]
+categories: [Programming, .NET]
+tags: [C#, LINQ]
 ---
 ![Illustration](/assets/img/posts/2020-05-01-linq-overview/Cover.png)
 

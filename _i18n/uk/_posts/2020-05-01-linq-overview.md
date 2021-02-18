@@ -3,8 +3,8 @@ layout: post
 title:  "LINQ. Огляд"
 date:   2020-05-01 17:35:30 +0200
 date_friendly: 1 травня 2020 р. 
-categories: [Програмування, dotNET]
-tags: [c#, linq]
+categories: [Програмування, .NET]
+tags: [C#, LINQ]
 ---
 ![Ілюстрація](/assets/img/posts/2020-05-01-linq-overview/Cover.png)
 

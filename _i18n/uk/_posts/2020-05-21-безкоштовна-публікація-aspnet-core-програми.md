@@ -3,8 +3,8 @@ layout: post
 title:  "Безкоштовна публікація ASP.NET Core програми"
 date:   2020-05-21 10:00:00 +0200
 date_friendly: 21 травня 2020 р. 
-categories: [Програмування, dotNET]
-tags: [dotnet, asp.net core, deployment, heroku]
+categories: [Програмування, .NET]
+tags: [.NET, ASP.NET Core, розгортання, Heroku]
 ---
 ![](http://www.martyniuk.info/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/cover.png)
 

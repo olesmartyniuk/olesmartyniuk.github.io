@@ -4,7 +4,7 @@ title:  "Жадібні алгоритми"
 date:   2020-05-08 17:30:00 +0200
 date_friendly: 8 травня 2020 р. 
 categories: [Програмування, Алгоритми]
-tags: [алгоритми, codility]
+tags: [алгоритми, codility.com]
 ---
 
 ![Обкладинка](/assets/img/posts/2020-05-08-greedy-algorithms/Cover.png) 

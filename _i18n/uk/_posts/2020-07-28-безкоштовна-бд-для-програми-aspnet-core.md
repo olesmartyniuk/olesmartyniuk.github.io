@@ -3,8 +3,8 @@ layout: post
 title:  "Безкоштовна БД для програми ASP.NET Core"
 date:   2020-07-28 10:00:00 +0200
 date_friendly: 28 липня 2020 р. 
-categories: [Програмування, dotNET]
-tags: [dotnet, asp.net core, postgresql, heroku, EntityFramework, identity]
+categories: [Програмування, .NET]
+tags: [.NET, ASP.NET Core, PostgreSQL, Heroku, Entity Framework, identity]
 ---
 
 ![](http://www.martyniuk.info/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/cover.jpg)
