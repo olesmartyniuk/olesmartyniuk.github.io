@@ -197,10 +197,15 @@ In 2007, C# had version 2.0 and no LINQ. Data processing was done in an imperati
 In the fall of 2007, Microsoft released the .NET Framework 3.5, which featured significant innovations. These changes made it possible to create LINQ and raise the C # version to 3.0. Among the innovations were:
 
 **Lambda** expressions made it possible to easily define predicates for methods such as Where, Select as `() => {...}`.
+
 **Anonymous types** allowed the creation of objects of arbitrary structure on the fly and removed the need to declare a type for the result of the LINQ expression.
+
 **Expression trees** made it possible to store predicates as objects, on the basis of which different data providers could generate their own optimized query. This applies to LINQ to SQL or LINQ to XPath.
+
 **Expansion methods** have allowed expanding existing types without modifying and imitating them. This allowed LINQ to be applied to a large number of third-party types that support `IEnumerable` or `IQueryable`.
+
 **Object and collection initializers** allowed objects to be created and their fields to be initialized without the use of constructors, which greatly simplified the syntax for LINQ projection methods when creating new objects as part of an expression.
+
 **Declaring variables as `var`** greatly simplified the query result type determination and made it possible to return anonymous data from a LINQ expression.
 All these features have taken C # and the .NET platform to a new level and allowed Microsoft to create LINQ. Since its release, it has become an integral part of the .NET framework and as a library for working with data is not inferior, and in many aspects surpasses the built-in tools of other languages, such as Java, Python, Go, and JavaScript.
 
