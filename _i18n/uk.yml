@@ -1,0 +1,16 @@
+global:
+  ukrainian: Українська
+  english: Анлійська
+  another_language: In English
+site:
+  title: Мартинюк Онлайн
+  tagline: Блог про бекенд розробку на .NET
+pages:
+  home: Статті
+  categories: Категорії
+  tags: Теги
+  archives: Архів
+  about: Про мене
+  posts: Статті
+tags:
+  title: Популярні Теги

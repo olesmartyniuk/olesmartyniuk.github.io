@@ -1,43 +1,66 @@
 <!--
   The Top Bar
 -->
+
 <div id="topbar-wrapper" class="row justify-content-center topbar-down">
   <div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between">
     <span id="breadcrumb">
-      {% for item in page.breadcrumb %}
-        {% if item.url %}
+
+    {% assign paths = page.url | split: '/' %}
+
+    {% if paths.size == 0 %}
+      <!-- index page -->
+      <span>{%t pages.posts %}</span>
+    {% else %}
+
+      {% for item in paths %}
+
+        {% if forloop.first %}
+          {% unless page.layout == 'post' %}
+          <span>
+            <a href="{{ '/' | relative_url }}">{%t pages.home %}</a>
+          </span>
+          {% endunless %}
+
+        {% elsif forloop.last %}
+          <span>{%t page.title %}</span>
+
+        {% else %}
         <span>
-          <a href="{{ site.baseurl }}{{ item.url | remove: '.html'}}">
-            {{ item.label }}
+          {% assign url = item %}
+          {% if item == 'posts' and page.layout == 'post' %}
+            {% assign url = '/' %}
+          {% endif %}
+          <a href="{{ url | relative_url }}">
+            {{ item | capitalize }}
           </a>
         </span>
-        {% else %}
-          <span>{{ item.label }}</span>
+
         {% endif %}
+
       {% endfor %}
 
-      {% unless page.layout == "home" %}
-        <span>{{ page.title_friendly }}</span>
-      {% endunless %}
+    {% endif %}
 
     </span><!-- endof #breadcrumb -->
 
     <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i>
 
     <div id="topbar-title">
-    {% if page.location %}
-      {{- page.location -}}
-    {% elsif page.layout == "home" %}
-      {{- site.title -}}
-    {% else %}
-      {{- page.title_friendly -}}
-    {% endif %}
+      {% if page.layout == 'home' %}
+        {%t site.title %}
+      {% elsif page.dynamic_title %}
+        {%t page.title %}
+      {% else %}
+        {{- page.layout | capitalize -}}
+      {% endif %}
     </div>
 
     <i id="search-trigger" class="fas fa-search fa-fw"></i>
     <span id="search-wrapper" class="align-items-center">
       <i class="fas fa-search fa-fw"></i>
-      <input class="form-control" id="search-input" type="search" placeholder="{{ site.data.label.search_hint }}...">
+      <input class="form-control" id="search-input" type="search"
+        aria-label="search" placeholder="{{ site.data.label.search_hint | default: 'Search' }}...">
       <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i>
     </span>
     <span id="search-cancel" >Cancel</span>

@@ -2,8 +2,7 @@
   Switch the mode between dark and light.
 -->
 
-<i class="mode-toggle fas fa-sun" dark-mode-invisible></i>
-<i class="mode-toggle fas fa-moon" light-mode-invisible></i>
+<i class="mode-toggle fas fa-adjust"></i>
 
 <script type="text/javascript">
 
@@ -13,35 +12,38 @@
     static get LIGHT_MODE() { return "light"; }
 
     constructor() {
-      if (this.mode != null) {
-        if (this.mode == ModeToggle.DARK_MODE) {
-          this.setDark();
+      if (this.hasMode) {
+        if (this.isDarkMode) {
+          if (!this.isSysDarkPrefer) {
+            this.setDark();
+          }
         } else {
-          this.setLight();
-        }
-      } else {
-        if (this.isSysDarkPrefer) {
-          this.setDark();
-        } else {
-          this.setLight();
+          if (this.isSysDarkPrefer) {
+            this.setLight();
+          }
         }
       }
 
       var self = this;
 
       /* always follow the system prefers */
-      this.sysDarkPrefers.addListener(function () {
-        if (self.mode != null) {
-          if (self.mode == ModeToggle.DARK_MODE) {
+      this.sysDarkPrefers.addListener(function() {
+        if (self.hasMode) {
+          if (self.isDarkMode) {
             if (!self.isSysDarkPrefer) {
-              self.setLight();
-            }
-          } else {
-            if (self.isSysDarkPrefer) {
               self.setDark();
             }
+
+          } else {
+            if (self.isSysDarkPrefer) {
+              self.setLight();
+            }
           }
+
+          self.clearMode();
         }
+
+        self.updateMermaid();
       });
 
     } /* constructor() */
@@ -74,18 +76,45 @@
 
     get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); }
 
+    /* get the current mode on screen */
+    get modeStatus() {
+      if (this.isDarkMode
+        || (!this.hasMode && this.isSysDarkPrefer) ) {
+        return ModeToggle.DARK_MODE;
+      } else {
+        return ModeToggle.LIGHT_MODE;
+      }
+    }
+
+    updateMermaid() {
+      if (typeof mermaid !== "undefined") {
+        let expectedTheme = (this.modeStatus === ModeToggle.DARK_MODE? "dark" : "default");
+        let config = { theme: expectedTheme };
+
+        /* re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */
+        $(".mermaid").each(function() {
+          let svgCode = $(this).prev().children().html();
+          $(this).removeAttr("data-processed");
+          $(this).html(svgCode);
+        });
+
+        mermaid.initialize(config);
+        mermaid.init(undefined, ".mermaid");
+      }
+    }
+
     flipMode() {
       if (this.hasMode) {
         if (this.isSysDarkPrefer) {
           if (this.isLightMode) {
-            this.setDark();
+            this.clearMode();
           } else {
             this.setLight();
           }
 
         } else {
           if (this.isDarkMode) {
-            this.setLight();
+            this.clearMode();
           } else {
             this.setDark();
           }
@@ -99,14 +128,18 @@
         }
       }
 
+      this.updateMermaid();
+
     } /* flipMode() */
 
   } /* ModeToggle */
 
   let toggle = new ModeToggle();
 
-  $(".mode-toggle").click(function () {
+  $(".mode-toggle").click(function() {
+
     toggle.flipMode();
+
   });
 
 </script>

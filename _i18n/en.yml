@@ -1,0 +1,16 @@
+global:
+  ukrainian: Ukrainian
+  english: English
+  another_language: Українською
+site:
+  title: Martyniuk Online
+  tagline: Blog about .NET backend development
+pages:
+  home: Home
+  categories: Categories
+  tags: Tags
+  archives: Archives
+  about: About
+  posts: Posts
+tags:
+  title: Trending Tags
