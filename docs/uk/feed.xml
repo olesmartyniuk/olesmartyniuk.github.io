@@ -4,7 +4,7 @@
   <id>http://0.0.0.0:4000/</id>
   <title>Мартинюк Онлайн</title>
   <subtitle>Персональний блог Олександра Мартинюка українською мовою Oleksandr Martyniuk personal blog .NET C# Web Development Software Programming Algorithms Ukrainian</subtitle>
-  <updated>2021-02-18T22:31:37+02:00</updated>
+  <updated>2021-02-18T23:41:58+02:00</updated>
   <author>
     <name>Oleksandr Martyniuk</name>
     <uri>http://0.0.0.0:4000/</uri>
@@ -36,7 +36,7 @@
     
     <category term="Програмування" />
     
-    <category term="dotNET" />
+    <category term=".NET" />
     
   
 
@@ -78,7 +78,7 @@
     
     <category term="Програмування" />
     
-    <category term="dotNET" />
+    <category term=".NET" />
     
   
 
@@ -121,7 +121,7 @@ C# 9.0 набуває форм і я хочу поділитись нашим б
     
     <category term="Програмування" />
     
-    <category term="dotNET" />
+    <category term=".NET" />
     
   
 
@@ -165,7 +165,7 @@ var urls = new [] ...
     
     <category term="Програмування" />
     
-    <category term="dotNET" />
+    <category term=".NET" />
     
   
 
@@ -191,13 +191,13 @@ var urls = new [] ...
   
   <entry>
     <title>Жадібні алгоритми</title>
-    <link href="http://0.0.0.0:4000/uk/posts/%D0%B6%D0%B0%D0%B4%D1%96%D0%B1%D0%BD%D1%96-%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D0%B8/" rel="alternate" type="text/html" title="Жадібні алгоритми" />
+    <link href="http://0.0.0.0:4000/uk/posts/greedy-algorithms/" rel="alternate" type="text/html" title="Жадібні алгоритми" />
     <published>2020-05-08T18:30:00+03:00</published>
   
     <updated>2020-05-08T18:30:00+03:00</updated>
   
-    <id>http://0.0.0.0:4000/uk/posts/%D0%B6%D0%B0%D0%B4%D1%96%D0%B1%D0%BD%D1%96-%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D0%B8/</id>
-    <content src="http://0.0.0.0:4000/uk/posts/%D0%B6%D0%B0%D0%B4%D1%96%D0%B1%D0%BD%D1%96-%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D0%B8/" />
+    <id>http://0.0.0.0:4000/uk/posts/greedy-algorithms/</id>
+    <content src="http://0.0.0.0:4000/uk/posts/greedy-algorithms/" />
     <author>
       <name>Oleksandr Martyniuk</name>
     </author>
