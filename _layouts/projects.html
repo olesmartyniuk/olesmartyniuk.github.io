@@ -13,20 +13,32 @@ layout: default
         </h1>
         <div class="row post-content">
           <div class="col-12 col-md-6">
+            
+            {% if project.site %}
             <a  href="{{ project.site }}" target="_blank">
               <img src="{{ project.img }}">
             </a>
+            {% else %}
+              <img src="{{ project.img }}">
+            {% endif %}
+
           </div>
           <div class="col-12 col-md-6">
             <div>{% t project.about %}</div>
+            
+            {% if project.site %}
             <div>
               {% t projects.site %}:
               <a href="{{ project.site }}" target="_blank">{{ project.site | remove:'http://' | remove:'https://' }}</a>
             </div>
+            {% endif %}
+
+            {% if project.details %}
             <div>
               {% t projects.details %}:
               <a href="{{ project.details }}" target="_blank">{{ project.details | remove:'http://' | remove:'https://' }}</a>
             </div>
+            {% endif %}
           </div>
         </div>
       </div>
