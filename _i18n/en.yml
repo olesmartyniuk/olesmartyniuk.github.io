@@ -3,8 +3,8 @@ global:
   english: English
   another_language: Українською
 site:
-  title: Martyniuk Online
-  tagline: Blog about .NET backend development
+  title: Martyniuk Oleksandr
+  tagline: .NET Engineer
 pages:
   home: Home
   categories: Categories
