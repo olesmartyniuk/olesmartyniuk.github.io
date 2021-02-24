@@ -27,5 +27,6 @@ zbyrach:
 kafka-cli:
   title: Kafka CLI
   about: >- 
-    Kafka Command Line Tool (kafka-cli) is the .NET Core tool that allows you to manage topics and produce/consume messages to/from Kafka cluster. 
+    Kafka Command Line Tool (kafka-cli) allows you to manage topics and produce/consume messages to/from Kafka cluster. 
+    Kafka CLI is .NET Core Global Tool and distributed as a Nuget package.
     You can propose any changes to the tool as Kafka CLI is an open source project.
