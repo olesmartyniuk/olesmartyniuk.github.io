@@ -119,6 +119,10 @@ collections:
   tabs:
     output: true
     sort_by: order
+  projects:
+    output: true
+    sort_by: order
+    permalink: /projects/:path/
 
 
 defaults:

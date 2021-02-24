@@ -1,0 +1,37 @@
+---
+layout: default
+---
+
+<div class="row">
+  <div class="col-12 col-lg-11">
+    <div id="page" class="post pb-5 pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4 mb-md-4">
+
+      {% for project in site.projects %}
+      <div>
+        <h1>
+          {% t project.title %}
+        </h1>
+        <div class="row post-content">
+          <div class="col-12 col-md-6">
+            <a  href="{{ project.site }}" target="_blank">
+              <img src="{{ project.img }}">
+            </a>
+          </div>
+          <div class="col-12 col-md-6">
+            <div>{% t project.about %}</div>
+            <div>
+              {% t projects.site %}:
+              <a href="{{ project.site }}" target="_blank">{{ project.site | remove:'http://' | remove:'https://' }}</a>
+            </div>
+            <div>
+              {% t projects.details %}:
+              <a href="{{ project.details }}" target="_blank">{{ project.details | remove:'http://' | remove:'https://' }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</div>

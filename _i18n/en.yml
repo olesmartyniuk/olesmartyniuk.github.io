@@ -11,6 +11,17 @@ pages:
   tags: Tags
   archives: Archives
   about: About
+  projects: Projects
   posts: Posts
 tags:
   title: Trending Tags
+projects:
+  site: Site
+  details: Details
+zbyrach:
+  title: Zbyrach
+  about: >-
+    Zbyrach is a web application that helps users find articles and news by relevant keywords and sends found articles by e-mail.
+    A keyword is a word or concept that may interest a user. For example, "history", "software development" or "HTML". Currently, Zbyrach supports only keywords in English language.
+    In order to use Zbyrach user need to have a Google account.
+  
