@@ -1,1 +1,19 @@
-[ { "title": "LINQ. Overview", "url": "/posts/linq-overview/", "categories": "Programming, .NET", "tags": "C#, LINQ", "date": "2020-05-01 18:35:30 +0300", "snippet": "In this article, we will look into LINQ as an important component of the .NET framework, its history, and its role. Why it was created and how to use this tool in practice. Finally, we will look at examples in C# that give an idea of ​​what LINQ is.LINQ - (language integrated query) - a query dat..." } ]
+[
+  
+  {
+    "title": "LINQ. Overview",
+    "url": "/posts/linq-overview/",
+    "categories": "Programming, .NET",
+    "tags": "C#, LINQ",
+    "date": "2020-05-01 18:35:30 +0300",
+    
+
+
+
+
+
+    "snippet": "In this article, we will look into LINQ as an important component of the .NET framework, its history, and its role. Why it was created and how to use this tool in practice. Finally, we will look at examples in C# that give an idea of ​​what LINQ is.LINQ - (language integrated query) - a query dat..."
+  }
+  
+]
+

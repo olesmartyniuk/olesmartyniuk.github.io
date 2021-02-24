@@ -1,4 +1,648 @@
-<!DOCTYPE html><html lang="uk" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="pv-cache-enabled" content="false"><title> Транзакції в DynamoDB | Мартинюк Олександр</title><link rel="shortcut icon" href="/uk/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="icon" href="/uk/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/uk/assets/img/favicons/apple-icon.png"><link rel="apple-touch-icon" href="/uk/assets/img/favicons/apple-icon-precomposed.png"><link rel="apple-touch-icon" sizes="57x57" href="/uk/assets/img/favicons/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/uk/assets/img/favicons/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/uk/assets/img/favicons/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/uk/assets/img/favicons/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/uk/assets/img/favicons/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/uk/assets/img/favicons/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/uk/assets/img/favicons/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/uk/assets/img/favicons/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/uk/assets/img/favicons/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="/uk/assets/img/favicons/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="/uk/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/uk/assets/img/favicons/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="/uk/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/uk/assets/img/favicons/manifest.json"><meta name='msapplication-config' content='/uk/assets/img/favicons/browserconfig.xml'><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="/uk/assets/img/favicons/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="cdn.jsdelivr.net"><link rel="dns-prefetch" href="cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"> <script src="/assets/js/dist/lang-detector.js"></script> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script defer src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script defer src="/app.js"></script> <script defer src="https://www.googletagmanager.com/gtag/js?id=UA-166067964-1"></script> <script> document.addEventListener("DOMContentLoaded", function(event) { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-166067964-1'); }); </script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper text-center"><div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src="/assets/img/sample/avatar.jpg" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/">Мартинюк Олександр</a></div><div class="site-subtitle font-italic">Програміст .NET</div><div class="site-title mt-0"> <a href="/posts/%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B0%D0%BA%D1%86%D1%96%D1%97-%D0%B2-dynamodb/" title="In English"> <img src="/assets/img/sample/english.png" width="40px" height="40px"/> </a></div></div><ul class="w-100"><li class="nav-item"> <a href="/uk/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>СТАТТІ</span> </a><li class="nav-item"> <a href="/uk/categories/" class="nav-link"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>КАТЕГОРІЇ</span> </a><li class="nav-item"> <a href="/uk/tags/" class="nav-link"> <i class="fa-fw fas fa-tags ml-xl-3 mr-xl-3 unloaded"></i> <span>ТЕГИ</span> </a><li class="nav-item"> <a href="/uk/archives/" class="nav-link"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>АРХІВ</span> </a><li class="nav-item"> <a href="/uk/projects/" class="nav-link"> <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i> <span>ПРОЄКТИ</span> </a><li class="nav-item"> <a href="/uk/about/" class="nav-link"> <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i> <span>ПРО МЕНЕ</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center"> <a href="https://github.com/alexmartyniuk" aria-label="github" class="order-3" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href="https://twitter.com/alexmartyniuk" aria-label="twitter" class="order-4" target="_blank" rel="noopener"> <i class="fab fa-twitter"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['alexander.martinyuk','gmail.com'].join('@')" aria-label="email" class="order-5" > <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" class="order-6" > <i class="fas fa-rss"></i> </a> <span class="icon-border order-2"></span> <span id="mode-toggle-wrapper" class="order-1"> <i class="mode-toggle fas fa-adjust"></i> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } var self = this; /* always follow the system prefers */ this.sysDarkPrefers.addListener(function() { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.updateMermaid(); }); } /* constructor() */ setDark() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_KEY); sessionStorage.removeItem(ModeToggle.MODE_KEY); } get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode == ModeToggle.DARK_MODE; } get isLightMode() { return this.mode == ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer) ) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } updateMermaid() { if (typeof mermaid !== "undefined") { let expectedTheme = (this.modeStatus === ModeToggle.DARK_MODE? "dark" : "default"); let config = { theme: expectedTheme }; /* re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */ $(".mermaid").each(function() { let svgCode = $(this).prev().children().html(); $(this).removeAttr("data-processed"); $(this).html(svgCode); }); mermaid.initialize(config); mermaid.init(undefined, ".mermaid"); } } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.updateMermaid(); } /* flipMode() */ } /* ModeToggle */ let toggle = new ModeToggle(); $(".mode-toggle").click(function() { toggle.flipMode(); }); </script> </span></div></div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Posts </a> </span> <span></span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" placeholder="Search..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper"><div id="main"><div class="row"><div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><h1 data-toc-skip>Транзакції в DynamoDB</h1><div class="post-meta text-muted d-flex flex-column"><div> <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Tue, Sep 29, 2020, 12:00 AM +0300" > Sep 29, 2020 <i class="unloaded">2020-09-29T00:00:00+03:00</i> </span></div><div> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="2251 words">12 min</span></div></div><div class="post-content"><h1 id="nosql-проти-sql">NoSQL проти SQL</h1><p>Протягом багатьох років в розробці програмного забезпечення домінували реляційні бази даних. Мова SQL стала однією з найпоширеніших мов програмування. Але на початку 21 століття розвиток WEB 2.0 і потреби таких компаній як Google і Facebook спричинили революцію в збереженні даних.</p><p>Сувора узгодженість і внутрішнє об’єднання даних стали менш важливими за високу доступність, швидкість та можливість горизонтального масштабування. З часом сформувалась стійка думка, що NoSQL бази даних - це для не впорядкованих даних великих розмірів, що необхідно зберігати в кластері та швидко отримувати. Тоді як SQL - це для структурованих даних, які пов’язані відношеннями і повинні бути суворо узгодженими завдяки механізму транзакцій та зовнішніх ключів.</p><p>Перед проектування систем програмісти почали запитувати себе: що важливіше - <a href="https://uk.wikipedia.org/wiki/ACID">ACID</a> чи висока доступність та швидкість? Така ситуація тривала деякий час, аж поки в NoSQL не з’явились транзакції.</p><p>В цій статті я розкажу про транзакції в одній з перших NoSQL баз даних - Amazon DynamoDB. Подивимось чим вони відрізняються від транзакцій в SQL, в яких випадках варто будувати програми з їх використанням і як працювати з ними в C# та .NET Core.</p><h1 id="dynamodb">DynamoDB</h1><p><a href="https://aws.amazon.com/dynamodb/">DynamoDB</a> - документна база даних без схеми. Вона зберігає дані в таблицях, кожна з яких може розміщуватись на декількох серверах, розподіляючи таким чином навантаження. Це дозволяє DynamoDB обробляти мільйони запитів за секунду в пікові періоди.</p><p>Для представлення документів DynamoDB використовує формат JSON. Створення таблиці вимагає лише трьох аргументів: імені таблиці, ключа та списку атрибутів, серед яких повинен бути атрибут, що використовується як <em>ключ секції</em>.</p><p>Ключ секції (Partition Key) використовується для визначення фактичного розміщення запису. Застосовуючи HASH-функцію до ключа секції DynamoDB знаходить фізичний сервер в кластері і місце на сервері куди дані будуть записані. Ключ секції разом з необов’язковим ключем сортування (Sort Key) створюють <em>первісний ключ</em>, що дозволяє унікально ідентифікувати запис в таблиці DynamoDB.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/uk/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/dynamodb-table.jpg" alt="" /></p><p>Тоді як реляційні бази даних пропонують для запитів досить потужну мову SQL, DynamoDB пропонує лише операції <code class="language-plaintext highlighter-rouge">Put</code>, <code class="language-plaintext highlighter-rouge">Get</code>, <code class="language-plaintext highlighter-rouge">Update</code> та <code class="language-plaintext highlighter-rouge">Delete</code> на одиночних таблицях і взагалі не пропонує можливості об’єднання таблиць. Зате через цю простоту DynamoDB добре масштабується і має високу пропускну здатність.</p><p>Ще однією особливістю БД є те, що її використання тарифікується не за місцем, яке займають дані, а за пропускною здатністю, що вимірюється так званими <code class="language-plaintext highlighter-rouge">RCU</code> та <code class="language-plaintext highlighter-rouge">WCU</code>.</p><p><code class="language-plaintext highlighter-rouge">RCU</code> (read capacity unit) - це одиниця, що відповідає одному запиту на читання до 4 Kb даних. <code class="language-plaintext highlighter-rouge">WCU</code> (write capacity unit) - аналогічно для запису, тільки ліміт даних - 1 Kb.</p><h1 id="локальна-dynamodb">Локальна DynamoDB</h1><p>Давайте спробуємо запустити DynamoDB локально і виконати прості запити для створення таблиці і запису даних.</p><p>Для роботи нам знадобляться <a href="https://www.docker.com/">Docker</a> та <a href="https://dotnet.microsoft.com/download">.NET Core SDK</a>.</p><p>Amazon пропонує локальну версію DynamoDB у вигляді Docker образу. Вона повністю підтримує транзакції, тому акаунт AWS нам не потрібен, далі все будемо робити на локальному комп’ютері.</p><p>Відкриємо консоль і запустимо DynamoDB:</p><div class="language-powershell highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<!DOCTYPE html>
+
+
+
+<html lang="uk" 
+  
+>
+
+  <!--
+  The Head
+-->
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+    <meta name="pv-cache-enabled" content="false">
+
+    
+  
+
+  <title>
+      Транзакції в DynamoDB | 
+    Мартинюк Олександр
+  </title>
+
+  <!--
+  The Favicons for Web, Android, Microsoft, and iOS (iPhone and iPad) Apps
+  Generated by: https://www.favicon-generator.org/
+-->
+
+
+
+<link rel="shortcut icon" href="/uk/assets/img/favicons/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/uk/assets/img/favicons/favicon.ico" type="image/x-icon">
+
+<link rel="apple-touch-icon" href="/uk/assets/img/favicons/apple-icon.png">
+<link rel="apple-touch-icon" href="/uk/assets/img/favicons/apple-icon-precomposed.png">
+<link rel="apple-touch-icon" sizes="57x57" href="/uk/assets/img/favicons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/uk/assets/img/favicons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/uk/assets/img/favicons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/uk/assets/img/favicons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/uk/assets/img/favicons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/uk/assets/img/favicons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/uk/assets/img/favicons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/uk/assets/img/favicons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/uk/assets/img/favicons/apple-icon-180x180.png">
+
+<link rel="icon" type="image/png" sizes="192x192"  href="/uk/assets/img/favicons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/uk/assets/img/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/uk/assets/img/favicons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/uk/assets/img/favicons/favicon-16x16.png">
+
+<link rel="manifest" href="/uk/assets/img/favicons/manifest.json">
+<meta name='msapplication-config' content='/uk/assets/img/favicons/browserconfig.xml'>
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/uk/assets/img/favicons/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+  <!-- GA -->
+  
+
+  <!-- jsDelivr CDN -->
+  <link rel="preconnect" href="cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="cdn.jsdelivr.net">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css"
+    integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
+    crossorigin="anonymous">
+
+  <!--
+  CSS selector for site.
+-->
+
+<link rel="stylesheet" href="/assets/css/style.css">
+
+
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css">
+
+
+
+  <!-- JavaScripts -->
+
+  <script src="/assets/js/dist/lang-detector.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+  <script defer
+    src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script>
+
+  <!--
+  JS selector for site.
+-->
+
+
+  
+
+
+
+
+
+<script defer src="/assets/js/dist/post.min.js"></script>
+
+
+
+
+
+
+</head>
+
+
+  <body data-spy="scroll" data-target="#toc">
+
+    <!--
+  The Side Bar
+-->
+
+<div id="sidebar" class="d-flex flex-column align-items-end">
+
+  <div class="profile-wrapper text-center">
+    <div id="avatar">
+      <a href="/" alt="avatar" class="mx-auto">
+        
+        <img src="/assets/img/sample/avatar.jpg" alt="avatar" onerror="this.style.display='none'">
+      </a>
+    </div>
+
+    <div class="site-title mt-3">
+      <a href="/">Мартинюк Олександр</a>
+    </div>
+
+    <div class="site-subtitle font-italic">Програміст .NET</div>
+
+    <!-- language -->
+
+    
+    
+    <div class="site-title mt-0">               
+      
+        <a href="/posts/%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B0%D0%BA%D1%86%D1%96%D1%97-%D0%B2-dynamodb/" title="In English">
+          <img src="/assets/img/sample/english.png" width="40px" height="40px"/>          
+        </a>  
+                    
+    </div>
+
+  </div><!-- .profile-wrapper -->
+
+  <ul class="w-100">    
+    <!-- home -->
+    
+    <li class="nav-item">
+      <a href="/uk/" class="nav-link">
+        <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i>
+        <span>СТАТТІ</span>
+      </a>
+    </li>
+    <!-- the real tabs -->
+    
+
+      
+
+      <li class="nav-item">
+        <a href="/uk/categories/" class="nav-link">
+          <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i>
+          <span>КАТЕГОРІЇ</span>
+        </a>
+      </li> <!-- .nav-item -->
+    
+
+      
+
+      <li class="nav-item">
+        <a href="/uk/tags/" class="nav-link">
+          <i class="fa-fw fas fa-tags ml-xl-3 mr-xl-3 unloaded"></i>
+          <span>ТЕГИ</span>
+        </a>
+      </li> <!-- .nav-item -->
+    
+
+      
+
+      <li class="nav-item">
+        <a href="/uk/archives/" class="nav-link">
+          <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i>
+          <span>АРХІВ</span>
+        </a>
+      </li> <!-- .nav-item -->
+    
+
+      
+
+      <li class="nav-item">
+        <a href="/uk/projects/" class="nav-link">
+          <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i>
+          <span>ПРОЄКТИ</span>
+        </a>
+      </li> <!-- .nav-item -->
+    
+
+      
+
+      <li class="nav-item">
+        <a href="/uk/about/" class="nav-link">
+          <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i>
+          <span>ПРО МЕНЕ</span>
+        </a>
+      </li> <!-- .nav-item -->
+    
+
+  </ul> <!-- ul.nav.flex-column -->
+
+  <div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center">
+
+    
+      
+
+      
+      <a href="https://github.com/alexmartyniuk" aria-label="github"
+        class="order-3"
+        target="_blank" rel="noopener">
+        <i class="fab fa-github-alt"></i>
+      </a>
+      
+
+    
+      
+
+      
+      <a href="https://twitter.com/alexmartyniuk" aria-label="twitter"
+        class="order-4"
+        target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+      
+
+    
+      
+
+      
+      <a href="
+          javascript:location.href = 'mailto:' + ['alexander.martinyuk','gmail.com'].join('@')" aria-label="email"
+        class="order-5"
+        >
+        <i class="fas fa-envelope"></i>
+      </a>
+      
+
+    
+      
+
+      
+      <a href="/feed.xml" aria-label="rss"
+        class="order-6"
+        >
+        <i class="fas fa-rss"></i>
+      </a>
+      
+
+    
+
+    
+      
+        <span class="icon-border order-2"></span>
+      
+
+      <span id="mode-toggle-wrapper" class="order-1">
+        <!--
+  Switch the mode between dark and light.
+-->
+
+<i class="mode-toggle fas fa-adjust"></i>
+
+<script type="text/javascript">
+
+  class ModeToggle {
+    static get MODE_KEY() { return "mode"; }
+    static get DARK_MODE() { return "dark"; }
+    static get LIGHT_MODE() { return "light"; }
+
+    constructor() {
+      if (this.hasMode) {
+        if (this.isDarkMode) {
+          if (!this.isSysDarkPrefer) {
+            this.setDark();
+          }
+        } else {
+          if (this.isSysDarkPrefer) {
+            this.setLight();
+          }
+        }
+      }
+
+      var self = this;
+
+      /* always follow the system prefers */
+      this.sysDarkPrefers.addListener(function() {
+        if (self.hasMode) {
+          if (self.isDarkMode) {
+            if (!self.isSysDarkPrefer) {
+              self.setDark();
+            }
+
+          } else {
+            if (self.isSysDarkPrefer) {
+              self.setLight();
+            }
+          }
+
+          self.clearMode();
+        }
+
+        self.updateMermaid();
+      });
+
+    } /* constructor() */
+
+
+    setDark() {
+      $('html').attr(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE);
+      sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE);
+    }
+
+    setLight() {
+      $('html').attr(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE);
+      sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE);
+    }
+
+    clearMode() {
+      $('html').removeAttr(ModeToggle.MODE_KEY);
+      sessionStorage.removeItem(ModeToggle.MODE_KEY);
+    }
+
+    get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); }
+
+    get isSysDarkPrefer() { return this.sysDarkPrefers.matches; }
+
+    get isDarkMode() { return this.mode == ModeToggle.DARK_MODE; }
+
+    get isLightMode() { return this.mode == ModeToggle.LIGHT_MODE; }
+
+    get hasMode() { return this.mode != null; }
+
+    get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); }
+
+    /* get the current mode on screen */
+    get modeStatus() {
+      if (this.isDarkMode
+        || (!this.hasMode && this.isSysDarkPrefer) ) {
+        return ModeToggle.DARK_MODE;
+      } else {
+        return ModeToggle.LIGHT_MODE;
+      }
+    }
+
+    updateMermaid() {
+      if (typeof mermaid !== "undefined") {
+        let expectedTheme = (this.modeStatus === ModeToggle.DARK_MODE? "dark" : "default");
+        let config = { theme: expectedTheme };
+
+        /* re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */
+        $(".mermaid").each(function() {
+          let svgCode = $(this).prev().children().html();
+          $(this).removeAttr("data-processed");
+          $(this).html(svgCode);
+        });
+
+        mermaid.initialize(config);
+        mermaid.init(undefined, ".mermaid");
+      }
+    }
+
+    flipMode() {
+      if (this.hasMode) {
+        if (this.isSysDarkPrefer) {
+          if (this.isLightMode) {
+            this.clearMode();
+          } else {
+            this.setLight();
+          }
+
+        } else {
+          if (this.isDarkMode) {
+            this.clearMode();
+          } else {
+            this.setDark();
+          }
+        }
+
+      } else {
+        if (this.isSysDarkPrefer) {
+          this.setLight();
+        } else {
+          this.setDark();
+        }
+      }
+
+      this.updateMermaid();
+
+    } /* flipMode() */
+
+  } /* ModeToggle */
+
+  let toggle = new ModeToggle();
+
+  $(".mode-toggle").click(function() {
+
+    toggle.flipMode();
+
+  });
+
+</script>
+
+      </span>
+    
+
+  </div> <!-- .sidebar-bottom -->
+
+</div><!-- #sidebar -->
+
+
+    <!--
+  The Top Bar
+-->
+
+<div id="topbar-wrapper" class="row justify-content-center topbar-down">
+  <div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between">
+    <span id="breadcrumb">
+
+    
+
+    
+
+      
+
+        
+          
+
+        
+
+      
+
+        
+        <span>
+          
+          
+          <a href="/">
+            Posts
+          </a>
+        </span>
+
+        
+
+      
+
+        
+          <span></span>
+
+        
+
+      
+
+    
+
+    </span><!-- endof #breadcrumb -->
+
+    <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i>
+
+    <div id="topbar-title">
+      Post
+    </div>
+
+    <i id="search-trigger" class="fas fa-search fa-fw"></i>
+    <span id="search-wrapper" class="align-items-center">
+      <i class="fas fa-search fa-fw"></i>
+      <input class="form-control" id="search-input" type="search"
+        aria-label="search" placeholder="Search...">
+      <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i>
+    </span>
+    <span id="search-cancel" >Cancel</span>
+  </div>
+
+</div>
+
+
+    <div id="main-wrapper">
+      <div id="main">
+
+        <!--
+  Refactor the HTML structure.
+-->
+
+
+
+<!--
+  In order to allow a wide table to scroll horizontally,
+  we suround the markdown table with `<div class="table-wrapper">` and `</div>`
+-->
+
+
+<!--
+  Fixed kramdown code highlight rendering:
+  https://github.com/penibelst/jekyll-compress-html/issues/101
+  https://github.com/penibelst/jekyll-compress-html/issues/71#issuecomment-188144901
+-->
+
+
+<!-- Add attribute 'hide-bullet' to the checkbox list -->
+
+
+
+
+  
+
+  
+
+  <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+  
+  
+
+  
+
+  
+
+
+
+<!-- return -->
+<div class="row">
+
+  <div id="post-wrapper" class="col-12 col-lg-11 col-xl-8">
+
+    <div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
+
+      <h1 data-toc-skip>Транзакції в DynamoDB</h1>
+
+      <div class="post-meta text-muted d-flex flex-column">
+        <!-- Published date and author -->
+        <div>
+          <!--
+  Date format snippet
+-->
+
+
+
+
+
+<span class="timeago "
+  
+    data-toggle="tooltip"
+    data-placement="bottom"
+    title="Tue, Sep 29, 2020, 12:00 AM +0300"
+  >
+
+  
+  
+
+  
+    Sep 29, 2020
+  
+
+  <i class="unloaded">2020-09-29T00:00:00+03:00</i>
+
+</span>
+          
+        </div>
+
+        <div>       
+          <!-- read time -->
+          <!--
+  Calculate the post's reading time, and display the word count in tooltip
+ -->
+
+
+<!-- words per minute  -->
+
+
+
+
+
+
+
+<!-- return element -->
+<span class="readtime" data-toggle="tooltip" data-placement="bottom" title="2251 words">12 min</span>
+
+
+          <!-- page views -->
+          
+
+        </div>
+
+      </div> <!-- .post-meta -->
+
+      <div class="post-content">
+
+        
+
+        <h1 id="nosql-проти-sql">NoSQL проти SQL</h1>
+
+<p>Протягом багатьох років в розробці програмного забезпечення домінували реляційні бази даних. Мова SQL стала однією з найпоширеніших мов програмування. Але на початку 21 століття розвиток WEB 2.0 і потреби таких компаній як Google і Facebook спричинили революцію в збереженні даних.</p>
+
+<p>Сувора узгодженість і внутрішнє об’єднання даних стали менш важливими за високу доступність, швидкість та можливість горизонтального масштабування. З часом сформувалась стійка думка, що NoSQL бази даних - це для не впорядкованих даних великих розмірів, що необхідно зберігати в кластері та швидко отримувати. Тоді як SQL - це для структурованих даних, які пов’язані відношеннями і повинні бути суворо узгодженими завдяки механізму транзакцій та зовнішніх ключів.</p>
+
+<p>Перед проектування систем програмісти почали запитувати себе: що важливіше - <a href="https://uk.wikipedia.org/wiki/ACID">ACID</a> чи висока доступність та швидкість? Така ситуація тривала деякий час, аж поки в NoSQL не з’явились транзакції.</p>
+
+<p>В цій статті я розкажу про транзакції в одній з перших NoSQL баз даних - Amazon DynamoDB. Подивимось чим вони відрізняються від транзакцій в SQL, в яких випадках варто будувати програми з їх використанням і як працювати з ними в C# та .NET Core.</p>
+
+<h1 id="dynamodb">DynamoDB</h1>
+
+<p><a href="https://aws.amazon.com/dynamodb/">DynamoDB</a> - документна база даних без схеми. Вона зберігає дані в таблицях, кожна з яких може розміщуватись на декількох серверах, розподіляючи таким чином навантаження. Це дозволяє DynamoDB обробляти мільйони запитів за секунду в пікові періоди.</p>
+
+<p>Для представлення документів DynamoDB використовує формат JSON. Створення таблиці вимагає лише трьох аргументів: імені таблиці, ключа та списку атрибутів, серед яких повинен бути атрибут, що використовується як <em>ключ секції</em>.</p>
+
+<p>Ключ секції (Partition Key) використовується для визначення фактичного розміщення запису. Застосовуючи HASH-функцію до ключа секції DynamoDB знаходить фізичний сервер в кластері і місце на сервері куди дані будуть записані. Ключ секції разом з необов’язковим ключем сортування (Sort Key) створюють <em>первісний ключ</em>, що дозволяє унікально ідентифікувати запис в таблиці DynamoDB.</p>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/uk/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/dynamodb-table.jpg" alt="" /></p>
+
+<p>Тоді як реляційні бази даних пропонують для запитів досить потужну мову SQL, DynamoDB пропонує лише операції <code class="language-plaintext highlighter-rouge">Put</code>, <code class="language-plaintext highlighter-rouge">Get</code>, <code class="language-plaintext highlighter-rouge">Update</code> та <code class="language-plaintext highlighter-rouge">Delete</code> на одиночних таблицях і взагалі не пропонує можливості об’єднання таблиць. Зате через цю простоту DynamoDB добре масштабується і має високу пропускну здатність.</p>
+
+<p>Ще однією особливістю БД є те, що її використання тарифікується не за місцем, яке займають дані, а за пропускною здатністю, що вимірюється так званими <code class="language-plaintext highlighter-rouge">RCU</code> та <code class="language-plaintext highlighter-rouge">WCU</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">RCU</code> (read capacity unit) - це одиниця, що відповідає одному запиту на читання до 4 Kb даних. <code class="language-plaintext highlighter-rouge">WCU</code> (write capacity unit) - аналогічно для запису, тільки ліміт даних - 1 Kb.</p>
+
+<h1 id="локальна-dynamodb">Локальна DynamoDB</h1>
+<p>Давайте спробуємо запустити DynamoDB локально і виконати прості запити для створення таблиці і запису даних.</p>
+
+<p>Для роботи нам знадобляться <a href="https://www.docker.com/">Docker</a> та <a href="https://dotnet.microsoft.com/download">.NET Core SDK</a>.</p>
+
+<p>Amazon пропонує локальну версію DynamoDB у вигляді Docker образу. Вона повністю підтримує транзакції, тому акаунт AWS нам не потрібен, далі все будемо робити на локальному комп’ютері.</p>
+
+<p>Відкриємо консоль і запустимо DynamoDB:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -8,7 +652,7 @@
 8
 9
 10
-</pre><td class="rouge-code"><pre><span class="n">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">8000:8000</span><span class="w"> </span><span class="nx">amazon/dynamodb-local</span><span class="w">
+</pre></td><td class="rouge-code"><pre><span class="n">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">8000:8000</span><span class="w"> </span><span class="nx">amazon/dynamodb-local</span><span class="w">
 
 </span><span class="o">...</span><span class="w">
 </span><span class="n">Initializing</span><span class="w"> </span><span class="nx">DynamoDB</span><span class="w"> </span><span class="nx">Local</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">following</span><span class="w"> </span><span class="nx">configuration:</span><span class="w">
@@ -18,7 +662,50 @@
 </span><span class="n">SharedDb:</span><span class="w">       </span><span class="nx">false</span><span class="w">
 </span><span class="n">shouldDelayTransientStatuses:</span><span class="w">   </span><span class="nx">false</span><span class="w">
 </span><span class="n">CorsParams:</span><span class="w">     </span><span class="o">*</span><span class="w">
-</span></pre></table></code></div></div><p>Docker завантажив образ <code class="language-plaintext highlighter-rouge">dynamodb-local</code> і запустив сервіс на порту <code class="language-plaintext highlighter-rouge">8000</code>. Тепер ми можемо звернутися до бази даних за адресою <code class="language-plaintext highlighter-rouge">http://localhost:8000</code>.</p><p>Дані будуть збережені в пам’яті, про що свідчить параметр <code class="language-plaintext highlighter-rouge">InMemory: true</code>, тому <code class="language-plaintext highlighter-rouge">DbPath</code> (шлях до файлу даних) порожній. Якщо ви бажаєте зберігати дані на диску між запусками контейнеру вам <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.UsageNotes.html">необхідно вказати параметри</a> <code class="language-plaintext highlighter-rouge">-sharedDB</code> та <code class="language-plaintext highlighter-rouge">-dbPath</code>.</p><h1 id="система-замовлення-таксі">Система замовлення таксі</h1><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/uk/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-illustration.png" alt="" /></p><p>Перед тим як створити першу таблицю, опишемо предметну область, яку ми будемо моделювати.</p><p>Припустимо у нас є система замовлення таксі. Є клієнт, водій і, власне, замовлення. Опишемо деякі вимоги до нашої системи.</p><ol><li>Коли клієнт замовляє поїздку створюється замовлення.<li>Водій автомобіля приймає замовлення до роботи.<li>Водій не може прийняти замовлення, яке вже в роботі.<li>Водій не може прийняти замовлення, якщо він виконує інше замовлення.</ol><p>Це дуже спрощена схема роботи таких сервісів, як Uber або Uklon. Звісно, можна придумати набагато більше вимог до такої системи, але для нас зараз вони не важливі. Нам важливо продемонструвати <strong>ідемпотентність</strong>, <strong>узгодженність</strong> та <strong>атомарність</strong> операцій з DynamoDB.</p><p>Отже, які таблиці нам знадобляться в базі даних?</p><p>Перша - <em>клієнт</em>. Будь яка таблиця DynamoDB повинна містити унікальний ключ, нехай це буде телефонний номер клієнта. Також таблиця буде містити поточне замовлення цього клієнту.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/uk/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/client-table.png" alt="" /></p><p>У <em>водія</em> все схоже, тільки як унікальний ідентифікатор візьмемо номер машини. Так як модель водія дуже схожа на модель клієнта, то чому б нам не записати їх в одну таблицю? Назвемо її <code class="language-plaintext highlighter-rouge">Taxi</code>.</p><p>В <em>замовленні</em> будуть міститись ідентифікатори водія, клієнта і статус замовлення: <code class="language-plaintext highlighter-rouge">Pending</code>, <code class="language-plaintext highlighter-rouge">InProgress</code>, <code class="language-plaintext highlighter-rouge">Done</code>. Замовлення також будемо зберігати в таблиці <code class="language-plaintext highlighter-rouge">Taxi</code>.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/uk/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table.png" alt="" /></p><p>Уявімо, що в системі існує клієнт, водій та замовлення, яке вже знаходиться в статусі очікування.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/uk/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table-1.jpg" alt="" /></p><p>Для розробників, які багато працювали з SQL така загальна таблиця може здатись дивною. Їм відразу захочеться розділити її та провести нормалізацію. Але у світі NoSQL це абсолютно звична річ. Такі таблиці називаються <em>гомогенними</em>. DynamoDB не буде марнувати місце на диску для збереження порожніх полів записів, адже вона збергіає документи, або колекції атрибутів. Amazon радить використовувати саме гомогенні таблиці в DynamoDB. Їх рекомендація - <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-general-nosql-design.html#bp-general-nosql-design-concepts">тримати пов’язані дані якомога ближче і мати мінімальну кількість таблиць</a>.</p><h1 id="aws-sdk-та-net-core">AWS SDK та .NET Core</h1><p>Створимо консольну програму в .NET Core та додамо пакет для роботи з DynamoDB API - <code class="language-plaintext highlighter-rouge">AWSSDK.DynamoDBv2</code></p><div class="language-powershell highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</span></pre></td></tr></tbody></table></code></div></div>
+
+<p>Docker завантажив образ <code class="language-plaintext highlighter-rouge">dynamodb-local</code> і запустив сервіс на порту <code class="language-plaintext highlighter-rouge">8000</code>. Тепер ми можемо звернутися до бази даних за адресою <code class="language-plaintext highlighter-rouge">http://localhost:8000</code>.</p>
+
+<p>Дані будуть збережені в пам’яті, про що свідчить параметр <code class="language-plaintext highlighter-rouge">InMemory: true</code>, тому <code class="language-plaintext highlighter-rouge">DbPath</code> (шлях до файлу даних) порожній. Якщо ви бажаєте зберігати дані на диску між запусками контейнеру вам <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.UsageNotes.html">необхідно вказати параметри</a> <code class="language-plaintext highlighter-rouge">-sharedDB</code> та <code class="language-plaintext highlighter-rouge">-dbPath</code>.</p>
+
+<h1 id="система-замовлення-таксі">Система замовлення таксі</h1>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/uk/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-illustration.png" alt="" /></p>
+
+<p>Перед тим як створити першу таблицю, опишемо предметну область, яку ми будемо моделювати.</p>
+
+<p>Припустимо у нас є система замовлення таксі. Є клієнт, водій і, власне, замовлення. Опишемо деякі вимоги до нашої системи.</p>
+
+<ol>
+  <li>Коли клієнт замовляє поїздку створюється замовлення.</li>
+  <li>Водій автомобіля приймає замовлення до роботи.</li>
+  <li>Водій не може прийняти замовлення, яке вже в роботі.</li>
+  <li>Водій не може прийняти замовлення, якщо він виконує інше замовлення.</li>
+</ol>
+
+<p>Це дуже спрощена схема роботи таких сервісів, як Uber або Uklon. Звісно, можна придумати набагато більше вимог до такої системи, але для нас зараз вони не важливі. Нам важливо продемонструвати <strong>ідемпотентність</strong>, <strong>узгодженність</strong> та <strong>атомарність</strong> операцій з DynamoDB.</p>
+
+<p>Отже, які таблиці нам знадобляться в базі даних?</p>
+
+<p>Перша - <em>клієнт</em>. Будь яка таблиця DynamoDB повинна містити унікальний ключ, нехай це буде телефонний номер клієнта. Також таблиця буде містити поточне замовлення цього клієнту.</p>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/uk/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/client-table.png" alt="" /></p>
+
+<p>У <em>водія</em> все схоже, тільки як унікальний ідентифікатор візьмемо номер машини. Так як модель водія дуже схожа на модель клієнта, то чому б нам не записати їх в одну таблицю? Назвемо її <code class="language-plaintext highlighter-rouge">Taxi</code>.</p>
+
+<p>В <em>замовленні</em> будуть міститись ідентифікатори водія, клієнта і статус замовлення: <code class="language-plaintext highlighter-rouge">Pending</code>, <code class="language-plaintext highlighter-rouge">InProgress</code>, <code class="language-plaintext highlighter-rouge">Done</code>. Замовлення також будемо зберігати в таблиці <code class="language-plaintext highlighter-rouge">Taxi</code>.</p>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/uk/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table.png" alt="" /></p>
+
+<p>Уявімо, що в системі існує клієнт, водій та замовлення, яке вже знаходиться в статусі очікування.</p>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/uk/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table-1.jpg" alt="" /></p>
+
+<p>Для розробників, які багато працювали з SQL така загальна таблиця може здатись дивною. Їм відразу захочеться розділити її та провести нормалізацію. Але у світі NoSQL це абсолютно звична річ. Такі таблиці називаються <em>гомогенними</em>. DynamoDB не буде марнувати місце на диску для збереження порожніх полів записів, адже вона збергіає документи, або колекції атрибутів. Amazon радить використовувати саме гомогенні таблиці в DynamoDB. Їх рекомендація - <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-general-nosql-design.html#bp-general-nosql-design-concepts">тримати пов’язані дані якомога ближче і мати мінімальну кількість таблиць</a>.</p>
+
+<h1 id="aws-sdk-та-net-core">AWS SDK та .NET Core</h1>
+<p>Створимо консольну програму в .NET Core та додамо пакет для роботи з DynamoDB API - <code class="language-plaintext highlighter-rouge">AWSSDK.DynamoDBv2</code></p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -27,7 +714,7 @@
 7
 8
 9
-</pre><td class="rouge-code"><pre><span class="n">dotnet</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">console</span><span class="w">
+</pre></td><td class="rouge-code"><pre><span class="n">dotnet</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">console</span><span class="w">
 
 </span><span class="o">...</span><span class="w">
 </span><span class="n">Restore</span><span class="w"> </span><span class="nx">succeeded.</span><span class="w">
@@ -36,7 +723,11 @@
 
 </span><span class="n">info</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">PackageReference</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">package</span><span class="w"> </span><span class="s1">'AWSSDK.DynamoDBv2'</span><span class="w"> </span><span class="nx">version</span><span class="w"> </span><span class="s1">'3.5.0.22'</span><span class="w"> </span><span class="nx">added</span><span class="w"> </span><span class="o">...</span><span class="w">
 </span><span class="o">...</span><span class="w">
-</span></pre></table></code></div></div><p>У файлі <code class="language-plaintext highlighter-rouge">Program.cs</code> створимо клієнта для роботи з локальною базою даних і додамо метод для створення таблиці:</p><div class="language-c# highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</span></pre></td></tr></tbody></table></code></div></div>
+
+<p>У файлі <code class="language-plaintext highlighter-rouge">Program.cs</code> створимо клієнта для роботи з локальною базою даних і додамо метод для створення таблиці:</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -73,7 +764,7 @@
 35
 36
 37
-</pre><td class="rouge-code"><pre>
+</pre></td><td class="rouge-code"><pre>
 <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">AmazonDynamoDBClient</span> <span class="n">client</span> <span class="p">=</span>
     <span class="k">new</span> <span class="nf">AmazonDynamoDBClient</span><span class="p">(</span><span class="k">new</span> <span class="n">AmazonDynamoDBConfig</span> <span class="p">{</span><span class="n">ServiceURL</span> <span class="p">=</span> <span class="s">"http://localhost:8000"</span><span class="p">});</span>
 
@@ -110,7 +801,16 @@
         <span class="p">}</span>
     <span class="p">});</span>
 <span class="p">}</span>
-</pre></table></code></div></div><blockquote><p>Код проекту можна знайти на <a href="https://github.com/alexmartyniuk/blog-dynamodb-transactions/">Github</a></p></blockquote><p>Єдиним атрибутом який ми визначили є <code class="language-plaintext highlighter-rouge">Id</code> типу <code class="language-plaintext highlighter-rouge">String</code>. В схемі вказано, що поле <code class="language-plaintext highlighter-rouge">Id</code> буде ключем секції. Також необхідно вказати очікувану пропускну здатність, щоб DynamoDB знала як правильно масштабуватись. Для нас це не суттєво, нехай буде 5 одиниць за секунду для читання і запису.</p><p>Додамо клієнта, водія та замовлення як показано в таблиці вище. Використаємо нетранзакційний метод <code class="language-plaintext highlighter-rouge">PutItem</code>.</p><div class="language-c# highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></div></div>
+<blockquote>
+  <p>Код проекту можна знайти на <a href="https://github.com/alexmartyniuk/blog-dynamodb-transactions/">Github</a></p>
+</blockquote>
+
+<p>Єдиним атрибутом який ми визначили є <code class="language-plaintext highlighter-rouge">Id</code> типу <code class="language-plaintext highlighter-rouge">String</code>. В схемі вказано, що поле <code class="language-plaintext highlighter-rouge">Id</code> буде ключем секції. Також необхідно вказати очікувану пропускну здатність, щоб DynamoDB знала як правильно масштабуватись. Для нас це не суттєво, нехай буде 5 одиниць за секунду для читання і запису.</p>
+
+<p>Додамо клієнта, водія та замовлення як показано в таблиці вище. Використаємо нетранзакційний метод <code class="language-plaintext highlighter-rouge">PutItem</code>.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -142,7 +842,7 @@
 30
 31
 32
-</pre><td class="rouge-code"><pre><span class="k">private</span> <span class="k">static</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">AddClientDriverAndOrder</span><span class="p">()</span>
+</pre></td><td class="rouge-code"><pre><span class="k">private</span> <span class="k">static</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">AddClientDriverAndOrder</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">PutItemAsync</span><span class="p">(</span><span class="k">new</span> <span class="n">PutItemRequest</span>
     <span class="p">{</span>
@@ -174,7 +874,31 @@
         <span class="p">}</span>
     <span class="p">});</span>
 <span class="p">}</span>
-</pre></table></code></div></div><h1 id="транзакція-в-дії">Транзакція в дії</h1><p>Спробуймо реалізувати якусь більш складну операцію, наприклад, <em>водій бере замовлення у роботу</em>. Для того, щоб водій взяв замовлення нам необхідно:</p><ul><li>оновити рядок замовлення:<ul><li>записати номер машини водія в поле <code class="language-plaintext highlighter-rouge">DriverId</code>, якщо воно порожнє (водій не може взяти замовлення, яке вже виконується)<li>записати <code class="language-plaintext highlighter-rouge">InProgress</code> в поле <code class="language-plaintext highlighter-rouge">OrderStatus</code>, якщо воно було <code class="language-plaintext highlighter-rouge">Pending</code> (водій не може взяти замовлення в будь якому іншому статусі окрім “Очікує виконання”)</ul><li>оновити рядок водія:<ul><li>записати номер замовлення в поле <code class="language-plaintext highlighter-rouge">OrderId</code>, якщо воно порожнє (водій не може взяти одночасно два замовлення)</ul></ul><p>Тобто, кінцевий результат повинен виглядати так:</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/uk/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table-2.jpg" alt="" /></p><p>Тут нам знадобиться <a href="https://uk.wikipedia.org/wiki/ACID">ACID</a> транзакція, адже оновити записи замовлення і водія потрібно одночасно. Якщо будь яка з перелічених вище умов не виконається, жодних змін в базі не має відбутися.</p><div class="language-c# highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></div></div>
+
+<h1 id="транзакція-в-дії">Транзакція в дії</h1>
+<p>Спробуймо реалізувати якусь більш складну операцію, наприклад, <em>водій бере замовлення у роботу</em>. Для того, щоб водій взяв замовлення нам необхідно:</p>
+<ul>
+  <li>оновити рядок замовлення:
+    <ul>
+      <li>записати номер машини водія в поле <code class="language-plaintext highlighter-rouge">DriverId</code>, якщо воно порожнє (водій не може взяти замовлення, яке вже виконується)</li>
+      <li>записати <code class="language-plaintext highlighter-rouge">InProgress</code> в поле <code class="language-plaintext highlighter-rouge">OrderStatus</code>, якщо воно було <code class="language-plaintext highlighter-rouge">Pending</code> (водій не може взяти замовлення в будь якому іншому статусі окрім “Очікує виконання”)</li>
+    </ul>
+  </li>
+  <li>оновити рядок водія:
+    <ul>
+      <li>записати номер замовлення в поле <code class="language-plaintext highlighter-rouge">OrderId</code>, якщо воно порожнє (водій не може взяти одночасно два замовлення)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Тобто, кінцевий результат повинен виглядати так:</p>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/uk/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table-2.jpg" alt="" /></p>
+
+<p>Тут нам знадобиться <a href="https://uk.wikipedia.org/wiki/ACID">ACID</a> транзакція, адже оновити записи замовлення і водія потрібно одночасно. Якщо будь яка з перелічених вище умов не виконається, жодних змін в базі не має відбутися.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -228,7 +952,7 @@
 52
 53
 54
-</pre><td class="rouge-code"><pre><span class="k">private</span> <span class="k">static</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+</pre></td><td class="rouge-code"><pre><span class="k">private</span> <span class="k">static</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">await</span> <span class="nf">CreateTable</span><span class="p">();</span>
     <span class="k">await</span> <span class="nf">AddClientDriverAndOrder</span><span class="p">();</span>
@@ -282,16 +1006,1174 @@
         
     <span class="p">});</span>
 <span class="p">}</span>
-</pre></table></code></div></div><p>В цьому коді ми виконуємо транзакцію, що складається з двох елементів <code class="language-plaintext highlighter-rouge">TransactWriteItem</code>. Якщо умова в <code class="language-plaintext highlighter-rouge">ConditionExpression</code> виконується, буде виконано вираз <code class="language-plaintext highlighter-rouge">UpdateExpression</code>.</p><p>Для запису водія ми оновлюємо номер замовлення, якщо воно порожнє:</p><div class="language-c# highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>В цьому коді ми виконуємо транзакцію, що складається з двох елементів <code class="language-plaintext highlighter-rouge">TransactWriteItem</code>. Якщо умова в <code class="language-plaintext highlighter-rouge">ConditionExpression</code> виконується, буде виконано вираз <code class="language-plaintext highlighter-rouge">UpdateExpression</code>.</p>
+
+<p>Для запису водія ми оновлюємо номер замовлення, якщо воно порожнє:</p>
+<div class="language-c# highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-</pre><td class="rouge-code"><pre>    <span class="n">UpdateExpression</span> <span class="p">=</span> <span class="s">"set OrderId = :OrderId"</span><span class="p">,</span>
+</pre></td><td class="rouge-code"><pre>    <span class="n">UpdateExpression</span> <span class="p">=</span> <span class="s">"set OrderId = :OrderId"</span><span class="p">,</span>
     <span class="n">ConditionExpression</span> <span class="p">=</span> <span class="s">"attribute_not_exists(OrderId)"</span><span class="p">,</span>
-</pre></table></code></div></div><p>Для запису замовлення ми оновлюємо поле водія та статус, якщо водій ще не був призначений, а статус дорівнює <code class="language-plaintext highlighter-rouge">Pending</code>:</p><div class="language-c# highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Для запису замовлення ми оновлюємо поле водія та статус, якщо водій ще не був призначений, а статус дорівнює <code class="language-plaintext highlighter-rouge">Pending</code>:</p>
+<div class="language-c# highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-</pre><td class="rouge-code"><pre>    <span class="n">UpdateExpression</span> <span class="p">=</span> <span class="s">"set DriverId = :DriverId, OrderStatus = :NewStatus"</span><span class="p">,</span>
+</pre></td><td class="rouge-code"><pre>    <span class="n">UpdateExpression</span> <span class="p">=</span> <span class="s">"set DriverId = :DriverId, OrderStatus = :NewStatus"</span><span class="p">,</span>
     <span class="n">ConditionExpression</span> <span class="p">=</span> <span class="s">"attribute_not_exists(DriverId) AND OrderStatus=:OldStatus"</span><span class="p">,</span>
-</pre></table></code></div></div><p>Операція, що дозволяє водієві взяти замовлення, відповідає нашим трьом вимогам:</p><ul><li>Вона <strong>ідемпотентна</strong>. Повторне виконання методу не змінить стан бази даних і не викличе помилку. За це відповідає атрибут <code class="language-plaintext highlighter-rouge">ClientRequestToken</code>, який по суті є токеном ідемпотентності. Всі наступні запити до БД з тим самим <code class="language-plaintext highlighter-rouge">ClientRequestToken</code> будуть проігноровані. Це дозволяє, наприклад, водієві помилково натиснути два рази на кнопку прийняття замовлення.<li>Вона <strong>узгоджена</strong>. Записи замовлення та водія змінюються синхронно таким чином, що водій не може взяти замовлення в іншому статусі окрім <code class="language-plaintext highlighter-rouge">Pending</code>. Замовлення в статусі <code class="language-plaintext highlighter-rouge">Pending</code> завжди буде мати пов’язаного водія.<li>Вона <strong>атомарна</strong>. Запит або буде виконано повністю, або жодних змін до бази даних застосовуватись не буде.</ul><h1 id="причини-невдачі-транзакцій">Причини невдачі транзакцій</h1><p>Якщо виконати даний метод але з некоректними даними (наприклад, водій намагається взяти в роботу чуже замовлення) він викличе помилку:</p><div class="language-c# highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Операція, що дозволяє водієві взяти замовлення, відповідає нашим трьом вимогам:</p>
+<ul>
+  <li>Вона <strong>ідемпотентна</strong>. Повторне виконання методу не змінить стан бази даних і не викличе помилку. За це відповідає атрибут <code class="language-plaintext highlighter-rouge">ClientRequestToken</code>, який по суті є токеном ідемпотентності. Всі наступні запити до БД з тим самим <code class="language-plaintext highlighter-rouge">ClientRequestToken</code> будуть проігноровані. Це дозволяє, наприклад, водієві помилково натиснути два рази на кнопку прийняття замовлення.</li>
+  <li>Вона <strong>узгоджена</strong>. Записи замовлення та водія змінюються синхронно таким чином, що водій не може взяти замовлення в іншому статусі окрім <code class="language-plaintext highlighter-rouge">Pending</code>. Замовлення в статусі <code class="language-plaintext highlighter-rouge">Pending</code> завжди буде мати пов’язаного водія.</li>
+  <li>Вона <strong>атомарна</strong>. Запит або буде виконано повністю, або жодних змін до бази даних застосовуватись не буде.</li>
+</ul>
+
+<h1 id="причини-невдачі-транзакцій">Причини невдачі транзакцій</h1>
+<p>Якщо виконати даний метод але з некоректними даними (наприклад, водій намагається взяти в роботу чуже замовлення) він викличе помилку:</p>
+<div class="language-c# highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-</pre><td class="rouge-code"><pre><span class="n">Amazon</span><span class="p">.</span><span class="n">DynamoDBv2</span><span class="p">.</span><span class="n">Model</span><span class="p">.</span><span class="n">TransactionCanceledException</span><span class="p">:</span> 
+</pre></td><td class="rouge-code"><pre><span class="n">Amazon</span><span class="p">.</span><span class="n">DynamoDBv2</span><span class="p">.</span><span class="n">Model</span><span class="p">.</span><span class="n">TransactionCanceledException</span><span class="p">:</span> 
 <span class="err">'</span><span class="n">Transaction</span> <span class="n">cancelled</span><span class="p">,</span> <span class="n">please</span> <span class="n">refer</span> <span class="n">cancellation</span> <span class="n">reasons</span> <span class="k">for</span> <span class="n">specific</span> <span class="n">reasons</span><span class="p">...</span><span class="err">'</span>
-</pre></table></code></div></div><p>Транзакція може бути відмінена з декількох причин:</p><ul><li>не виконується умова в <code class="language-plaintext highlighter-rouge">ConditionExpression</code><li>одночасно виконується інша транзакція з тим самим записом<li>недостатня пропускна здатність (в нашому випадку це більше 5 викликів на секунду)<li>недостатньо прав для виконання запиту (це стосується лише DynamoDB в AWS)</ul><p>Що робити, коли ви отримали помилку виконання транзакції? Варто спробувати виконати операцію повторно. Переконайтесь, що ви встановили токен ідемпотентності (поле <code class="language-plaintext highlighter-rouge">ClientRequestToken</code>), тоді SDK може спробувати самостійно повторити запит.</p><p>Якщо ж ваша транзакція після автоматичних спроб не вдалась, необхідно виконати повторну спробу на рівні логіки програми. Для цього необхідно перебудувати вихідний стан вашої програми і спробувати повторити транзакцію з новими умовами і новим бажаним кінцевим станом БД.</p><p>Для отримання нового вихідного стану вашої програми (синхронізація з базою даних) можна обрати один з трьох методів:</p><ul><li><code class="language-plaintext highlighter-rouge">ReturnValuesOnConditionCheckFailure = ReturnValuesOnConditionCheckFailure.ALL_OLD</code> - встановленя цього поля дозволяє при виконанні транзакції повернути значення атрибутів, якщо умова транзакції не була виконана.<li>Виконати <code class="language-plaintext highlighter-rouge">TransactionGetItems</code>, тобто транзакційно отримати всі необхідні дані самостійно.<li>Працювати далі за умови, що узгодженість даних буде врешті-решт досягнута, можливо, після виконання повторного запиту.</ul><h1 id="порівняння-з-sql">Порівняння з SQL</h1><p>В SQL і деяких інших NoSQL рішеннях, таких як MongoDB, транзакції реалізовані в розмовному стилі. Першим викликом транзакція відкривається (<code class="language-plaintext highlighter-rouge">BEGIN TRANSACTION</code>), потім окремими викликами здійснюється модифікація даних (<code class="language-plaintext highlighter-rouge">INSERT</code>, <code class="language-plaintext highlighter-rouge">UPDATE</code>, <code class="language-plaintext highlighter-rouge">DELETE</code>). В кінці транзакція закривається (<code class="language-plaintext highlighter-rouge">COMMIT TRANSACTION</code>).</p><p>Такий розподіл координації між клієнтом і сервером накладає деякі обмеження на транзакції і робить їх реалізацію більш складною, а виконання - повільнішим.</p><p>Транзакції DynamoDB реалізовані в рамках <em>одного виклику API</em>.</p><p>Транзакції DynamoDB працюють виключно на сервері і у клієнта немає контролю за початком транзакції, її підтвердженням або відміною. Це робить транзакції DynamoDB дуже швидкими і розробнику не потрібно обирати між транзакційною БД і БД, яка масштабується горизонтально.</p><p>Також, з транзакціями DynamoDB неможливі взаємні блокування, оскільки використовується оптимістичний контроль одночасності. Завдяки цьому забезпечується низька затримка та висока доступність.</p><h1 id="недоліки-транзакцій">Недоліки транзакцій</h1><p>Але в транзакцій DynamoDB є ряд обмежень, які варто врахувати:</p><ul><li>Транзакції працюють лише в рамках одного регіону і одного акаунту AWS.<li>Транзакції можуть містити до десяти елементів, тобто можна оновити або додати не більше 10 записів за раз.<li>Транзакції споживають в два рази більше <code class="language-plaintext highlighter-rouge">RCU</code> або <code class="language-plaintext highlighter-rouge">WCU</code>, так як всередині використовуюється двофазний механізм: після виконання транзакції дані зчитуються ще раз для підтвердження їх коректності. Через це транзакційні виклики будуть в два рази дорожчими для споживача.</ul><h1 id="висновок">Висновок</h1><p>Транзакції в DynamoDB допомагають розробникам:</p><ul><li>підтримувати коректність даних, вносячи зміни в декілька записів і таблиць одночасно;<li>спрощувати бізнес логіку програм, переносячи на сервер перевірку даних;<li>оновлювати дані в багатьох таблицях узгоджено.</ul><p>Транзакції DynamoDB повністю підтримують ACID і в той же час можуть необмежено масштабуватись для забезпечення низької затримки та високої доступності даних.</p><p>Для .NET розробників Amazon пропонує низькорівневий SDK для доступу до DynamoDB, який повністю підтримує транзакції. Його використання дещо багатослівне і може заплутати новачка, але якщо ви плануєте працювати з великими навантаженнями на базу даних і в той же час не хочете позбавляти себе ACID транзакцій, DynamoDB може бути хорошим вибором.</p><blockquote><p>Всі приклади коду можна знайти на <a href="https://github.com/alexmartyniuk/blog-dynamodb-transactions/">Github</a></p></blockquote><p>Приємного кодування!</p></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/uk/categories/%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F/'>Програмування</a>, <a href='/uk/categories/net/'>.NET</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down"><div class="access"><div id="access-tags"> <span>Популярні Теги</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/uk/tags/net/">.NET</a> <a class="post-tag" href="/uk/tags/asp-net-core/">ASP.NET Core</a> <a class="post-tag" href="/uk/tags/c/">C#</a> <a class="post-tag" href="/uk/tags/heroku/">Heroku</a> <a class="post-tag" href="/uk/tags/%D0%BF%D0%B5%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%B4/">переклад</a> <a class="post-tag" href="/uk/tags/acid/">ACID</a> <a class="post-tag" href="/uk/tags/aws/">AWS</a> <a class="post-tag" href="/uk/tags/codility-com/">codility.com</a> <a class="post-tag" href="/uk/tags/dynamodb/">DynamoDB</a> <a class="post-tag" href="/uk/tags/entity-framework/">Entity Framework</a></div></div></div></div></div><div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><div id="disqus" class="pt-2 pb-2"><p class="text-center text-muted small pb-5"> Loading comments from <a href="https://disqus.com/">Disqus</a> ...</p></div><script src="/assets/js/lib/jquery.disqusloader.min.js"></script> <script> const options = { scriptUrl: '//martyniuk.disqus.com/embed.js', disqusConfig: function() { this.page.title = ''; this.page.url = 'http://www.martyniuk.info/uk/posts/%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B0%D0%BA%D1%86%D1%96%D1%97-%D0%B2-dynamodb/'; this.page.identifier = '/posts/%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B0%D0%BA%D1%86%D1%96%D1%97-%D0%B2-dynamodb/'; } }; $.disqusLoader('#disqus', options); </script></div></div></div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script> <script type="text/javascript"> const imgs = document.querySelectorAll('.post-content img'); const observer = lozad(imgs); observer.observe(); </script><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center"><div class="footer-left"></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-sm-11 post-content"><div id="search-hints"><h4 class="text-muted mb-4">Trending Tags</h4><a class="post-tag" href="/uk/tags/net/">.NET</a> <a class="post-tag" href="/uk/tags/asp-net-core/">ASP.NET Core</a> <a class="post-tag" href="/tags/c/">C#</a> <a class="post-tag" href="/uk/tags/heroku/">Heroku</a> <a class="post-tag" href="/uk/tags/%D0%BF%D0%B5%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%B4/">переклад</a> <a class="post-tag" href="/uk/tags/acid/">ACID</a> <a class="post-tag" href="/uk/tags/aws/">AWS</a> <a class="post-tag" href="/uk/tags/codility-com/">codility.com</a> <a class="post-tag" href="/uk/tags/dynamodb/">DynamoDB</a> <a class="post-tag" href="/uk/tags/entity-framework/">Entity Framework</a></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="http://www.martyniuk.info{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Транзакція може бути відмінена з декількох причин:</p>
+<ul>
+  <li>не виконується умова в <code class="language-plaintext highlighter-rouge">ConditionExpression</code></li>
+  <li>одночасно виконується інша транзакція з тим самим записом</li>
+  <li>недостатня пропускна здатність (в нашому випадку це більше 5 викликів на секунду)</li>
+  <li>недостатньо прав для виконання запиту (це стосується лише DynamoDB в AWS)</li>
+</ul>
+
+<p>Що робити, коли ви отримали помилку виконання транзакції? Варто спробувати виконати операцію повторно. Переконайтесь, що ви встановили токен ідемпотентності (поле <code class="language-plaintext highlighter-rouge">ClientRequestToken</code>), тоді SDK може спробувати самостійно повторити запит.</p>
+
+<p>Якщо ж ваша транзакція після автоматичних спроб не вдалась, необхідно виконати повторну спробу на рівні логіки програми. Для цього необхідно перебудувати вихідний стан вашої програми і спробувати повторити транзакцію з новими умовами і новим бажаним кінцевим станом БД.</p>
+
+<p>Для отримання нового вихідного стану вашої програми (синхронізація з базою даних) можна обрати один з трьох методів:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ReturnValuesOnConditionCheckFailure = ReturnValuesOnConditionCheckFailure.ALL_OLD</code> - встановленя цього поля дозволяє при виконанні транзакції повернути значення атрибутів, якщо умова транзакції не була виконана.</li>
+  <li>Виконати <code class="language-plaintext highlighter-rouge">TransactionGetItems</code>, тобто транзакційно отримати всі необхідні дані самостійно.</li>
+  <li>Працювати далі за умови, що узгодженість даних буде врешті-решт досягнута, можливо, після виконання повторного запиту.</li>
+</ul>
+
+<h1 id="порівняння-з-sql">Порівняння з SQL</h1>
+<p>В SQL і деяких інших NoSQL рішеннях, таких як MongoDB, транзакції реалізовані в розмовному стилі. Першим викликом транзакція відкривається (<code class="language-plaintext highlighter-rouge">BEGIN TRANSACTION</code>), потім окремими викликами здійснюється модифікація даних (<code class="language-plaintext highlighter-rouge">INSERT</code>, <code class="language-plaintext highlighter-rouge">UPDATE</code>, <code class="language-plaintext highlighter-rouge">DELETE</code>). В кінці транзакція закривається (<code class="language-plaintext highlighter-rouge">COMMIT TRANSACTION</code>).</p>
+
+<p>Такий розподіл координації між клієнтом і сервером накладає деякі обмеження на транзакції і робить їх реалізацію більш складною, а виконання - повільнішим.</p>
+
+<p>Транзакції DynamoDB реалізовані в рамках <em>одного виклику API</em>.</p>
+
+<p>Транзакції DynamoDB працюють виключно на сервері і у клієнта немає контролю за початком транзакції, її підтвердженням або відміною. Це робить транзакції DynamoDB дуже швидкими і розробнику не потрібно обирати між транзакційною БД і БД, яка масштабується горизонтально.</p>
+
+<p>Також, з транзакціями DynamoDB неможливі взаємні блокування, оскільки використовується оптимістичний контроль одночасності. Завдяки цьому забезпечується низька затримка та висока доступність.</p>
+
+<h1 id="недоліки-транзакцій">Недоліки транзакцій</h1>
+<p>Але в транзакцій DynamoDB є ряд обмежень, які варто врахувати:</p>
+<ul>
+  <li>Транзакції працюють лише в рамках одного регіону і одного акаунту AWS.</li>
+  <li>Транзакції можуть містити до десяти елементів, тобто можна оновити або додати не більше 10 записів за раз.</li>
+  <li>Транзакції споживають в два рази більше <code class="language-plaintext highlighter-rouge">RCU</code> або <code class="language-plaintext highlighter-rouge">WCU</code>, так як всередині використовуюється двофазний механізм: після виконання транзакції дані зчитуються ще раз для підтвердження їх коректності. Через це транзакційні виклики будуть в два рази дорожчими для споживача.</li>
+</ul>
+
+<h1 id="висновок">Висновок</h1>
+<p>Транзакції в DynamoDB допомагають розробникам:</p>
+<ul>
+  <li>підтримувати коректність даних, вносячи зміни в декілька записів і таблиць одночасно;</li>
+  <li>спрощувати бізнес логіку програм, переносячи на сервер перевірку даних;</li>
+  <li>оновлювати дані в багатьох таблицях узгоджено.</li>
+</ul>
+
+<p>Транзакції DynamoDB повністю підтримують ACID і в той же час можуть необмежено масштабуватись для забезпечення низької затримки та високої доступності даних.</p>
+
+<p>Для .NET розробників Amazon пропонує низькорівневий SDK для доступу до DynamoDB, який повністю підтримує транзакції. Його використання дещо багатослівне і може заплутати новачка, але якщо ви плануєте працювати з великими навантаженнями на базу даних і в той же час не хочете позбавляти себе ACID транзакцій, DynamoDB може бути хорошим вибором.</p>
+
+<blockquote>
+  <p>Всі приклади коду можна знайти на <a href="https://github.com/alexmartyniuk/blog-dynamodb-transactions/">Github</a></p>
+</blockquote>
+
+<p>Приємного кодування!</p>
+
+
+      </div>
+
+      <div class="post-tail-wrapper text-muted">
+
+        <!-- categories -->
+        
+        <div class="post-meta mb-3">
+          <i class="far fa-folder-open fa-fw mr-1"></i>
+          
+            <a href='/uk/categories/%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F/'>Програмування</a>,
+            <a href='/uk/categories/net/'>.NET</a>
+        </div>
+        
+
+        <!-- tags -->
+        
+
+        <div class="post-tail-bottom
+          d-flex justify-content-between align-items-center mt-3 pt-5 pb-2">
+          
+
+          
+
+        </div><!-- .post-tail-bottom -->
+
+      </div><!-- div.post-tail -->
+
+    </div> <!-- .post -->
+
+
+  </div> <!-- #post-wrapper -->
+
+  
+
+  
+
+  <!--
+  The Pannel on right side (Desktop views)
+-->
+
+<div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down">
+
+  <div class="access">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+  
+
+  
+    <div id="access-tags">
+      <span>Популярні Теги</span>
+      <div class="d-flex flex-wrap mt-3 mb-1 mr-3">        
+      
+        
+        <a class="post-tag" href="/uk/tags/net/">.NET</a>
+      
+        
+        <a class="post-tag" href="/uk/tags/asp-net-core/">ASP.NET Core</a>
+      
+        
+        <a class="post-tag" href="/uk/tags/c/">C#</a>
+      
+        
+        <a class="post-tag" href="/uk/tags/heroku/">Heroku</a>
+      
+        
+        <a class="post-tag" href="/uk/tags/%D0%BF%D0%B5%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%B4/">переклад</a>
+      
+        
+        <a class="post-tag" href="/uk/tags/acid/">ACID</a>
+      
+        
+        <a class="post-tag" href="/uk/tags/aws/">AWS</a>
+      
+        
+        <a class="post-tag" href="/uk/tags/codility-com/">codility.com</a>
+      
+        
+        <a class="post-tag" href="/uk/tags/dynamodb/">DynamoDB</a>
+      
+        
+        <a class="post-tag" href="/uk/tags/entity-framework/">Entity Framework</a>
+      
+
+      </div>
+    </div>
+  
+  </div> <!-- .access -->
+
+  
+
+</div> <!-- #panel-wrapper -->
+
+
+</div> <!-- .row -->
+
+<div class="row">
+  <div class="col-12 col-lg-11 col-xl-8">
+    <div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
+
+          
+
+    
+
+    
+      <!--
+  The Disqus lazy loading.
+  Powered by: <https://github.com/osvaldasvalutis/disqusLoader.js>
+-->
+
+<div id="disqus" class="pt-2 pb-2">
+  <p class="text-center text-muted small pb-5">
+    Loading comments from <a href="https://disqus.com/">Disqus</a> ...
+  </p>
+</div>
+
+<script src="/assets/js/lib/jquery.disqusloader.min.js"></script>
+<script>
+  const options = {
+    scriptUrl: '//martyniuk.disqus.com/embed.js',
+
+    disqusConfig: function() {
+      this.page.title = '';
+      this.page.url = 'http://0.0.0.0:4000/uk/posts/%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B0%D0%BA%D1%86%D1%96%D1%97-%D0%B2-dynamodb/';
+      this.page.identifier = '/posts/%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B0%D0%BA%D1%86%D1%96%D1%97-%D0%B2-dynamodb/';
+    }
+  };
+
+  $.disqusLoader('#disqus', options);
+</script>
+
+    
+
+    </div> <!-- #post-extend-wrapper -->
+
+  </div> <!-- .col-* -->
+
+</div> <!-- .row -->
+
+
+
+  <!--
+  image lazy load: https://github.com/ApoorvSaxena/lozad.js
+-->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+
+<script type="text/javascript">
+  const imgs = document.querySelectorAll('.post-content img');
+  const observer = lozad(imgs);
+  observer.observe();
+</script>
+
+
+
+
+        <!--
+  The Footer
+-->
+
+<footer class="d-flex w-100 justify-content-center">
+  <div class="d-flex justify-content-between align-items-center">
+    
+
+    <div class="footer-left">
+
+    </div>
+
+    <div class="footer-right">
+      <p class="mb-0">
+        Powered by
+        <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a>
+        with
+        <a href="https://github.com/cotes2020/jekyll-theme-chirpy"
+          target="_blank" rel="noopener">Chirpy</a>
+        theme.
+      </p>
+    </div>
+
+  </div> <!-- div.d-flex -->
+</footer>
+
+
+      </div>
+
+      <!--
+  The Search results
+-->
+<div id="search-result-wrapper" class="d-flex justify-content-center unloaded">
+  <div class="col-12 col-sm-11 post-content">
+    <div id="search-hints">
+      <h4 class="text-muted mb-4">Trending Tags</h4>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+      
+        
+        <a class="post-tag" href="/uk/tags/net/">.NET</a>
+      
+        
+        <a class="post-tag" href="/uk/tags/asp-net-core/">ASP.NET Core</a>
+      
+        
+        <a class="post-tag" href="/tags/c/">C#</a>
+      
+        
+        <a class="post-tag" href="/uk/tags/heroku/">Heroku</a>
+      
+        
+        <a class="post-tag" href="/uk/tags/%D0%BF%D0%B5%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%B4/">переклад</a>
+      
+        
+        <a class="post-tag" href="/uk/tags/acid/">ACID</a>
+      
+        
+        <a class="post-tag" href="/uk/tags/aws/">AWS</a>
+      
+        
+        <a class="post-tag" href="/uk/tags/codility-com/">codility.com</a>
+      
+        
+        <a class="post-tag" href="/uk/tags/dynamodb/">DynamoDB</a>
+      
+        
+        <a class="post-tag" href="/uk/tags/entity-framework/">Entity Framework</a>
+      
+
+    </div>
+    <div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+  </div>
+</div>
+
+
+    </div> <!-- #main-wrapper -->
+
+    
+
+    <div id="mask"></div>
+
+    <a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!--
+  Jekyll Simple Search loader
+  See: <https://github.com/christian-fei/Simple-Jekyll-Search>
+-->
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script>
+
+<script>
+SimpleJekyllSearch({
+  searchInput: document.getElementById('search-input'),
+  resultsContainer: document.getElementById('search-results'),
+  json: '/assets/js/data/search.json',
+  searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0">  <a href="http://0.0.0.0:4000{url}">{title}</a>  <div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1">    {categories}    {tags}  </div>  <p>{snippet}</p></div>',
+  noResultsText: '<p class="mt-5">Oops! No result founds.</p>',
+  templateMiddleware: function(prop, value, template) {
+    if (prop === 'categories') {
+      if (value === '') {
+        return `${value}`;
+      } else {
+        return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`;
+      }
+    }
+
+    if (prop === 'tags') {
+      if (value === '') {
+        return `${value}`;
+      } else {
+        return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`;
+      }
+    }
+  }
+});
+</script>
+
+
+  </body>
+
+</html>
+

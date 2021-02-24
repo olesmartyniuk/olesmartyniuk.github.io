@@ -1,1 +1,63 @@
-<feed xmlns="http://www.w3.org/2005/Atom"> <id>http://www.martyniuk.info/</id><title>Martyniuk Oleksandr</title><subtitle>Персональний блог Олександра Мартинюка українською мовою Oleksandr Martyniuk personal blog .NET C# Web Development Software Programming Algorithms Ukrainian</subtitle> <updated>2021-02-24T23:18:21+02:00</updated> <author> <name>Oleksandr Martyniuk</name> <uri>http://www.martyniuk.info/</uri> </author><link rel="self" type="application/atom+xml" href="http://www.martyniuk.info/feed.xml"/><link rel="alternate" type="text/html" hreflang="en" href="http://www.martyniuk.info/"/> <generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator> <rights> © 2021 Oleksandr Martyniuk </rights> <icon>/assets/img/favicons/favicon.ico</icon> <logo>/assets/img/favicons/favicon-96x96.png</logo> <entry><title>LINQ. Overview</title><link href="http://www.martyniuk.info/posts/linq-overview/" rel="alternate" type="text/html" title="LINQ. Overview" /><published>2020-05-01T18:35:30+03:00</published> <updated>2021-02-18T23:43:15+02:00</updated> <id>http://www.martyniuk.info/posts/linq-overview/</id> <content src="http://www.martyniuk.info/posts/linq-overview/" /> <author> <name>Oleksandr Martyniuk</name> </author> <category term="Programming" /> <category term=".NET" /> <summary> In this article, we will look into LINQ as an important component of the .NET framework, its history, and its role. Why it was created and how to use this tool in practice. Finally, we will look at examples in C# that give an idea of ​​what LINQ is. LINQ - (language integrated query) - a query data language, which is integrated into C#. The data can be collections of objects in memory, XML f... </summary> </entry> </feed>
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://0.0.0.0:4000/</id>
+  <title>Martyniuk Oleksandr</title>
+  <subtitle>Персональний блог Олександра Мартинюка українською мовою Oleksandr Martyniuk personal blog .NET C# Web Development Software Programming Algorithms Ukrainian</subtitle>
+  <updated>2021-02-24T23:55:24+02:00</updated>
+  <author>
+    <name>Oleksandr Martyniuk</name>
+    <uri>http://0.0.0.0:4000/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="http://0.0.0.0:4000/feed.xml"/>
+  <link rel="alternate" type="text/html" hreflang="en"
+    href="http://0.0.0.0:4000/"/>
+  <generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator>
+  <rights> © 2021 Oleksandr Martyniuk </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+  
+  <entry>
+    <title>LINQ. Overview</title>
+    <link href="http://0.0.0.0:4000/posts/linq-overview/" rel="alternate" type="text/html" title="LINQ. Overview" />
+    <published>2020-05-01T18:35:30+03:00</published>
+  
+    <updated>2021-02-18T23:43:15+02:00</updated>
+  
+    <id>http://0.0.0.0:4000/posts/linq-overview/</id>
+    <content src="http://0.0.0.0:4000/posts/linq-overview/" />
+    <author>
+      <name>Oleksandr Martyniuk</name>
+    </author>
+
+  
+    
+    <category term="Programming" />
+    
+    <category term=".NET" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      
+
+In this article, we will look into LINQ as an important component of the .NET framework, its history, and its role. Why it was created and how to use this tool in practice. Finally, we will look at examples in C# that give an idea of ​​what LINQ is.
+
+LINQ - (language integrated query) - a query data language, which is integrated into C#. The data can be collections of objects in memory, XML f...
+    </summary>
+  
+
+  </entry>
+
+</feed>
+
+
