@@ -4,7 +4,7 @@
   <id>http://0.0.0.0:4000/</id>
   <title>Martyniuk Oleksandr</title>
   <subtitle>Персональний блог Олександра Мартинюка українською мовою Oleksandr Martyniuk personal blog .NET C# Web Development Software Programming Algorithms Ukrainian</subtitle>
-  <updated>2021-02-25T00:07:05+02:00</updated>
+  <updated>2021-02-25T14:32:42+02:00</updated>
   <author>
     <name>Oleksandr Martyniuk</name>
     <uri>http://0.0.0.0:4000/</uri>
@@ -17,6 +17,48 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Gready algorithms</title>
+    <link href="http://0.0.0.0:4000/posts/greedy-algorithms/" rel="alternate" type="text/html" title="Gready algorithms" />
+    <published>2020-05-08T18:30:00+03:00</published>
+  
+    <updated>2020-05-08T18:30:00+03:00</updated>
+  
+    <id>http://0.0.0.0:4000/posts/greedy-algorithms/</id>
+    <content src="http://0.0.0.0:4000/posts/greedy-algorithms/" />
+    <author>
+      <name>Oleksandr Martyniuk</name>
+    </author>
+
+  
+    
+    <category term="Programming" />
+    
+    <category term="Algorithms" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      
+
+Greedy algorithm is an intuitive and efficient way to solve optimization problems. And although its implementation attracts with its obviousness, it is not always optimal. You need to understand precisely when to use a greedy approach and when to avoid it. In the article I suggest to look into greedy algorithms and try to apply it to problems from the codility.com site.
+
+Greedy approach
+
+Gree...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>

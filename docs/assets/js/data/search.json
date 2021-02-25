@@ -1,6 +1,21 @@
 [
   
   {
+    "title": "Gready algorithms",
+    "url": "/posts/greedy-algorithms/",
+    "categories": "Programming, Algorithms",
+    "tags": "algorithms, codility.com",
+    "date": "2020-05-08 18:30:00 +0300",
+    
+
+
+
+
+
+    "snippet": "Greedy algorithm is an intuitive and efficient way to solve optimization problems. And although its implementation attracts with its obviousness, it is not always optimal. You need to understand precisely when to use a greedy approach and when to avoid it. In the article I suggest to look into gr..."
+  },
+  
+  {
     "title": "LINQ. Overview",
     "url": "/posts/linq-overview/",
     "categories": "Programming, .NET",
