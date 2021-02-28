@@ -1,6 +1,6 @@
 ---
 layout: post
-published: false
+published: true
 title:  "5 проблем в автотестах"
 date:   2021-02-27 14:00:00 +0200
 categories: [Програмування, якість коду]
