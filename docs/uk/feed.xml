@@ -4,7 +4,7 @@
   <id>http://0.0.0.0:4000/</id>
   <title>Мартинюк Олександр</title>
   <subtitle>Персональний блог Олександра Мартинюка українською мовою Oleksandr Martyniuk personal blog .NET C# Web Development Software Programming Algorithms Ukrainian</subtitle>
-  <updated>2021-03-01T14:14:07+02:00</updated>
+  <updated>2021-03-01T14:18:47+02:00</updated>
   <author>
     <name>Oleksandr Martyniuk</name>
     <uri>http://0.0.0.0:4000/</uri>
@@ -24,7 +24,7 @@
     <link href="http://0.0.0.0:4000/uk/posts/auto-tests-issues/" rel="alternate" type="text/html" title="7 проблем в автотестах" />
     <published>2021-02-27T14:00:00+02:00</published>
   
-    <updated>2021-03-01T14:13:29+02:00</updated>
+    <updated>2021-03-01T14:18:26+02:00</updated>
   
     <id>http://0.0.0.0:4000/uk/posts/auto-tests-issues/</id>
     <content src="http://0.0.0.0:4000/uk/posts/auto-tests-issues/" />

@@ -593,7 +593,7 @@
 
 
 <!-- return element -->
-<span class="readtime" data-toggle="tooltip" data-placement="bottom" title="2254 words">12 min</span>
+<span class="readtime" data-toggle="tooltip" data-placement="bottom" title="2253 words">12 min</span>
 
 
           <!-- page views -->
@@ -647,13 +647,11 @@
 3
 4
 5
-6
 </pre></td><td class="rouge-code"><pre><span class="k">public</span> <span class="kt">double</span> <span class="nf">CalculateAreaOfTriangle</span><span class="p">(</span><span class="kt">double</span> <span class="n">a</span><span class="p">,</span> <span class="kt">double</span> <span class="n">b</span><span class="p">,</span> <span class="kt">double</span> <span class="n">c</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="kt">var</span> <span class="n">p</span> <span class="p">=</span> <span class="p">(</span><span class="n">a</span> <span class="p">+</span> <span class="n">b</span> <span class="p">+</span> <span class="n">c</span><span class="p">)</span> <span class="p">/</span> <span class="m">2</span><span class="p">;</span>
     <span class="k">return</span> <span class="n">Math</span><span class="p">.</span><span class="nf">Sqrt</span><span class="p">(</span><span class="n">p</span> <span class="p">*</span> <span class="p">(</span><span class="n">p</span> <span class="p">-</span> <span class="n">a</span><span class="p">)</span> <span class="p">*</span> <span class="p">(</span><span class="n">p</span> <span class="p">-</span> <span class="n">b</span><span class="p">)</span> <span class="p">*</span> <span class="p">(</span><span class="n">p</span> <span class="p">-</span> <span class="n">c</span><span class="p">));</span>
 <span class="p">}</span>
-
 </pre></td></tr></tbody></table></code></div></div>
 
 <p>При її тестування інтуїтивним підходом буде повторити формулу в тесті, щоб не обчислювати площу самостійно в калькуляторі. Але це не вірний підхід, бо програміст може допустити помилку, яка буде продубльована в тесті, особливо якщо один програміст пише і код, і тест до нього. Крім того, використання складних алгоритмів в тестах ускладнює їх підтримку.</p>
