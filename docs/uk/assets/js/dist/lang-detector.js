@@ -2,8 +2,8 @@ function getBestSuitableSupportedLang(lang, locale, supported) {
     // Exclude first element, default language
     var supported_lang = supported.shift();
 
-    if (supported.includes(lang + "-" + locale)) {
-        supported_lang = lang + "-" + locale;
+    if (supported.includes(lang + '-' + locale)) {
+        supported_lang = lang + '-' + locale;
     } else if (supported.includes(lang)) {
         supported_lang = lang;
     }
@@ -19,9 +19,10 @@ var suitable_lang = getBestSuitableSupportedLang(lang, locale, supported_languag
 
 var hostname = window.location.hostname;
 var referrer = document.referrer;
+var rootPage = (window.location.pathname == '/') || (window.location.pathname == '');
 
 var landingPage = !referrer || referrer.indexOf(hostname) == -1;
 
-if (landingPage && (current_lang !== suitable_lang)) {
+if (landingPage && rootPage && (current_lang !== suitable_lang)) {
   window.location = '/' + suitable_lang + '/';
 }
