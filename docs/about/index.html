@@ -507,6 +507,20 @@
 
 
 
+  
+
+  
+
+  <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+  
+  
+
+  
+
+  
+
+
+
 <!-- return -->
 <div class="row">
   <div class="col-12 col-lg-11 col-xl-8">
@@ -514,7 +528,11 @@
     
       <h1 class="dynamic-title">About</h1>
       <div class="post-content">
-        <p>About me</p>
+        <p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/img/sample/avatar-big.jpg" alt="Фото" /></p>
+
+<p>I am a software engineer with 12 years of experience in web services, distributed systems and databases. I love .NET, clean code, and want to help users solve their problems.</p>
+
+<p>If you have a project where I can help you please reach me by <a href="mailto:alexander.martinyuk@gmail.com">email</a>.</p>
 
 
       </div>
@@ -789,6 +807,18 @@
 
 
 
+
+
+  <!--
+  image lazy load: https://github.com/ApoorvSaxena/lozad.js
+-->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+
+<script type="text/javascript">
+  const imgs = document.querySelectorAll('.post-content img');
+  const observer = lozad(imgs);
+  observer.observe();
+</script>
 
 
 
