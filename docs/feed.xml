@@ -4,7 +4,7 @@
   <id>http://0.0.0.0:4000/</id>
   <title>Martyniuk Oleksandr</title>
   <subtitle>Персональний блог Олександра Мартинюка українською мовою Oleksandr Martyniuk personal blog .NET C# Web Development Software Programming Algorithms Ukrainian</subtitle>
-  <updated>2021-03-01T14:52:38+02:00</updated>
+  <updated>2021-03-09T16:12:21+02:00</updated>
   <author>
     <name>Oleksandr Martyniuk</name>
     <uri>http://0.0.0.0:4000/</uri>
@@ -17,6 +17,46 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>7 issues in autotests from my experience</title>
+    <link href="http://0.0.0.0:4000/posts/auto-tests-issues/" rel="alternate" type="text/html" title="7 issues in autotests from my experience" />
+    <published>2021-02-27T14:00:00+02:00</published>
+  
+    <updated>2021-02-27T14:00:00+02:00</updated>
+  
+    <id>http://0.0.0.0:4000/posts/auto-tests-issues/</id>
+    <content src="http://0.0.0.0:4000/posts/auto-tests-issues/" />
+    <author>
+      <name>Oleksandr Martyniuk</name>
+    </author>
+
+  
+    
+    <category term="Programming" />
+    
+    <category term="Code quality" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      
+
+In my practice I’ve seen projects with different approaches to testing: some were 99% covered by unit tests, while others had no tests at all. In this article, I want to highlight the typical problems with automated tests I faced during my career and how to solve them.
+
+Every good software engineer cares about the quality of his code, so writing tests is a part of our job. We will talk about ...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>

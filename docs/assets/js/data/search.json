@@ -1,6 +1,21 @@
 [
   
   {
+    "title": "7 issues in autotests from my experience",
+    "url": "/posts/auto-tests-issues/",
+    "categories": "Programming, Code quality",
+    "tags": "unit tests, C#, integration tests, experience",
+    "date": "2021-02-27 14:00:00 +0200",
+    
+
+
+
+
+
+    "snippet": "In my practice I’ve seen projects with different approaches to testing: some were 99% covered by unit tests, while others had no tests at all. In this article, I want to highlight the typical problems with automated tests I faced during my career and how to solve them.Every good software engineer..."
+  },
+  
+  {
     "title": "Gready algorithms",
     "url": "/posts/greedy-algorithms/",
     "categories": "Programming, Algorithms",
