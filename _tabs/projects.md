@@ -1,6 +1,6 @@
 ---
 layout: projects
 title: pages.projects
-icon: fas fa-info
+icon: fas fa-tasks
 order: 4
 ---
