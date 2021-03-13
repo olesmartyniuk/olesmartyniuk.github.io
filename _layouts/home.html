@@ -38,6 +38,12 @@ layout: page
     {% assign posts = posts | push: default[i] %}
   {% endfor %}
 {% endif %}
+  
+{% if site.lang == "en" %}              
+  {% assign lang_prefix = "" %}
+{% else %}      
+  {% assign lang_prefix = "/uk" %}
+{% endif %}
 
 
 <div id="post-list">
@@ -46,7 +52,7 @@ layout: page
 
   <div class="post-preview">
     <h1>
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <a href="{{ lang_prefix }}{{ post.url }}">{{ post.title }}</a>
     </h1>
 
     <div class="post-content">
