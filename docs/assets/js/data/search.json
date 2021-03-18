@@ -16,6 +16,21 @@
   },
   
   {
+    "title": "Transactions in DynamoDB",
+    "url": "/posts/transactions-dynamodb/",
+    "categories": "Programming, .NET",
+    "tags": ".NET, DynamoDB, AWS, NoSQL, transactions, ACID",
+    "date": "2020-09-29 00:00:00 +0300",
+    
+
+
+
+
+
+    "snippet": "NoSQL vs. SQLFor many years, relational databases dominated software development. SQL has become one of the most popular programming languages. But at the beginning of the 21st century, the WEB 2.0 and the needs of big companies such as Google and Facebook made a revolution in data storage.Strict..."
+  },
+  
+  {
     "title": "Gready algorithms",
     "url": "/posts/greedy-algorithms/",
     "categories": "Programming, Algorithms",
