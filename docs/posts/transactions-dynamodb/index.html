@@ -593,7 +593,7 @@
 
 
 <!-- return element -->
-<span class="readtime" data-toggle="tooltip" data-placement="bottom" title="2539 words">14 min</span>
+<span class="readtime" data-toggle="tooltip" data-placement="bottom" title="2524 words">14 min</span>
 
 
           <!-- page views -->
@@ -613,25 +613,25 @@
 
 <p>Strict coherence and internal data aggregation have become less important than high availability, performance, and scalability. Over time, there has been a strong belief that NoSQL databases are for large data that needs to be stored in a cluster and retrieved quickly. Whereas SQL is for structured data that is related and must be strictly consistent through a transaction mechanism and foreign keys.</p>
 
-<p>Before designing systems, programmers began to ask themselves: what is more important - [ACID] ​​(https://uk.wikipedia.org/wiki/ACID) or high availability and speed? This situation lasted for some time until transactions appeared in NoSQL.</p>
+<p>Before designing systems, programmers began to ask themselves: what is more important - <a href="https://uk.wikipedia.org/wiki/ACID">ACID</a> or high availability and speed? This situation lasted for some time until transactions appeared in NoSQL.</p>
 
 <p>In this article, I will talk about transactions in one of the first NoSQL databases - Amazon DynamoDB. Let’s see how they differ from transactions in SQL, in which cases it is necessary to build programs with their use and how to work with them in C # and .NET Core.</p>
 
 <h1 id="dynamodb">DynamoDB</h1>
 
-<p>[DynamoDB] (https://aws.amazon.com/dynamodb/) - schemaless document database. It stores data in tables, each of which can be hosted on multiple servers, thus distributing the load. This allows DynamoDB to process millions of requests per second during peak periods.</p>
+<p><a href="https://aws.amazon.com/dynamodb/">DynamoDB</a> - schemaless document database. It stores data in tables, each of which can be hosted on multiple servers, thus distributing the load. This allows DynamoDB to process millions of requests per second during peak periods.</p>
 
-<p>DynamoDB uses the JSON format to persist documents. Creating a table requires only three arguments: the table name, key, and attribute list, which must include the attribute used as the <em>section key</em>.</p>
+<p>DynamoDB uses the JSON format to persist documents. Creating a table requires only three arguments: the table name, key, and attribute list, which must include the attribute used as the <em>partition key</em>.</p>
 
-<p>The Partition Key is used to determine the actual location of the record. Applying the HASH function to the section key, DynamoDB finds the physical server in the cluster and the location on the server where the data will be written. The section key together with the optional Sort Key create the <em>original key</em>, which allows you to uniquely identify the record in the DynamoDB table.</p>
+<p>The Partition Key is used to determine the actual location of the record. Applying the HASH function to the partition key, DynamoDB finds the physical server in the cluster and the location on the server where the data will be written. The partition key together with the optional Sort Key create the <em>primary key</em>, which allows you to uniquely identify the record in the DynamoDB table.</p>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/dynamodb-table.jpg" alt="" /></p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/dynamodb-table-en.jpg" alt="" /></p>
 
 <p>While relational databases offer a fairly powerful SQL language for queries, DynamoDB offers only <code class="language-plaintext highlighter-rouge">Put</code>,<code class="language-plaintext highlighter-rouge"> Get</code>, <code class="language-plaintext highlighter-rouge">Update</code> and<code class="language-plaintext highlighter-rouge"> Delete</code> operations on single tables and can’t combine tables at all. But because of this simplicity, DynamoDB is well scalable and has a high bandwidth.</p>
 
-<p>Another feature of the database is that its use is charged not by the place occupied by the data, but by the bandwidth measured by the so-called <code class="language-plaintext highlighter-rouge">RCU</code> and<code class="language-plaintext highlighter-rouge"> WCU</code>.</p>
+<p>Another feature of the database is that its use is charged not by the place occupied, but by the bandwidth measured by <code class="language-plaintext highlighter-rouge">RCU</code> and<code class="language-plaintext highlighter-rouge"> WCU</code>.</p>
 
-<p><code class="language-plaintext highlighter-rouge">RCU</code> (read capacity unit) is a unit that corresponds to one read request up to 4 Kb of data. <code class="language-plaintext highlighter-rouge">WCU</code> (write capacity unit) - similar to write, only data limit - 1 Kb.</p>
+<p><code class="language-plaintext highlighter-rouge">RCU</code> (read capacity unit) is a unit that corresponds to one read request up to 4 Kb of data. <code class="language-plaintext highlighter-rouge">WCU</code> (write capacity unit) - similar to read, only data limit - 1 Kb.</p>
 
 <h1 id="local-dynamodb">Local DynamoDB</h1>
 <p>Let’s try to run DynamoDB locally and execute simple queries to create a table and some records.</p>
@@ -664,9 +664,9 @@
 </span><span class="n">CorsParams:</span><span class="w">     </span><span class="o">*</span><span class="w">
 </span></pre></td></tr></tbody></table></code></div></div>
 
-<p>Docker loaded the <code class="language-plaintext highlighter-rouge">dynamodb-local</code> image and launched the service on port <code class="language-plaintext highlighter-rouge">8000</code>. We can now access the database at <code class="language-plaintext highlighter-rouge">http://localhost:8000</code>.</p>
+<p>Docker loaded the <code class="language-plaintext highlighter-rouge">dynamodb-local</code> image and launched the service on port <code class="language-plaintext highlighter-rouge">8000</code>. Now we can access the database at <code class="language-plaintext highlighter-rouge">http://localhost:8000</code>.</p>
 
-<p>The data will be stored in memory, as evidenced by the <code class="language-plaintext highlighter-rouge">InMemory: true</code> parameter, so<code class="language-plaintext highlighter-rouge">DbPath</code> (the path to the data file) is empty. If you want to store data on disk between container launches you <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.UsageNotes.html">need to specify parameters</a> <code class="language-plaintext highlighter-rouge">-sharedDB</code> and <code class="language-plaintext highlighter-rouge">-dbPath</code>.</p>
+<p>The data will be stored in memory, as a result of <code class="language-plaintext highlighter-rouge">InMemory: true</code> parameter, so<code class="language-plaintext highlighter-rouge">DbPath</code> (the path to the data file) is empty. If you want to store data on disk between container launches you <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.UsageNotes.html">need to specify parameters</a> <code class="language-plaintext highlighter-rouge">-sharedDB</code> and <code class="language-plaintext highlighter-rouge">-dbPath</code>.</p>
 
 <h1 id="taxi-ordering-system">Taxi ordering system</h1>
 <p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-illustration.png" alt="" /></p>
@@ -690,7 +690,7 @@
 
 <p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/client-table.png" alt="" /></p>
 
-<p>The <em>driver</em> table is similar, but as a unique identifier we will take car number. Since the driver model is very similar to the customer model, why don’t we write them down in one table? Let’s call it <code class="language-plaintext highlighter-rouge">Taxi</code>.</p>
+<p>The <em>driver</em> table is similar, but as a unique identifier we will use car number. Since the driver model is very similar to the customer model, why don’t we write them down in one table? Let’s call it <code class="language-plaintext highlighter-rouge">Taxi</code>.</p>
 
 <p>The <em>order</em> will contain the driver, customer and order status: <code class="language-plaintext highlighter-rouge">Pending</code>,<code class="language-plaintext highlighter-rouge"> InProgress</code>, <code class="language-plaintext highlighter-rouge">Done</code>. We will also save the order in the <code class="language-plaintext highlighter-rouge">Taxi</code> table.</p>
 
@@ -698,9 +698,9 @@
 
 <p>Imagine that there is a customer, driver, and order in a pending state.</p>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table-1.jpg" alt="" /></p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table-1-en.jpg" alt="" /></p>
 
-<p>For developers familiar with SQL, such a general table may seem strange. They immediately want to divide and normalize it. But in the world of NoSQL this is a completely normal thing. Such tables are called <em>homogeneous</em>. DynamoDB will not waste disk space to save empty record fields, because it saves documents as attribute collections. Amazon advises using homogeneous tables in DynamoDB. Their recommendation is [keep related data as close as possible and have a minimum number of tables] (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-general-nosql-design.html#bp-general- nosql-design-concepts).</p>
+<p>For developers familiar with SQL, such a general table may seem strange. They immediately want to divide and normalize it. But in the world of NoSQL this is a completely normal thing. Such tables are called <em>homogeneous</em>. DynamoDB will not waste disk space to save empty record fields, because it saves documents as attribute collections. Amazon advises using homogeneous tables in DynamoDB. Their recommendation is <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-general-nosql-design.html#bp-general-nosql-design-concepts">keep related data as close as possible and have a minimum number of tables</a>.</p>
 
 <h1 id="aws-sdk-and-net-core">AWS SDK and .NET Core</h1>
 <p>Create a console program in .NET Core and add a package to work with DynamoDB API - <code class="language-plaintext highlighter-rouge">AWSSDK.DynamoDBv2</code></p>
@@ -892,9 +892,9 @@
 
 <p>That is, the final result should look like this:</p>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table-2.jpg" alt="" /></p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table-2-en.jpg" alt="" /></p>
 
-<p>Here we need a [ACID]​​(https://uk.wikipedia.org/wiki/ACID) transaction because we need to update the order record and the driver record at the same time. If any of the above conditions are not met, no changes to the database should occur.</p>
+<p>Here we need a <a href="https://uk.wikipedia.org/wiki/ACID">ACID</a> transaction because we need to update the order record and the driver record at the same time. If any of the above conditions are not met, no changes to the database should occur.</p>
 
 <div class="language-c# highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -1008,42 +1008,44 @@
 
 <p>In this code, we execute a transaction consisting of two elements <code class="language-plaintext highlighter-rouge">TransactWriteItem</code>. If the condition in <code class="language-plaintext highlighter-rouge">ConditionExpression</code> is met, the expression <code class="language-plaintext highlighter-rouge">UpdateExpression</code> will be executed.</p>
 
-<p>To change the driver, we update the order number if it is empty:
-```c #
-    UpdateExpression = “set OrderId =: OrderId”,
-    ConditionExpression = “Attribute_not_exists (OrderId)”,</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<p>To change the driver, we update the order number if it is empty:</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-3
-4
-5
-</pre></td><td class="rouge-code"><pre>
-To change the order, we update the driver field and status if the driver has not yet been assigned and the status is `Pending`:
-```c #
-    UpdateExpression = "set DriverId =: DriverId, OrderStatus =: NewStatus",
-    ConditionExpression = "attribute_not_exists (DriverId) AND OrderStatus =: OldStatus",
+</pre></td><td class="rouge-code"><pre>    <span class="n">UpdateExpression</span> <span class="p">=</span> <span class="s">"set OrderId =: OrderId"</span><span class="p">,</span>
+    <span class="n">ConditionExpression</span> <span class="p">=</span> <span class="s">"Attribute_not_exists (OrderId)"</span><span class="p">,</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>To change the order, we update the driver field and status if the driver has not yet been assigned and the status is <code class="language-plaintext highlighter-rouge">Pending</code>:</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>    <span class="n">UpdateExpression</span> <span class="p">=</span> <span class="s">"set DriverId =: DriverId, OrderStatus =: NewStatus"</span><span class="p">,</span>
+    <span class="n">ConditionExpression</span> <span class="p">=</span> <span class="s">"attribute_not_exists (DriverId) AND OrderStatus =: OldStatus"</span><span class="p">,</span>
 </pre></td></tr></tbody></table></code></div></div>
 
 <p>This operation allows the driver to take the order and meets our three requirements:</p>
 <ul>
-  <li>It is <strong>idempotent</strong>. Repeating the method will not change the state of the database and will not cause an error. This is due to the <code class="language-plaintext highlighter-rouge">ClientRequestToken</code> attribute, which is essentially an idempotency token. All subsequent queries to the database with the same <code class="language-plaintext highlighter-rouge">ClientRequestToken</code> will be ignored. This allows, for example, the driver to mistakenly press the order acceptance button twice.</li>
+  <li>It is <strong>idempotent</strong>. Repeating the call will not change the state of the database and will not cause an error. This is due to the <code class="language-plaintext highlighter-rouge">ClientRequestToken</code> attribute, which is essentially an idempotency token. All subsequent queries to the database with the same <code class="language-plaintext highlighter-rouge">ClientRequestToken</code> will be ignored. This allows, for example, the driver to mistakenly press the order acceptance button twice.</li>
   <li>It is <strong>consistent</strong>. Order and driver records change synchronously so that the driver cannot take an order in a status other than <code class="language-plaintext highlighter-rouge">Pending</code>. An order in <code class="language-plaintext highlighter-rouge">Pending</code> status will always have a linked driver.</li>
   <li>It is <strong>atomic</strong>. The query will either be executed as a whole or no changes will be applied to the database.</li>
 </ul>
 
 <h1 id="reasons-for-transaction-failure">Reasons for transaction failure</h1>
-<p>If you perform this method but with incorrect data (for example, the driver tries to take someone else’s order), it will cause an error:
-<code class="language-plaintext highlighter-rouge">c #
-Amazon.DynamoDBv2.Model.TransactionCanceledException:
-'Transaction canceled, please refer cancellation reasons for specific reasons ...'
-</code></p>
+<p>If you perform this method but with incorrect data (for example, the driver tries to take someone else’s order), it will cause an error:</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="n">Amazon</span><span class="p">.</span><span class="n">DynamoDBv2</span><span class="p">.</span><span class="n">Model</span><span class="p">.</span><span class="n">TransactionCanceledException</span><span class="p">:</span>
+<span class="err">'</span><span class="n">Transaction</span> <span class="n">canceled</span><span class="p">,</span> <span class="n">please</span> <span class="n">refer</span> <span class="n">cancellation</span> <span class="n">reasons</span> <span class="k">for</span> <span class="n">specific</span> <span class="n">reasons</span> <span class="p">...</span><span class="err">'</span>
+</pre></td></tr></tbody></table></code></div></div>
 
 <p>The transaction can be canceled for several reasons:</p>
 <ul>
   <li>the condition in <code class="language-plaintext highlighter-rouge">ConditionExpression</code> is not fulfilled</li>
   <li>another transaction with the same record is executed at the same time</li>
   <li>insufficient bandwidth (in our case it is more than 5 calls per second)</li>
-  <li>not enough rights to execute the request (this only applies to DynamoDB in AWS)</li>
+  <li>not enough permissions to execute the request (this only applies to DynamoDB in AWS)</li>
 </ul>
 
 <p>What to do when you get a transaction error? You should try the operation again. Make sure you have set the idempotency token (field <code class="language-plaintext highlighter-rouge">ClientRequestToken</code>), then the SDK can try to retry the request.</p>
@@ -1058,7 +1060,7 @@ Amazon.DynamoDBv2.Model.TransactionCanceledException:
 </ul>
 
 <h1 id="comparison-with-sql">Comparison with SQL</h1>
-<p>In SQL and some other NoSQL solutions, such as MongoDB, transactions are implemented in a conversational style. The first call opens the transaction (<code class="language-plaintext highlighter-rouge">BEGIN TRANSACTION</code>), then the individual calls modify the data (<code class="language-plaintext highlighter-rouge"> INSERT</code>, <code class="language-plaintext highlighter-rouge">UPDATE</code>,<code class="language-plaintext highlighter-rouge"> DELETE</code>). At the end, the transaction is closed (<code class="language-plaintext highlighter-rouge">COMMIT TRANSACTION</code>).</p>
+<p>In SQL and some other NoSQL solutions, such as MongoDB, transactions are implemented in a conversational style. The first call opens the transaction (<code class="language-plaintext highlighter-rouge">BEGIN TRANSACTION</code>), then the individual calls modify the data (<code class="language-plaintext highlighter-rouge">INSERT</code>, <code class="language-plaintext highlighter-rouge">UPDATE</code>,<code class="language-plaintext highlighter-rouge"> DELETE</code>). At the end, the transaction is closed (<code class="language-plaintext highlighter-rouge">COMMIT TRANSACTION</code>).</p>
 
 <p>This distribution of coordination between the client and the server imposes some restrictions on transactions and makes their implementation more difficult and makes execution slower.</p>
 

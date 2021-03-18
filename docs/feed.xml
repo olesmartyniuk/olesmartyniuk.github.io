@@ -4,7 +4,7 @@
   <id>http://0.0.0.0:4000/</id>
   <title>Martyniuk Oleksandr</title>
   <subtitle>Персональний блог Олександра Мартинюка українською мовою Oleksandr Martyniuk personal blog .NET C# Web Development Software Programming Algorithms Ukrainian</subtitle>
-  <updated>2021-03-18T22:27:45+02:00</updated>
+  <updated>2021-03-18T23:04:29+02:00</updated>
   <author>
     <name>Oleksandr Martyniuk</name>
     <uri>http://0.0.0.0:4000/</uri>
@@ -64,7 +64,7 @@ Every good software engineer cares about the quality of his code, so writing tes
     <link href="http://0.0.0.0:4000/posts/transactions-dynamodb/" rel="alternate" type="text/html" title="Transactions in DynamoDB" />
     <published>2020-09-29T00:00:00+03:00</published>
   
-    <updated>2020-09-29T00:00:00+03:00</updated>
+    <updated>2021-03-18T23:04:35+02:00</updated>
   
     <id>http://0.0.0.0:4000/posts/transactions-dynamodb/</id>
     <content src="http://0.0.0.0:4000/posts/transactions-dynamodb/" />
