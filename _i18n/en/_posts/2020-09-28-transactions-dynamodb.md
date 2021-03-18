@@ -26,7 +26,7 @@ DynamoDB uses the JSON format to persist documents. Creating a table requires on
 
 The Partition Key is used to determine the actual location of the record. Applying the HASH function to the section key, DynamoDB finds the physical server in the cluster and the location on the server where the data will be written. The section key together with the optional Sort Key create the *original key*, which allows you to uniquely identify the record in the DynamoDB table.
 
-![](/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/dynamodb-table.jpg)
+![](/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/dynamodb-table-en.jpg)
 
 While relational databases offer a fairly powerful SQL language for queries, DynamoDB offers only `Put`,` Get`, `Update` and` Delete` operations on single tables and can't combine tables at all. But because of this simplicity, DynamoDB is well scalable and has a high bandwidth.
 
@@ -89,7 +89,7 @@ The *order* will contain the driver, customer and order status: `Pending`,` InPr
 
 Imagine that there is a customer, driver, and order in a pending state.
 
-![](/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table-1.jpg)
+![](/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table-1-en.jpg)
 
 For developers familiar with SQL, such a general table may seem strange. They immediately want to divide and normalize it. But in the world of NoSQL this is a completely normal thing. Such tables are called *homogeneous*. DynamoDB will not waste disk space to save empty record fields, because it saves documents as attribute collections. Amazon advises using homogeneous tables in DynamoDB. Their recommendation is [keep related data as close as possible and have a minimum number of tables](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-general-nosql-design.html#bp-general-nosql-design-concepts).
 
@@ -199,7 +199,7 @@ Let's try to implement a more complex operation, for example, *the driver takes 
 
 That is, the final result should look like this:
 
-![](/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table-2.jpg)
+![](/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/taxi-table-2-en.jpg)
 
 Here we need a [ACID](https://uk.wikipedia.org/wiki/ACID) transaction because we need to update the order record and the driver record at the same time. If any of the above conditions are not met, no changes to the database should occur.
 
