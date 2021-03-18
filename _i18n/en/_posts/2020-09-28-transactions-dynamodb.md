@@ -14,7 +14,7 @@ For many years, relational databases dominated software development. SQL has bec
 
 Strict coherence and internal data aggregation have become less important than high availability, performance, and scalability. Over time, there has been a strong belief that NoSQL databases are for large data that needs to be stored in a cluster and retrieved quickly. Whereas SQL is for structured data that is related and must be strictly consistent through a transaction mechanism and foreign keys.
 
-Before designing systems, programmers began to ask themselves: what is more important - [ACID]​​(https://uk.wikipedia.org/wiki/ACID) or high availability and speed? This situation lasted for some time until transactions appeared in NoSQL.
+Before designing systems, programmers began to ask themselves: what is more important - [ACID](https://uk.wikipedia.org/wiki/ACID) or high availability and speed? This situation lasted for some time until transactions appeared in NoSQL.
 
 In this article, I will talk about transactions in one of the first NoSQL databases - Amazon DynamoDB. Let's see how they differ from transactions in SQL, in which cases it is necessary to build programs with their use and how to work with them in C # and .NET Core.
 
@@ -22,9 +22,9 @@ In this article, I will talk about transactions in one of the first NoSQL databa
 
 [DynamoDB](https://aws.amazon.com/dynamodb/) - schemaless document database. It stores data in tables, each of which can be hosted on multiple servers, thus distributing the load. This allows DynamoDB to process millions of requests per second during peak periods.
 
-DynamoDB uses the JSON format to persist documents. Creating a table requires only three arguments: the table name, key, and attribute list, which must include the attribute used as the *section key*.
+DynamoDB uses the JSON format to persist documents. Creating a table requires only three arguments: the table name, key, and attribute list, which must include the attribute used as the *pertition key*.
 
-The Partition Key is used to determine the actual location of the record. Applying the HASH function to the section key, DynamoDB finds the physical server in the cluster and the location on the server where the data will be written. The section key together with the optional Sort Key create the *original key*, which allows you to uniquely identify the record in the DynamoDB table.
+The Partition Key is used to determine the actual location of the record. Applying the HASH function to the pertition key, DynamoDB finds the physical server in the cluster and the location on the server where the data will be written. The pertition key together with the optional Sort Key create the *primary key*, which allows you to uniquely identify the record in the DynamoDB table.
 
 ![](/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/dynamodb-table-en.jpg)
 
