@@ -22,9 +22,9 @@ In this article, I will talk about transactions in one of the first NoSQL databa
 
 [DynamoDB](https://aws.amazon.com/dynamodb/) - schemaless document database. It stores data in tables, each of which can be hosted on multiple servers, thus distributing the load. This allows DynamoDB to process millions of requests per second during peak periods.
 
-DynamoDB uses the JSON format to persist documents. Creating a table requires only three arguments: the table name, key, and attribute list, which must include the attribute used as the *pertition key*.
+DynamoDB uses the JSON format to persist documents. Creating a table requires only three arguments: the table name, key, and attribute list, which must include the attribute used as the *partition key*.
 
-The Partition Key is used to determine the actual location of the record. Applying the HASH function to the pertition key, DynamoDB finds the physical server in the cluster and the location on the server where the data will be written. The pertition key together with the optional Sort Key create the *primary key*, which allows you to uniquely identify the record in the DynamoDB table.
+The Partition Key is used to determine the actual location of the record. Applying the HASH function to the partition key, DynamoDB finds the physical server in the cluster and the location on the server where the data will be written. The partition key together with the optional Sort Key create the *primary key*, which allows you to uniquely identify the record in the DynamoDB table.
 
 ![](/assets/img/posts/2020-09-28-use-dynamodb-transactions-with-dotnet-core/dynamodb-table-en.jpg)
 
