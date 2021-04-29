@@ -6,7 +6,7 @@ date_friendly: 21 травня 2020 р.
 categories: [Програмування, .NET]
 tags: [.NET, ASP.NET Core, розгортання, Heroku]
 ---
-![](http://www.martyniuk.info/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/cover.png)
+![](/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/cover.png)
 
 В багатьох програмістів є власні проєкти на .NET Core, які в певний момент хочеться показати іншим. Бажано, щоб розгортання відбувалось просто і швидко, а хостинг був безкоштовним. В цій статті я розкажу, як розгортати проєкти на .NET Core в Heroku з безперервною доставкою, не вкладаючи в це ні копійки.
 
@@ -25,7 +25,7 @@ Dyno бувають двох типів:
 * **web** - для програм що очікують вхідних HTTP запитів
 * **worker** - для програм, що виконують операції у фоні
 
-![](http://www.martyniuk.info/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/free-plan-capabilities.png)
+![](/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/free-plan-capabilities.png)
 
 Якщо ви використовуєте лише безкоштовний dyno, варто зауважити, що Heroku призупиняє виконання dyno після 30 хв бездіяльності. Тобто, якщо за останні 30 хв. до вашого web dyno не надійшло жодного запиту, він буде поставлений на паузу. Прокинеться він при наступному запиті. Для користувача це може виглядадти так, ніби сайт в браузері перший раз відкривається довго. В той час, поки ваш dyno спить, він НЕ споживає вільні години. Іншими словами, якщо ваш тестовий проєкт досить навантажений і обслуговує користувачів 24 години на добу вам вистачить вільних хвилин лише на 23 дні в місяць. 
 
@@ -111,7 +111,7 @@ remote:  HINT: This occurs when Heroku cannot detect the buildpack to use for th
 ## Контейнер в якості стеку
 
 Всі dyno за умовчанням запускаються на Linux Ubuntu 18:
-![](http://www.martyniuk.info/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/dotnet-app-heroku-settings.png)
+![](/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/dotnet-app-heroku-settings.png)
 
 Але Heroku має можливість запустити будь-який **Docker** контейнер і таким чином дозволяє самостійно вирішувати, яка операційна система і фреймворк потрібні програмісту. 
 
@@ -187,7 +187,7 @@ To https://git.heroku.com/dotnet-app-heroku.git
 
 Якщо зараз відкрити сайт `https://dotnet-app-heroku.herokuapp.com/` в браузері ми побачимо помилку. 
 
-![](http://www.martyniuk.info/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/app-error.png)
+![](/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/app-error.png)
 
 Щоб розібратись, чому це сталося, переглянемо логи нашої програми:
 
@@ -218,7 +218,7 @@ webBuilder
 
 Тепер можна зберегти зміни і зробити пуш в репозиторій. Пуш займе близько хвилини, поки створиться Docker образ. Відкрийте `https://dotnet-app-heroku.herokuapp.com/`. Тепер все працює.
 
-![](http://www.martyniuk.info/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/app-running.png)
+![](/assets/img/posts/2020-05-21-deploy-dotnet-core-app-for-free/app-running.png)
 
 ## Висновок
 Ми побачили, як:

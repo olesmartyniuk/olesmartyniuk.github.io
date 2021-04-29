@@ -7,9 +7,9 @@ categories: [Програмування, .NET]
 tags: [.NET, ASP.NET Core, PostgreSQL, Heroku, Entity Framework, identity]
 ---
 
-![](http://www.martyniuk.info/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/cover.jpg)
+![](/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/cover.jpg)
 
-В цій статті я розкажу про додатки **[Heroku](http://heroku.com)**, ми створимо базу даних **[PostgreSQL](https://www.postgresql.org/)** і налаштуємо її для підтримки процесу аутентифікації у веб-програмі ASP.NET Core. Це друга стаття циклу, тому варто ознайомитись з [попередньою](http://www.martyniuk.info/posts/deploy-dotnet-core-app-for-free/), в якій проєкт було створено і розгорнуто. Створена база даних не буде вимагати жодних фінансових витрат і гарно підходить для власного невеликого проєкту.
+В цій статті я розкажу про додатки **[Heroku](http://heroku.com)**, ми створимо базу даних **[PostgreSQL](https://www.postgresql.org/)** і налаштуємо її для підтримки процесу аутентифікації у веб-програмі ASP.NET Core. Це друга стаття циклу, тому варто ознайомитись з [попередньою](/posts/deploy-dotnet-core-app-for-free/), в якій проєкт було створено і розгорнуто. Створена база даних не буде вимагати жодних фінансових витрат і гарно підходить для власного невеликого проєкту.
 
 ## Передумови
 
@@ -20,17 +20,17 @@ tags: [.NET, ASP.NET Core, PostgreSQL, Heroku, Entity Framework, identity]
 
 Вся робота буде відбуватись в командному рядку. У якості редактору коду можна використовувати будь-який на ваш вибір.
 
-У [попередній статті](http://www.martyniuk.info/posts/deploy-dotnet-core-app-for-free/) ми створили просту програму ASP.NET Core, налаштували її для роботи в Heroku і розгорнули у хмарі. В цій статті ми модифікуємо створений код: додамо аутентифікацію та базу даних для зберігання інформації про користувачів. Готовий код можна знайти на [Github](https://github.com/alexmartyniuk/blog-dotnet-app-heroku).
+У [попередній статті](/posts/deploy-dotnet-core-app-for-free/) ми створили просту програму ASP.NET Core, налаштували її для роботи в Heroku і розгорнули у хмарі. В цій статті ми модифікуємо створений код: додамо аутентифікацію та базу даних для зберігання інформації про користувачів. Готовий код можна знайти на [Github](https://github.com/alexmartyniuk/blog-dotnet-app-heroku).
 
 
 ## Додатки Heroku
 Heroku має безліч готових інструментів та сервісів, які називаються **Add-ons** (додатки). На [сторінці з додатками](https://elements.heroku.com/addons) можна знайти біля 150 сервісів, згрупованих по категоріям: Data Stores, Monitoring, Logging, Caching і т.д. Наприклад, тут є бази даних MySQL, Redis або MongoDB, сервіси повнотекстового пошуку Elasticsearch, стримінгу повідомлень Kafka, генерації PDF, обробки відео і багато іншого.
 
-![](http://www.martyniuk.info/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/heroku-addons.jpg)
+![](/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/heroku-addons.jpg)
 
 Ми будемо використовувати сервіс бази даних, який називається [Heroku Postgres](https://elements.heroku.com/addons/heroku-postgresql). Він доступний в декількох планах: від найпростішого **Hobby Dev**, який обмежений 20-ти одночасними з'єднаннями і 10000-ми рядками, до найбільш потужного **Shield 8**, який надає 488 GB оперативної пам'яті і 3TB сховища. 
 
-![](http://www.martyniuk.info/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/postgresql-pricing.jpg)
+![](/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/postgresql-pricing.jpg)
 
 ## Масштабування Heroku Postgres
 Heroku Postgres легко масштабується вертикально. Є можливість збільшувати розмір сховища і оперативної пам'яті, в якій знаходиться так званий `hot-data-set`, для швидшої оброки запитів. Для вертикального масштабування необхідно просто змінити план використання на вищий. Горизонтальне масштабування в Heroku Postgres можливе завдяки спеціальній конфігурації `leader-follower`. Вона дозволяє створювати декілька копій вашої бази даних, доступних лише для читання, які називаються `follower`. Дані в цих БД синхронізуються в реальному часі із основною базою, яка в термінології Heroku називається `leader`. Heroku забезпечує розташування баз даних `follower` та `leader` в різних дата-центрах, що підвищує їх надійність і дає можливість продовжити роботу вашій програмі у випадку виходу з ладу частини інфраструктури Heroku.
@@ -41,7 +41,7 @@ Heroku Postgres легко масштабується вертикально. Є
 
 
 ## Створення бази даних
-Перейдіть в каталог з проєктом `dotnet-app-heroku`, що був створений в [попередній статті](http://www.martyniuk.info/posts/deploy-dotnet-core-app-for-free/). Перш за все, необхідно увійти в акаунт Heroku:
+Перейдіть в каталог з проєктом `dotnet-app-heroku`, що був створений в [попередній статті](/posts/deploy-dotnet-core-app-for-free/). Перш за все, необхідно увійти в акаунт Heroku:
 
 ```powershell
 > heroku login
@@ -203,7 +203,7 @@ Done.
 
 Після цього можемо переконатись, що база даних була успішно створена та містить всі необхідні таблиці. Для цього я підключився до бази даних через менеджер [HeidiSQL](https://www.heidisql.com/):
 
-![](http://www.martyniuk.info/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/databse-structure.jpg) 
+![](/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/databse-structure.jpg) 
 
 ## Налаштування інтерфейсу аутентифікації
 
@@ -261,7 +261,7 @@ else
 
 Тепер можна виконати `build` проєкту і переконатись, що все працює. Зробіть коміт і пуш у репозиторій Heroku. Ваша програма буде автоматично розгорнута (адже ми сконфігурували це в першій статті) і через деякий час доступна за адресою `http://dotnet-app-heroku.herokuapp.com/`. Спробуйте зареєструвати нового користувача і потім увійти від його імені:
 
-![](http://www.martyniuk.info/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/working-app.jpg) 
+![](/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/working-app.jpg) 
 
 ## Статистика використання БД
 
