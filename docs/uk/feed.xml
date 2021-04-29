@@ -4,7 +4,7 @@
   <id>http://0.0.0.0:4000/</id>
   <title>Мартинюк Олександр</title>
   <subtitle>Персональний блог Олександра Мартинюка українською мовою Oleksandr Martyniuk personal blog .NET C# Web Development Software Programming Algorithms Ukrainian</subtitle>
-  <updated>2021-03-28T15:38:33+03:00</updated>
+  <updated>2021-04-29T23:10:56+03:00</updated>
   <author>
     <name>Oleksandr Martyniuk</name>
     <uri>http://0.0.0.0:4000/</uri>
@@ -104,7 +104,7 @@
     <link href="http://0.0.0.0:4000/uk/posts/%D0%B1%D0%B5%D0%B7%D0%BA%D0%BE%D1%88%D1%82%D0%BE%D0%B2%D0%BD%D0%B0-%D0%B1%D0%B4-%D0%B4%D0%BB%D1%8F-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B8-aspnet-core/" rel="alternate" type="text/html" title="Безкоштовна БД для програми ASP.NET Core" />
     <published>2020-07-28T11:00:00+03:00</published>
   
-    <updated>2021-02-18T23:43:15+02:00</updated>
+    <updated>2021-04-29T23:10:49+03:00</updated>
   
     <id>http://0.0.0.0:4000/uk/posts/%D0%B1%D0%B5%D0%B7%D0%BA%D0%BE%D1%88%D1%82%D0%BE%D0%B2%D0%BD%D0%B0-%D0%B1%D0%B4-%D0%B4%D0%BB%D1%8F-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B8-aspnet-core/</id>
     <content src="http://0.0.0.0:4000/uk/posts/%D0%B1%D0%B5%D0%B7%D0%BA%D0%BE%D1%88%D1%82%D0%BE%D0%B2%D0%BD%D0%B0-%D0%B1%D0%B4-%D0%B4%D0%BB%D1%8F-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B8-aspnet-core/" />
@@ -146,7 +146,7 @@
     <link href="http://0.0.0.0:4000/uk/posts/%D0%B7%D1%83%D1%81%D1%82%D1%80%D1%96%D1%87%D0%B0%D0%B9%D1%82%D0%B5-csharp-9/" rel="alternate" type="text/html" title="Зустрічайте C# 9.0" />
     <published>2020-06-11T13:00:00+03:00</published>
   
-    <updated>2021-02-18T23:43:15+02:00</updated>
+    <updated>2021-04-29T23:10:49+03:00</updated>
   
     <id>http://0.0.0.0:4000/uk/posts/%D0%B7%D1%83%D1%81%D1%82%D1%80%D1%96%D1%87%D0%B0%D0%B9%D1%82%D0%B5-csharp-9/</id>
     <content src="http://0.0.0.0:4000/uk/posts/%D0%B7%D1%83%D1%81%D1%82%D1%80%D1%96%D1%87%D0%B0%D0%B9%D1%82%D0%B5-csharp-9/" />
@@ -189,7 +189,7 @@ C# 9.0 набуває форм і я хочу поділитись нашим б
     <link href="http://0.0.0.0:4000/uk/posts/%D0%BE%D0%B1%D0%BC%D0%B5%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F-%D0%BE%D0%B4%D0%BD%D0%BE%D1%87%D0%B0%D1%81%D0%BD%D0%B8%D1%85-%D0%BF%D0%BE%D1%82%D0%BE%D0%BA%D1%96%D0%B2-csharp/" rel="alternate" type="text/html" title="Обмеження одночасних потоків в C#" />
     <published>2020-05-28T20:00:00+03:00</published>
   
-    <updated>2021-02-18T23:43:15+02:00</updated>
+    <updated>2021-04-29T23:10:49+03:00</updated>
   
     <id>http://0.0.0.0:4000/uk/posts/%D0%BE%D0%B1%D0%BC%D0%B5%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F-%D0%BE%D0%B4%D0%BD%D0%BE%D1%87%D0%B0%D1%81%D0%BD%D0%B8%D1%85-%D0%BF%D0%BE%D1%82%D0%BE%D0%BA%D1%96%D0%B2-csharp/</id>
     <content src="http://0.0.0.0:4000/uk/posts/%D0%BE%D0%B1%D0%BC%D0%B5%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F-%D0%BE%D0%B4%D0%BD%D0%BE%D1%87%D0%B0%D1%81%D0%BD%D0%B8%D1%85-%D0%BF%D0%BE%D1%82%D0%BE%D0%BA%D1%96%D0%B2-csharp/" />

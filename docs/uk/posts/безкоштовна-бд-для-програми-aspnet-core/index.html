@@ -607,9 +607,9 @@
 
         
 
-        <p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="http://www.martyniuk.info/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/cover.jpg" alt="" /></p>
+        <p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/uk/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/cover.jpg" alt="" /></p>
 
-<p>В цій статті я розкажу про додатки <strong><a href="http://heroku.com">Heroku</a></strong>, ми створимо базу даних <strong><a href="https://www.postgresql.org/">PostgreSQL</a></strong> і налаштуємо її для підтримки процесу аутентифікації у веб-програмі ASP.NET Core. Це друга стаття циклу, тому варто ознайомитись з <a href="http://www.martyniuk.info/posts/deploy-dotnet-core-app-for-free/">попередньою</a>, в якій проєкт було створено і розгорнуто. Створена база даних не буде вимагати жодних фінансових витрат і гарно підходить для власного невеликого проєкту.</p>
+<p>В цій статті я розкажу про додатки <strong><a href="http://heroku.com">Heroku</a></strong>, ми створимо базу даних <strong><a href="https://www.postgresql.org/">PostgreSQL</a></strong> і налаштуємо її для підтримки процесу аутентифікації у веб-програмі ASP.NET Core. Це друга стаття циклу, тому варто ознайомитись з <a href="/posts/deploy-dotnet-core-app-for-free/">попередньою</a>, в якій проєкт було створено і розгорнуто. Створена база даних не буде вимагати жодних фінансових витрат і гарно підходить для власного невеликого проєкту.</p>
 
 <h2 id="передумови">Передумови</h2>
 
@@ -622,16 +622,16 @@
 
 <p>Вся робота буде відбуватись в командному рядку. У якості редактору коду можна використовувати будь-який на ваш вибір.</p>
 
-<p>У <a href="http://www.martyniuk.info/posts/deploy-dotnet-core-app-for-free/">попередній статті</a> ми створили просту програму ASP.NET Core, налаштували її для роботи в Heroku і розгорнули у хмарі. В цій статті ми модифікуємо створений код: додамо аутентифікацію та базу даних для зберігання інформації про користувачів. Готовий код можна знайти на <a href="https://github.com/alexmartyniuk/blog-dotnet-app-heroku">Github</a>.</p>
+<p>У <a href="/posts/deploy-dotnet-core-app-for-free/">попередній статті</a> ми створили просту програму ASP.NET Core, налаштували її для роботи в Heroku і розгорнули у хмарі. В цій статті ми модифікуємо створений код: додамо аутентифікацію та базу даних для зберігання інформації про користувачів. Готовий код можна знайти на <a href="https://github.com/alexmartyniuk/blog-dotnet-app-heroku">Github</a>.</p>
 
 <h2 id="додатки-heroku">Додатки Heroku</h2>
 <p>Heroku має безліч готових інструментів та сервісів, які називаються <strong>Add-ons</strong> (додатки). На <a href="https://elements.heroku.com/addons">сторінці з додатками</a> можна знайти біля 150 сервісів, згрупованих по категоріям: Data Stores, Monitoring, Logging, Caching і т.д. Наприклад, тут є бази даних MySQL, Redis або MongoDB, сервіси повнотекстового пошуку Elasticsearch, стримінгу повідомлень Kafka, генерації PDF, обробки відео і багато іншого.</p>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="http://www.martyniuk.info/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/heroku-addons.jpg" alt="" /></p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/uk/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/heroku-addons.jpg" alt="" /></p>
 
 <p>Ми будемо використовувати сервіс бази даних, який називається <a href="https://elements.heroku.com/addons/heroku-postgresql">Heroku Postgres</a>. Він доступний в декількох планах: від найпростішого <strong>Hobby Dev</strong>, який обмежений 20-ти одночасними з’єднаннями і 10000-ми рядками, до найбільш потужного <strong>Shield 8</strong>, який надає 488 GB оперативної пам’яті і 3TB сховища.</p>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="http://www.martyniuk.info/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/postgresql-pricing.jpg" alt="" /></p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/uk/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/postgresql-pricing.jpg" alt="" /></p>
 
 <h2 id="масштабування-heroku-postgres">Масштабування Heroku Postgres</h2>
 <p>Heroku Postgres легко масштабується вертикально. Є можливість збільшувати розмір сховища і оперативної пам’яті, в якій знаходиться так званий <code class="language-plaintext highlighter-rouge">hot-data-set</code>, для швидшої оброки запитів. Для вертикального масштабування необхідно просто змінити план використання на вищий. Горизонтальне масштабування в Heroku Postgres можливе завдяки спеціальній конфігурації <code class="language-plaintext highlighter-rouge">leader-follower</code>. Вона дозволяє створювати декілька копій вашої бази даних, доступних лише для читання, які називаються <code class="language-plaintext highlighter-rouge">follower</code>. Дані в цих БД синхронізуються в реальному часі із основною базою, яка в термінології Heroku називається <code class="language-plaintext highlighter-rouge">leader</code>. Heroku забезпечує розташування баз даних <code class="language-plaintext highlighter-rouge">follower</code> та <code class="language-plaintext highlighter-rouge">leader</code> в різних дата-центрах, що підвищує їх надійність і дає можливість продовжити роботу вашій програмі у випадку виходу з ладу частини інфраструктури Heroku.</p>
@@ -641,7 +641,7 @@
 <p>Варто додати, що Heroku Postgres доступна у двох регіонах - Північній Америці та Європі. Ми створимо БД у Європі, так як наша веб-програма також розміщена на сервері у Європі.</p>
 
 <h2 id="створення-бази-даних">Створення бази даних</h2>
-<p>Перейдіть в каталог з проєктом <code class="language-plaintext highlighter-rouge">dotnet-app-heroku</code>, що був створений в <a href="http://www.martyniuk.info/posts/deploy-dotnet-core-app-for-free/">попередній статті</a>. Перш за все, необхідно увійти в акаунт Heroku:</p>
+<p>Перейдіть в каталог з проєктом <code class="language-plaintext highlighter-rouge">dotnet-app-heroku</code>, що був створений в <a href="/posts/deploy-dotnet-core-app-for-free/">попередній статті</a>. Перш за все, необхідно увійти в акаунт Heroku:</p>
 
 <div class="language-powershell highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -882,7 +882,7 @@
 
 <p>Після цього можемо переконатись, що база даних була успішно створена та містить всі необхідні таблиці. Для цього я підключився до бази даних через менеджер <a href="https://www.heidisql.com/">HeidiSQL</a>:</p>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="http://www.martyniuk.info/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/databse-structure.jpg" alt="" /></p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/uk/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/databse-structure.jpg" alt="" /></p>
 
 <h2 id="налаштування-інтерфейсу-аутентифікації">Налаштування інтерфейсу аутентифікації</h2>
 
@@ -969,7 +969,7 @@ else
 
 <p>Тепер можна виконати <code class="language-plaintext highlighter-rouge">build</code> проєкту і переконатись, що все працює. Зробіть коміт і пуш у репозиторій Heroku. Ваша програма буде автоматично розгорнута (адже ми сконфігурували це в першій статті) і через деякий час доступна за адресою <code class="language-plaintext highlighter-rouge">http://dotnet-app-heroku.herokuapp.com/</code>. Спробуйте зареєструвати нового користувача і потім увійти від його імені:</p>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="http://www.martyniuk.info/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/working-app.jpg" alt="" /></p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/uk/assets/img/posts/2020-07-28-add-database-to-app-in-heroku/working-app.jpg" alt="" /></p>
 
 <h2 id="статистика-використання-бд">Статистика використання БД</h2>
 
