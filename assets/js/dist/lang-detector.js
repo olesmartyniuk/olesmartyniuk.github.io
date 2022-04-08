@@ -1,28 +1,11 @@
-function getBestSuitableSupportedLang(lang, locale, supported) {
-    // Exclude first element, default language
-    var supported_lang = supported.shift();
-
-    if (supported.includes(lang + '-' + locale)) {
-        supported_lang = lang + '-' + locale;
-    } else if (supported.includes(lang)) {
-        supported_lang = lang;
-    }
-
-    return supported_lang;
-}
-
-var [lang, locale] = (((navigator.userLanguage || navigator.language).replace('-', '_')).toLowerCase()).split('_');
-var supported_languages = ['en', 'uk'];
-var current_lang = '';
-
-var suitable_lang = getBestSuitableSupportedLang(lang, locale, supported_languages)
-
+var ukrainian = 'uk';
+var [preferedLanguage, locale] = (((navigator.userLanguage || navigator.language).replace('-', '_')).toLowerCase()).split('_');
 var hostname = window.location.hostname;
 var referrer = document.referrer;
 var rootPage = (window.location.pathname == '/') || (window.location.pathname == '');
 
 var landingPage = !referrer || referrer.indexOf(hostname) == -1;
 
-if (landingPage && rootPage && (current_lang !== suitable_lang)) {
-  window.location = '/' + suitable_lang + '/';
+if (preferedLanguage === ukrainian && landingPage && rootPage) {
+    window.location = '/' + ukrainian + '/';
 }
