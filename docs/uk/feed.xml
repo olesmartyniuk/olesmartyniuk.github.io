@@ -4,7 +4,7 @@
   <id>http://0.0.0.0:4000/</id>
   <title>Мартинюк Олександр</title>
   <subtitle>Персональний блог Олександра Мартинюка українською мовою Oleksandr Martyniuk personal blog .NET C# Web Development Software Programming Algorithms Ukrainian</subtitle>
-  <updated>2021-05-17T23:13:30+03:00</updated>
+  <updated>2022-04-08T06:48:02+03:00</updated>
   <author>
     <name>Oleksandr Martyniuk</name>
     <uri>http://0.0.0.0:4000/</uri>
@@ -13,7 +13,7 @@
   <link rel="alternate" type="text/html" hreflang="uk"
     href="http://0.0.0.0:4000/"/>
   <generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator>
-  <rights> © 2021 Oleksandr Martyniuk </rights>
+  <rights> © 2022 Oleksandr Martyniuk </rights>
   <icon>/uk/assets/img/favicons/favicon.ico</icon>
   <logo>/uk/assets/img/favicons/favicon-96x96.png</logo>
 

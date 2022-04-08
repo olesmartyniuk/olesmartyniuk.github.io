@@ -124,155 +124,121 @@
   The Side Bar
 -->
 
+
+
 <div id="sidebar" class="d-flex flex-column align-items-end">
 
-  <div class="profile-wrapper text-center">
-    <div id="avatar">
-      <a href="/" alt="avatar" class="mx-auto">
+    <div class="profile-wrapper text-center">
+        <div id="avatar">
+
+            <a href="/" alt="avatar" class="mx-auto">
+                
         
         <img src="/assets/img/sample/avatar.jpg" alt="avatar" onerror="this.style.display='none'">
       </a>
+        </div>
+
+        <div class="site-title mt-3">
+            <a href="/">Martyniuk Oleksandr</a>
+        </div>
+
+        <div class="site-subtitle font-italic">.NET Engineer</div>
+
+        <!-- language -->
+
+        <div class="site-title mt-0">
+            
+            <a href="/uk/" title="Українською">
+                <img src="/assets/img/sample/ukrainian.png" width="40px" height="40px" />
+            </a>
+            
+        </div>
+
     </div>
+    <!-- .profile-wrapper -->
 
-    <div class="site-title mt-3">
-      <a href="/">Martyniuk Oleksandr</a>
-    </div>
+    <ul class="w-100">
+        <!-- home -->
+        
+        <li class="nav-item active ">
+            <a href="/" class="nav-link">
+                <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i>
+                <span>HOME</span>
+            </a>
+        </li>
+        <!-- the real tabs -->
+         
 
-    <div class="site-subtitle font-italic">.NET Engineer</div>
+        <li class="nav-item">
+            <a href="/categories/" class="nav-link">
+                <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i>
+                <span>CATEGORIES</span>
+            </a>
+        </li>
+        <!-- .nav-item -->
+         
 
-    <!-- language -->
+        <li class="nav-item">
+            <a href="/tags/" class="nav-link">
+                <i class="fa-fw fas fa-tags ml-xl-3 mr-xl-3 unloaded"></i>
+                <span>TAGS</span>
+            </a>
+        </li>
+        <!-- .nav-item -->
+         
 
-    
-    
-    <div class="site-title mt-0">               
-              
-        <a href="/uk/" title="Українською">
-          <img src="/assets/img/sample/ukrainian.png" width="40px" height="40px"/>
-        </a>  
-                    
-    </div>
+        <li class="nav-item">
+            <a href="/archives/" class="nav-link">
+                <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i>
+                <span>ARCHIVES</span>
+            </a>
+        </li>
+        <!-- .nav-item -->
+         
 
-  </div><!-- .profile-wrapper -->
+        <li class="nav-item">
+            <a href="/projects/" class="nav-link">
+                <i class="fa-fw fas fa-tasks ml-xl-3 mr-xl-3 unloaded"></i>
+                <span>PROJECTS</span>
+            </a>
+        </li>
+        <!-- .nav-item -->
+         
 
-  <ul class="w-100">    
-    <!-- home -->
-    
-    <li class="nav-item active">
-      <a href="/" class="nav-link">
-        <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i>
-        <span>HOME</span>
-      </a>
-    </li>
-    <!-- the real tabs -->
-    
+        <li class="nav-item">
+            <a href="/about/" class="nav-link">
+                <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i>
+                <span>ABOUT</span>
+            </a>
+        </li>
+        <!-- .nav-item -->
+        
 
-      
+    </ul>
+    <!-- ul.nav.flex-column -->
 
-      <li class="nav-item">
-        <a href="/categories/" class="nav-link">
-          <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i>
-          <span>CATEGORIES</span>
+    <div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center">
+
+          
+        <a href="https://github.com/alexmartyniuk" aria-label="github" class="order-3"  target="_blank" rel="noopener" >
+            <i class="fab fa-github-alt"></i>
         </a>
-      </li> <!-- .nav-item -->
-    
-
-      
-
-      <li class="nav-item">
-        <a href="/tags/" class="nav-link">
-          <i class="fa-fw fas fa-tags ml-xl-3 mr-xl-3 unloaded"></i>
-          <span>TAGS</span>
+           
+        <a href="https://twitter.com/alexmartyniuk" aria-label="twitter" class="order-4"  target="_blank" rel="noopener" >
+            <i class="fab fa-twitter"></i>
         </a>
-      </li> <!-- .nav-item -->
-    
-
-      
-
-      <li class="nav-item">
-        <a href="/archives/" class="nav-link">
-          <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i>
-          <span>ARCHIVES</span>
+           
+        <a href=" javascript:location.href = 'mailto:' + ['alexander.martinyuk','gmail.com'].join('@')" aria-label="email" class="order-5"  >
+            <i class="fas fa-envelope"></i>
         </a>
-      </li> <!-- .nav-item -->
-    
-
-      
-
-      <li class="nav-item">
-        <a href="/projects/" class="nav-link">
-          <i class="fa-fw fas fa-tasks ml-xl-3 mr-xl-3 unloaded"></i>
-          <span>PROJECTS</span>
+           
+        <a href="/feed.xml" aria-label="rss" class="order-6"  >
+            <i class="fas fa-rss"></i>
         </a>
-      </li> <!-- .nav-item -->
-    
+           
+        <span class="icon-border order-2"></span> 
 
-      
-
-      <li class="nav-item">
-        <a href="/about/" class="nav-link">
-          <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i>
-          <span>ABOUT</span>
-        </a>
-      </li> <!-- .nav-item -->
-    
-
-  </ul> <!-- ul.nav.flex-column -->
-
-  <div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center">
-
-    
-      
-
-      
-      <a href="https://github.com/alexmartyniuk" aria-label="github"
-        class="order-3"
-        target="_blank" rel="noopener">
-        <i class="fab fa-github-alt"></i>
-      </a>
-      
-
-    
-      
-
-      
-      <a href="https://twitter.com/alexmartyniuk" aria-label="twitter"
-        class="order-4"
-        target="_blank" rel="noopener">
-        <i class="fab fa-twitter"></i>
-      </a>
-      
-
-    
-      
-
-      
-      <a href="
-          javascript:location.href = 'mailto:' + ['alexander.martinyuk','gmail.com'].join('@')" aria-label="email"
-        class="order-5"
-        >
-        <i class="fas fa-envelope"></i>
-      </a>
-      
-
-    
-      
-
-      
-      <a href="/feed.xml" aria-label="rss"
-        class="order-6"
-        >
-        <i class="fas fa-rss"></i>
-      </a>
-      
-
-    
-
-    
-      
-        <span class="icon-border order-2"></span>
-      
-
-      <span id="mode-toggle-wrapper" class="order-1">
+        <span id="mode-toggle-wrapper" class="order-1">
         <!--
   Switch the mode between dark and light.
 -->
@@ -419,13 +385,13 @@
 
 </script>
 
-      </span>
-    
+      </span> 
 
-  </div> <!-- .sidebar-bottom -->
+    </div>
+    <!-- .sidebar-bottom -->
 
-</div><!-- #sidebar -->
-
+</div>
+<!-- #sidebar -->
 
     <!--
   The Top Bar
@@ -570,7 +536,7 @@ In my practice I’ve seen projects with different approaches to testing: some w
   
 
   
-    Feb 27
+    Feb 27, 2021
   
 
   <i class="unloaded">2021-02-27T14:00:00+02:00</i>

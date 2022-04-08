@@ -120,155 +120,121 @@
   The Side Bar
 -->
 
+
+
 <div id="sidebar" class="d-flex flex-column align-items-end">
 
-  <div class="profile-wrapper text-center">
-    <div id="avatar">
-      <a href="/" alt="avatar" class="mx-auto">
+    <div class="profile-wrapper text-center">
+        <div id="avatar">
+
+            <a href="/uk/" alt="avatar" class="mx-auto">
+                
         
         <img src="/assets/img/sample/avatar.jpg" alt="avatar" onerror="this.style.display='none'">
       </a>
+        </div>
+
+        <div class="site-title mt-3">
+            <a href="/">Мартинюк Олександр</a>
+        </div>
+
+        <div class="site-subtitle font-italic">Програміст .NET</div>
+
+        <!-- language -->
+
+        <div class="site-title mt-0">
+            
+            <a href="/categories/" title="In English">
+                <img src="/assets/img/sample/english.png" width="40px" height="40px" />
+            </a>
+            
+        </div>
+
     </div>
+    <!-- .profile-wrapper -->
 
-    <div class="site-title mt-3">
-      <a href="/">Мартинюк Олександр</a>
-    </div>
+    <ul class="w-100">
+        <!-- home -->
+        
+        <li class="nav-item">
+            <a href="/uk/" class="nav-link">
+                <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i>
+                <span>СТАТТІ</span>
+            </a>
+        </li>
+        <!-- the real tabs -->
+         
 
-    <div class="site-subtitle font-italic">Програміст .NET</div>
+        <li class="nav-item active ">
+            <a href="/uk/categories/" class="nav-link">
+                <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i>
+                <span>КАТЕГОРІЇ</span>
+            </a>
+        </li>
+        <!-- .nav-item -->
+         
 
-    <!-- language -->
+        <li class="nav-item">
+            <a href="/uk/tags/" class="nav-link">
+                <i class="fa-fw fas fa-tags ml-xl-3 mr-xl-3 unloaded"></i>
+                <span>ТЕГИ</span>
+            </a>
+        </li>
+        <!-- .nav-item -->
+         
 
-    
-    
-    <div class="site-title mt-0">               
-      
-        <a href="/categories/" title="In English">
-          <img src="/assets/img/sample/english.png" width="40px" height="40px"/>          
-        </a>  
-                    
-    </div>
+        <li class="nav-item">
+            <a href="/uk/archives/" class="nav-link">
+                <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i>
+                <span>АРХІВ</span>
+            </a>
+        </li>
+        <!-- .nav-item -->
+         
 
-  </div><!-- .profile-wrapper -->
+        <li class="nav-item">
+            <a href="/uk/projects/" class="nav-link">
+                <i class="fa-fw fas fa-tasks ml-xl-3 mr-xl-3 unloaded"></i>
+                <span>ПРОЄКТИ</span>
+            </a>
+        </li>
+        <!-- .nav-item -->
+         
 
-  <ul class="w-100">    
-    <!-- home -->
-    
-    <li class="nav-item">
-      <a href="/uk/" class="nav-link">
-        <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i>
-        <span>СТАТТІ</span>
-      </a>
-    </li>
-    <!-- the real tabs -->
-    
+        <li class="nav-item">
+            <a href="/uk/about/" class="nav-link">
+                <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i>
+                <span>ПРО МЕНЕ</span>
+            </a>
+        </li>
+        <!-- .nav-item -->
+        
 
-      
+    </ul>
+    <!-- ul.nav.flex-column -->
 
-      <li class="nav-item active">
-        <a href="/uk/categories/" class="nav-link">
-          <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i>
-          <span>КАТЕГОРІЇ</span>
+    <div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center">
+
+          
+        <a href="https://github.com/alexmartyniuk" aria-label="github" class="order-3"  target="_blank" rel="noopener" >
+            <i class="fab fa-github-alt"></i>
         </a>
-      </li> <!-- .nav-item -->
-    
-
-      
-
-      <li class="nav-item">
-        <a href="/uk/tags/" class="nav-link">
-          <i class="fa-fw fas fa-tags ml-xl-3 mr-xl-3 unloaded"></i>
-          <span>ТЕГИ</span>
+           
+        <a href="https://twitter.com/alexmartyniuk" aria-label="twitter" class="order-4"  target="_blank" rel="noopener" >
+            <i class="fab fa-twitter"></i>
         </a>
-      </li> <!-- .nav-item -->
-    
-
-      
-
-      <li class="nav-item">
-        <a href="/uk/archives/" class="nav-link">
-          <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i>
-          <span>АРХІВ</span>
+           
+        <a href=" javascript:location.href = 'mailto:' + ['alexander.martinyuk','gmail.com'].join('@')" aria-label="email" class="order-5"  >
+            <i class="fas fa-envelope"></i>
         </a>
-      </li> <!-- .nav-item -->
-    
-
-      
-
-      <li class="nav-item">
-        <a href="/uk/projects/" class="nav-link">
-          <i class="fa-fw fas fa-tasks ml-xl-3 mr-xl-3 unloaded"></i>
-          <span>ПРОЄКТИ</span>
+           
+        <a href="/feed.xml" aria-label="rss" class="order-6"  >
+            <i class="fas fa-rss"></i>
         </a>
-      </li> <!-- .nav-item -->
-    
+           
+        <span class="icon-border order-2"></span> 
 
-      
-
-      <li class="nav-item">
-        <a href="/uk/about/" class="nav-link">
-          <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i>
-          <span>ПРО МЕНЕ</span>
-        </a>
-      </li> <!-- .nav-item -->
-    
-
-  </ul> <!-- ul.nav.flex-column -->
-
-  <div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center">
-
-    
-      
-
-      
-      <a href="https://github.com/alexmartyniuk" aria-label="github"
-        class="order-3"
-        target="_blank" rel="noopener">
-        <i class="fab fa-github-alt"></i>
-      </a>
-      
-
-    
-      
-
-      
-      <a href="https://twitter.com/alexmartyniuk" aria-label="twitter"
-        class="order-4"
-        target="_blank" rel="noopener">
-        <i class="fab fa-twitter"></i>
-      </a>
-      
-
-    
-      
-
-      
-      <a href="
-          javascript:location.href = 'mailto:' + ['alexander.martinyuk','gmail.com'].join('@')" aria-label="email"
-        class="order-5"
-        >
-        <i class="fas fa-envelope"></i>
-      </a>
-      
-
-    
-      
-
-      
-      <a href="/feed.xml" aria-label="rss"
-        class="order-6"
-        >
-        <i class="fas fa-rss"></i>
-      </a>
-      
-
-    
-
-    
-      
-        <span class="icon-border order-2"></span>
-      
-
-      <span id="mode-toggle-wrapper" class="order-1">
+        <span id="mode-toggle-wrapper" class="order-1">
         <!--
   Switch the mode between dark and light.
 -->
@@ -415,13 +381,13 @@
 
 </script>
 
-      </span>
-    
+      </span> 
 
-  </div> <!-- .sidebar-bottom -->
+    </div>
+    <!-- .sidebar-bottom -->
 
-</div><!-- #sidebar -->
-
+</div>
+<!-- #sidebar -->
 
     <!--
   The Top Bar
